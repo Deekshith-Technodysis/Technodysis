@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_applicant_exp_level,hr.applicant.exp.level,model_hr_applicant_exp_level,,1,1,1,1
+access_hr_applicant_notice_period,hr.applicant.notice.period,model_hr_applicant_notice_period,,1,1,1,1
+access_salary_line,salary.line,model_salary_line,,1,1,1,1
+
+access_res_partner_workorder,res.partner.workorder,model_res_partner_workorder,,1,1,1,1
+access_res_partner_workorder_line,res.partner.workorder.line,model_res_partner_workorder_line,,1,1,1,1
+

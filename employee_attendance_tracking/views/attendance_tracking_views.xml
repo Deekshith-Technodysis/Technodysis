@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Company View -->
+    <record id="attendance_tracking_form" model="ir.ui.view">
+        <field name="name">attendance.tracking.form</field>
+        <field name="model">attendance.tracking</field>
+        <field name="arch" type="xml">
+        	<form string="Attendance Tracking">
+        		<sheet>
+        			<group>
+        				<group>
+                            <field name="name" invisible="1"/>
+        					<field name="emp_id"/>
+                            <field name="emp_seq_id"/>
+        					<field name="worked_days"/>
+        					<field name="leaves_taken"/>
+        				</group>
+        				<group>
+        					<label for="billing_from" string="Billing Period"/>
+        					<div class="o_row" name="total_experience">
+			                    <field name="billing_from" style="width:30%%"/>
+			                    <field name="billing_to" style="width:30%%"/>
+			                </div>
+			                <field name="billed_days"/>
+                            <label for="no_of_weekends" string="Saturday/Sundays worked"/>
+                            <div class="o_row">
+                                <field name="no_of_weekends"/>days
+                            </div>
+                            <label for="total_hours_worked" string="Hours worked in Saturday/Sunday"/>
+                            <div class="o_row">
+                                <field name="total_hours_worked"/>hours
+                            </div>
+                            
+                            <field name="charges"/>
+                            <field name="total_amount"/>
+                            <field name="company_id" invisible="1"/>
+        				</group>
+        			</group>
+        		</sheet>
+        	</form>
+        </field>
+    </record>
+    <record id="attendance_tracking_tree" model="ir.ui.view">
+        <field name="name">attendance.tracking.tree</field>
+        <field name="model">attendance.tracking</field>
+        <field name="arch" type="xml">
+        	<tree string="Attendance Tracking">
+        		<field name="emp_id"/>
+        		<field name="worked_days"/>
+				<field name="leaves_taken"/>
+				<field name="billed_days"/>
+        	</tree>
+        </field>
+    </record>
+
+    <record id="attendance_tracking_action" model="ir.actions.act_window">
+        <field name="name">Attendance Tracking</field>
+        <field name="res_model">attendance.tracking</field>
+        <field name='view_mode'>tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Import Attendance of employees
+            </p>
+        </field>
+    </record>
+
+   <menuitem
+        action='attendance_tracking_action'
+        id='attendance_tracking_menu'
+        parent='hr.menu_hr_root'/>
+</odoo>

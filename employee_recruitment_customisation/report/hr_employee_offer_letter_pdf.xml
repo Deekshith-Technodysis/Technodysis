@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+      <record id="action_report_offer_doc" model="ir.actions.report">
+           <field name="name">Offer Letter</field>
+           <field name="model">hr.applicant</field>
+           <field name="report_type">qweb-pdf</field>
+           <field name="report_name">employee_recruitment_customisation.report_offer_doc</field>
+           <field name="print_report_name">'%s - Offer Letter' % (object.partner_name)</field>
+           <field name="binding_model_id" ref="model_hr_applicant"/>
+          <field name="binding_type">report</field>
+      </record>
+      <record id="action_salary_annexure" model="ir.actions.report">
+          <field name="name">Salary Annexure</field>
+          <field name="model">hr.applicant</field>
+          <field name="report_type">qweb-pdf</field>
+          <field name="report_name">employee_recruitment_customisation.salary_annexure</field>
+          <field name="print_report_name">'%s - Offer Letter' % (object.partner_name)</field>
+          <field name="binding_model_id" ref="model_hr_applicant"/>
+          <field name="binding_type">report</field>
+      </record>
+    </data>
+</odoo>

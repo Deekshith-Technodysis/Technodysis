@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Company View -->
+    <record id="view_company_form_custom_inherited" model="ir.ui.view">
+        <field name="name">res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="before">
+            	<field name="ceo_id"/>
+                <field name="hsn_no"/>
+                <field name="lut_no"/>
+                <field name="pan_no"/>
+            </xpath>
+            <xpath expr="//page/group" position="inside">
+                <group string="Seal" groups="hr_recruitment.group_hr_recruitment_manager">
+                    <field name="company_seal" widget="image"/>
+                    <field name="company_seal_sign" widget="image"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

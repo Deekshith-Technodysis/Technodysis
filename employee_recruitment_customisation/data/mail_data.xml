@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    	<record id="offer_letter_mail_template_id" model="mail.template">
+            <field name="name">Offer Letter: Send by email</field>
+            <field name="model_id" ref="employee_recruitment_customisation.model_hr_applicant"/>
+            <field name="subject">Offer Letter</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="partner_to"></field>
+            <field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+				    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+				        
+				       <!--  Dear ${object.partner_name}, 
+				        <br/><br/>
+				        <p style="text-indent:0px">Congratulations on your offer from ${object.company_id.name}. 
+				        	<br/>We are delighted to offer you the position of ${object.job_id.name}. As discussed please find your attached offer letter.
+				        </p>
+				        <br/><br/>
+				        
+				        Regards,
+				        <br/>
+				        ${object.hr.name}
+				        <br/> -->
+				        Hi ${object.partner_name},
+				        <br/>
+
+						Congratulations from ${object.company_id.name}!<br/>
+
+						We would like to offer you for the post of “${object.name}” Please find the attached offer letter.<br/>
+
+						You need to sign each pages of offer letter and send back to us in the pdf format.<br/>
+
+						Also provide your confirmation on accepting the appointment offer given by us.
+						<br/>
+
+						Your joining date is  ${object.joining_date}.
+					    </p>
+					    <br/>
+					    Thanks &amp; Regards,<br/>
+					    ${object.hr.name}<br/>
+					    ${object.hr.work_email}<br/>
+					    ${object.hr.mobile_phone}<br/>
+					    ${object.company_id.website}<br/>
+				</div>
+            </field>
+            <field name="report_name">Offer Letter</field>
+            <field name="lang">${object.user_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="salary_annexure_mail_template_id" model="mail.template">
+            <field name="name">Annexure 1: Send by email</field>
+            <field name="model_id" ref="employee_recruitment_customisation.model_hr_applicant"/>
+            <field name="subject">Salary Structure</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="partner_to"></field>
+            <field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+				    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+				        
+				        Dear ${object.partner_name}, 
+				        <br/><br/>
+				        <p style="text-indent:0px">Congratulations on your offer from ${object.company_id.name}. 
+				        	<br/>We are delighted to offer you the position of ${object.job_id.name}. As discussed please find your attached Salary Structure.<br/>
+				        	Also provide your confirmation on accepting the appointment offer given by us.
+				        </p>
+				        <br/><br/>
+				        
+				        Regards,
+				        <br/>
+				        ${object.hr.name}
+				        <br/>
+				    </p>
+				</div>
+            </field>
+            <field name="report_name">Salary Annexure</field>
+            <field name="lang">${object.user_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+        <record id="workorder_mail_template_id" model="mail.template">
+            <field name="name">Workorder: Send by email</field>
+            <field name="model_id" ref="employee_recruitment_customisation.model_res_partner_workorder"/>
+            <field name="subject">Workorder</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="partner_to"></field>
+            <field name="report_template" ref="employee_recruitment_customisation.partner_wo_xlsx"/>
+            <field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+				    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+				        
+				        Dear ${object.client_id.name}, 
+				        <br/><br/>
+				        <p style="text-indent:0px">Kindly find the attached workorder.
+				        </p>
+				        <br/><br/>
+				        
+				        Regards,
+				        <br/>
+				        ${object.hr_id.name}
+				        <br/>
+				    </p>
+				</div>
+            </field>
+            <field name="report_name">Workorder</field>
+            <field name="lang">${object.user_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+
+
+       	<!-- <record id="mail_template_application" model="mail.template">
+            <field name="name">Offer Letter: Confirmation Email</field>
+            <field name="model_id" ref="employee_recruitment_customisation.model_hr_applicant"/>
+            <field name="subject">Offer Letter</field>
+            <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+            <field name="partner_to"></field>
+            <field name="body_html" type="html">
+				<div style="margin: 0px; padding: 0px;">
+				    <p style="margin: 0px; padding: 0px; font-size: 12px;">
+
+				        Hi ${object.partner_name},
+				        <br/>
+
+						Congratulations from ${object.company_id.name}!<br/>
+
+						We would like to offer you for the post of “${object.name}” Please find the attached offer letter.<br/>
+
+						You need to sign each pages of offer letter and send back to us in the pdf format.<br/>
+
+						Also provide your confirmation on accepting the appointment offer given by us.
+						<br/>
+
+						Your joining date is  ${object.joining_date}.
+				    </p>
+				    <br/>
+				    Thanks &amp; Regards,<br/>
+				    ${object.hr.name}<br/>
+				    ${object.hr.work_email}<br/>
+				    ${object.hr.mobile_phone}<br/>
+				    ${object.company_id.website}<br/>
+				</div>
+			</field>
+            <field name="report_template" ref="action_report_offer_doc"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="auto_delete" eval="True"/>
+        </record> -->
+	</data>
+</odoo>

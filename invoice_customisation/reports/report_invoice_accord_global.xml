@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_accord_document">
+            <t t-call="invoice_customisation.custom_invoice_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <div class="page" style="font-size: 12px !important;">
+                    <table class="table table-sm o_main_table" style="border: 1px solid black;width:100%">
+                        <tr style="border: 1px solid black;width:35%">
+                            <td colspan="4" style="border: 1px solid black;">
+                                <strong>Client</strong><br/>
+                                <address t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: True}"/>
+                                <t t-if="o.partner_id.vat">
+                                    GSTIN : <span t-field="o.partner_id.vat"/><br/>
+                                </t>
+                                <t t-if="o.partner_id.pan_no">
+                                    PAN : <span t-field="o.partner_id.pan_no"/>
+                                </t>
+                            </td>
+                            <td colspan="3" style="border: 1px solid black;width:25%"><strong>Bank Details</strong><br/>
+                                Bank Name: <span t-esc="o.partner_bank_id.bank_id.name"/><br/>
+                                Account name- <span t-esc="o.partner_bank_id.acc_holder_name"/><br/>
+                                Account no-<span t-esc="o.partner_bank_id.acc_number"/><br/>
+                                IFSC code-<span t-esc="o.partner_bank_id.bank_id.bic"/><br/>
+                                Swift code: <span t-esc="o.partner_bank_id.swift_code"/><br/>
+                            </td>
+                            <td colspan="4" style="border: 1px solid black;width:40%">
+                                Invoice No: <span t-esc="o.name" style="margin-left:60px;"/><br/>
+                                Category of Service:&#160;&#160;  Information Technology Service<br/>
+                                Reference  &#160;&#160;&#160;&#160;<br/>
+                                Billing Period : <span t-esc="o.billing_from" style="margin-left:42px;"/> to <span t-esc="o.billing_to"/><br/>
+                                Kind attention : <span t-esc="o.kind_attention.name" style="margin-left:35px;"/><br/>
+                                Description: <span t-esc="o.description" style="margin-left:54px;"/><br/>
+                            </td>
+                        </tr>
+                        
+                    </table>
+
+
+                    <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
+
+                    <table class="table table-sm o_main_table" name="invoice_line_table" style="page-break-inside: auto;">
+                        <thead>
+                            <tr class="border-black" style="border: 1px solid black;border-bottom: 1px solid black;">
+                                <th name="sl_no" style="border: 1px solid black;border-bottom: 1px solid black;">Sl No.</th>
+                                <th name="th_description" class="text-center" style="border-top: 1px solid black;border-right: 1px solid black;"><span>Description</span></th>
+                                <th name="billing_rate" class="text-center" style="border-top: 1px solid black;border-right: 1px solid black;"><span>No of Days Worked</span></th>
+                                <th name="th_priceunit" style="border-top: 1px solid black;border-right: 1px solid black;" t-attf-class="text-center"><span>Billing Amount in INR/Month</span></th>
+                                <th name="th_subtotal" style="border-top: 1px solid black;border-right: 1px solid black;" class="text-right">
+                                    <span>Total in INR</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody" style="border-bottom: 1px solid black;border-top: 1px solid black;">
+                            <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                            <t t-set="sl_no" t-value="0"/>
+                            <t t-foreach="lines" t-as="line">
+                                
+                            </t>
+                            <tr>
+                            	<td style="border-right: 1px solid black;border-left: 1px solid black;">
+                            		<br/>
+                                    <div style="margin-top:35px">
+                                		<t t-foreach="lines" t-as="line">
+                                    		<t t-set="sl_no" t-value="sl_no+1"/>
+                                			<span t-esc="sl_no"/><br/>
+                                		</t>
+                                    </div>
+                            	</td>
+                            	<td style="border-right: 1px solid black;">
+                            		<span><strong>Contract staff service charges for the month of : <span t-esc="datetime.datetime.strptime(str(o.billing_from), '%Y-%m-%d').strftime('%B-%y')"/></strong><br/></span>
+	                            	<hr/>
+	                            	<div style="margin-top:20px">
+	                            		<t t-set="weekends_worked" t-value="0"/>
+	                            		<t t-set="weekend_charges" t-value="0"/>
+	                            		<t t-set="total_charges" t-value="0"/>
+	                            		<t t-foreach="lines" t-as="line">
+	                            			<span t-field="line.employee_id.name"/><br/>
+	                            			<t t-if="line.no_of_weekends">
+	                            				<t t-set="weekends_worked" t-value="weekends_worked + line.no_of_weekends"/>
+	                            				<t t-set="weekend_charges" t-value="line.charges"/>
+	                            				<t t-set="total_charges" t-value="total_charges + line.total_amount"/>
+	                            			</t>
+	                            		</t>
+	                            	</div>
+	                            	
+	                            	
+	                            </td>
+                            	<td style="border-right: 1px solid black;">
+                            		<br/><br/><br/>
+                            		<t t-foreach="lines" t-as="line">
+                            			<span t-field="line.worked_days"/><br/>
+                            		</t>
+                            	</td>
+                            	<td style="border-right: 1px solid black;" class="text-right">
+	                            	<br/><br/><br/>
+                            		<t t-foreach="lines" t-as="line">
+                            			<span t-esc="line.billing_rate" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                            		</t>
+                            	</td>
+                            	<td style="border-right: 1px solid black;" class="text-right">
+                            		<br/><br/><br/>
+                            		<t t-set="total_billing_rate" t-value="0"/>
+                            		<t t-foreach="lines" t-as="line">
+                            			<span t-esc="line.price_unit - line.total_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                            			<t t-set="total_billing_rate" t-value="total_billing_rate + (line.price_unit - line.total_amount)"/>
+                            		</t>
+                            	</td>
+                            </tr>
+                            <tr>
+                            	<td style="border: 1px solid black;"></td>
+                            	<td colspan="3" style="border: 1px solid black;" class="text-center"><strong>Total Billing rate</strong></td>
+                            	<td style="border: 1px solid black;" class="text-right"> <strong><span t-esc="total_billing_rate" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></strong></td>
+                            </tr>
+                            <tr>
+                            	<td style="border-right: 1px solid black;border-left: 1px solid black;"/>
+                            	<td style="border-right: 1px solid black;"> 
+                            		<strong>Number of Saturdays &amp; Sundays worked</strong><br/>
+                            		<t t-foreach="lines" t-as="line">
+                            			<span t-field="line.employee_id.name"/> - <span t-field="line.no_of_weekends"/> days <br/>
+                            		</t>
+                            	</td>
+                            	<td style="border-right: 1px solid black;" class="text-center">
+                            		<span t-esc="weekends_worked"/>
+                            	</td>
+                            	<td style="border-right: 1px solid black;" class="text-right">
+                            		<span t-esc="weekend_charges" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            	</td>
+                            	<td style="border-right: 1px solid black;" class="text-right">
+                            		<span t-esc="total_charges" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            	</td>
+
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+
+                    <div class="clearfix">
+                        <div id="total" class="row">
+                            <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ml-auto">
+                                <table class="table table-sm" style="page-break-inside: avoid;">
+                                    <tr class="border-black o_subtotal" style="">
+                                        <td><strong>Total</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.amount_untaxed"/>
+                                        </td>
+                                    </tr>
+                                    <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                        <tr style="">
+                                            <t t-if="len(o.line_ids.filtered(lambda line: line.tax_line_id)) in [0, 1] and o.amount_untaxed == amount_by_group[2]">
+                                                <td><span class="text-nowrap" t-esc="amount_by_group[0]"/></td>
+                                                <td class="text-right o_price_total">
+                                                    <span class="text-nowrap" t-esc="amount_by_group[3]"/>
+                                                </td>
+                                            </t>
+                                            <t t-else="">
+                                                <td>
+                                                    <span t-esc="amount_by_group[0]"/> on 
+                                                    <span t-esc="'%.2f' % (amount_by_group[7])"/> %
+                                                </td>
+                                                <td class="text-right o_price_total">
+                                                    <span class="text-nowrap" t-esc="amount_by_group[3]"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr class="border-black o_total">
+                                        <td><strong>Grand Total</strong></td>
+                                        <td class="text-right">
+                                            <span class="text-nowrap" t-field="o.amount_total"/>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table" style="border: 1px solid black;page-break-inside: avoid;">
+                        <t t-if="o.partner_id.l10n_in_gst_treatment == 'special_economic_zone'">
+                            <tr>
+                                <td colspan="11" style="border-top: 1px solid black;border-right: 1px solid black">
+                                    <div>
+                                        <span style="font-size:13px;">SUPPLY MEANT FOR SEZ UNDER LETTER OF UNDERTAKING WITHOUT PAYMENT OF IGST AGAINST LUT NO : <br/>
+                                            <t t-if="o.company_id.lut_no">
+                                                <span t-field="o.company_id.lut_no"/>
+                                            </t>
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </t>
+                        <tr>
+                            <td colspan="11" style="border-top: 1px solid black;border-right: 1px solid black">
+                                <span >HSN/SAC Code : <span t-field="o.partner_id.hsn_no"/></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="11" style="border-top: 1px solid black;border-right: 1px solid black">
+                                <div><span>Amount Chargeable (in words)</span><span style="margin-left:63%" class="text-right">E. &amp; O.E</span><br/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="border: 1px solid black;">
+                            <td rowspan="6" colspan="11" style="border-top: 1px solid black;border-right: 1px solid black;">
+                                <div>
+                                    <span t-esc="o.text_amount"/>
+                                </div>
+                                <div style="margin-left:70%">
+                                    <t t-if="o.company_id.company_seal_sign">
+                                        <img t-att-src="image_data_uri(o.company_id.company_seal_sign)" style="max-height: 2cm; max-width: 4cm;"/>
+                                    </t><br/>
+                              For Technodysis PVT LTD<br/>
+                               <span style="margin-left:10px"> Authorised Signatory</span>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </table>                    
+                </div>
+            </t>
+        </template>
+        <template id="report_invoice_accord">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.move_type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                        <t t-call="invoice_customisation.report_invoice_accord_document" t-lang="lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

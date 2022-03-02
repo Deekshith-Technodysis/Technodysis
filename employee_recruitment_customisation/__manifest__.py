@@ -1,0 +1,33 @@
+# -*- coding: utf-8 -*-
+
+{
+    'name': 'Recruitment Customisations',
+    'version': '14.0.1.0.1',
+    "category": "Generic Modules/Human Resources",
+    'summary': 'Customisations for Employee module',
+    'description': 'Customisations for Employee module',
+    'author': 'Technodysis',
+    'company': 'Technodysis',
+    'maintainer': 'Technodysis',
+    'website': 'https://www.technodysis.com',
+    'depends': ['hr','website','hr_recruitment','mail','web','report_xlsx','base','hr_skills','contacts'],
+    'data': [
+             'security/ir.model.access.csv',
+             'data/hr_recruitment_data.xml',
+             'report/offer_letter_report_layout.xml',
+             'report/report_offer_letter.xml',
+             'report/workorder_xlsx.xml',
+             'data/ir_sequence_data.xml',
+             'data/mail_data.xml',
+             'report/hr_employee_offer_letter_pdf.xml',
+             'views/hr_recruitment_views.xml',
+             'views/hr_applicant_views.xml',
+             'views/hr_employee_views.xml',
+             'views/hr_skills_views.xml',
+             'views/res_partner_views.xml',
+             'views/res_partner_workorder_views.xml',
+            ],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    	<record id="seq_rec_candidate" model="ir.sequence">
+            <field name="name">Job Application</field>
+            <field name="code">hr.applicant</field>
+            <field name="padding">5</field>
+            <field name="prefix">TD/</field>
+            <field name="suffix">/%(year)s</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_rec_employee" model="ir.sequence">
+            <field name="name">HR Employee</field>
+            <field name="code">hr.employee</field>
+            <field name="padding">5</field>
+            <field name="prefix">EMP/</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="seq_rec_workorder" model="ir.sequence">
+            <field name="name">Client Workorder</field>
+            <field name="code">res.partner.workorder</field>
+            <field name="padding">5</field>
+            <field name="prefix">CW/</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

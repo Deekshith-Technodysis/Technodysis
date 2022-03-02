@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<odoo>
+        <record id="sourcing_application_reason_view_form" model="ir.ui.view">
+            <field name="name">sourcing.application.reason.form</field>
+            <field name="model">sourcing.application.reason</field>
+            <field name="arch" type="xml">
+                <form string="Create Application">
+                    <group class="oe_title">
+                    	<group>
+                    		<field name="expected_joining_date"/>
+                    		<field name="official_np_lwd"/>
+                    	</group>
+                    </group>
+                    <group class="oe_title">
+                    	<field name="comments"/>
+                    	<field name="change_reason"/>
+                        <field name="sourcing_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_create_application" string="Create Application" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="sourcing_get_application_reason_action" model="ir.actions.act_window">
+            <field name="name">Create Application</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sourcing.application.reason</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sourcing_application_reason_view_form"/>
+            <field name="target">new</field>
+        </record>
+</odoo>

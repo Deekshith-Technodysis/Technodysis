@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Paper format -->
+        <record id="paperformat_custom_invoice" model="report.paperformat">
+            <field name="name">Custom Invoice Paperformat</field>
+            <field name="format">custom</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">80</field>
+            <field name="margin_bottom">40</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">60</field>
+            <field name="dpi">90</field>
+        </record>
+        <!-- QWeb Reports -->
+        <record id="account_invoices_basic" model="ir.actions.report">
+            <field name="name">Invoices Basic</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_customisation.report_invoice_basic</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="invoice_customisation.paperformat_custom_invoice"/>
+        </record>
+        <record id="account_invoices_lumen" model="ir.actions.report">
+            <field name="name">Invoices for Lumen</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_customisation.report_invoice_lumen</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="invoice_customisation.paperformat_custom_invoice"/>
+        </record>
+        <record id="account_invoices_questglobal" model="ir.actions.report">
+            <field name="name">Invoices for Questglobal</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_customisation.report_invoice_questglobal</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="invoice_customisation.paperformat_custom_invoice"/>
+        </record>
+        <record id="account_invoices_sandvik" model="ir.actions.report">
+            <field name="name">Invoices for Sandvik</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_customisation.report_invoice_sandvik</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="invoice_customisation.paperformat_custom_invoice"/>
+        </record>
+        <record id="account_invoices_accord" model="ir.actions.report">
+            <field name="name">Invoices for Accord</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">invoice_customisation.report_invoice_accord</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="binding_model_id" ref="model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="invoice_customisation.paperformat_custom_invoice"/>
+        </record>
+    </data>
+</odoo>

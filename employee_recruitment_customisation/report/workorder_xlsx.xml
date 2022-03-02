@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="partner_wo_xlsx" model="ir.actions.report">
+        <field name="name">Workorder Report XLSX</field>
+        <field name="model">res.partner.workorder</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">employee_recruitment_customisation.partner_wo_xlsx</field>
+        <field name="print_report_name">'Workorder'</field>
+        <field name="binding_model_id" ref="model_res_partner_workorder"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

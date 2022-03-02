@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="hr_recruitment.hr_applicant_category_action" model="ir.actions.act_window">
+        <field name="name">Category</field>
+        <field name="res_model">hr.applicant.category</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new tag
+            </p>
+        </field>
+    </record>
+	<menuitem name="Category" id="hr_recruitment.hr_applicant_category_menu" groups="base.group_no_one" sequence="2" parent="hr_recruitment.menu_hr_recruitment_configuration" action="hr_recruitment.hr_applicant_category_action"/>
+
+
+    <record model="ir.ui.view" id="view_applicant_exp_level_form">
+        <field name="name">Experience Level</field>
+        <field name="model">hr.applicant.exp.level</field>
+        <field name="arch" type="xml">
+            <form string="Experience Level">
+                <sheet>
+                    <group>
+                        <group>
+                            <div class="oe_title">
+                                <h1><field name="name" placeholder="Level" style="width:50%%" required="1"/></h1>
+                            </div>
+                        </group>
+                    </group>
+                    <field name="notes" placeholder="Notes"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_applicant_exp_level_tree">
+        <field name="name">Experience Level</field>
+        <field name="model">hr.applicant.exp.level</field>
+        <field name="arch" type="xml">
+            <tree string="Experience Level">
+                <field name="name"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+     
+    <record id="action_applicant_exp_level" model="ir.actions.act_window">
+        <field name="name">Experience Level</field>
+        <field name="res_model">hr.applicant.exp.level</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No record found. Let's create one!
+            </p>
+        </field>
+   </record>
+    
+    
+    <menuitem name="Experience Level" id="applicant_exp_level_menu" sequence="3" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_applicant_exp_level"/>
+
+    <record model="ir.ui.view" id="view_applicant_notice_period_form">
+        <field name="name">Notice Period</field>
+        <field name="model">hr.applicant.notice.period</field>
+        <field name="arch" type="xml">
+            <form string="Notice Period">
+                <sheet>
+                    <group>
+                        <group>
+                            <div class="oe_title">
+                                <h1><field name="name" placeholder="Notice Period" style="width:50%%" required="1"/></h1>
+                            </div>
+                        </group>
+                    </group>
+                    <field name="notes" placeholder="Notes"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_applicant_notice_period_tree">
+        <field name="name">Notice Period</field>
+        <field name="model">hr.applicant.notice.period</field>
+        <field name="arch" type="xml">
+            <tree string="Notice Period">
+                <field name="name"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+     
+    <record id="action_applicant_notice_period" model="ir.actions.act_window">
+        <field name="name">Notice Period</field>
+        <field name="res_model">hr.applicant.notice.period</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No record found. Let's create one!
+            </p>
+        </field>
+   </record>
+    <menuitem name="Notice Period" id="applicant_notice_period_menu" sequence="4" parent="hr_recruitment.menu_hr_recruitment_configuration" action="action_applicant_notice_period"/>
+</odoo>

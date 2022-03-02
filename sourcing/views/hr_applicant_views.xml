@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_sourcing_view_form_inherit_recruitment" model="ir.ui.view">
+        <field name="name">hr.applicant.form.inherit.recruitment</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='job_id']" position="after">
+        		<field name="origin_id" invisible="1"/>
+        	</xpath>
+            <xpath expr="//field[@name='medium_id']" position="after">
+                <field name="work_location_id"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+
+	<record  model="ir.actions.act_window" id="application_form_action_view_active">
+        <field name="name">Applications</field>
+        <field name="res_model">hr.applicant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_recruitment.hr_applicant_view_tree_activity')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('hr_recruitment.hr_applicant_view_form')})]"/>
+        <field name="domain">[('origin_id', '=', active_id)]</field>
+    </record>
+</odoo>

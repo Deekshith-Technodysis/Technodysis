@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Employee View -->
+    <record id="hr_employee_view_form_custom_inherited" model="ir.ui.view">
+        <field name="name">custom.hr.employee.view.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/div[2]/h1" position="after">
+                <field name="emp_id"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="before">
+                <field name="alternate_phone" widget="phone"/>
+            </xpath>
+            <xpath expr="//field[@name='passport_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='identification_id']" position="after">
+                <field name="pan_no"/>
+            </xpath>
+            <xpath expr="//field[@name='birthday']" position="after">
+                <field name="father_name"/>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_billable"/>
+                <field name="client_work_address" context="{'show_address': 1}"
+                options='{"always_reload": True, "highlight_first_line": True}' attrs="{'invisible' :[('is_billable','=',False)]}"/>
+                <field name="enable_laptop_charges" invisible="1"/>
+                <field name="laptop_charges" attrs="{'invisible' :[('enable_laptop_charges','=',False)]}"/>
+                <field name="enable_travel_expense" invisible="1"/>
+                <field name="travel_expense" attrs="{'invisible' :[('enable_travel_expense','=',False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="after">
+                <field name="joining_date"/>
+            </xpath>
+
+
+            <xpath expr="//page[@name='personal_information']/group[1]/group[1]" position="after">
+                <group string="Passport Details">
+                    <field name="passport_id"/>
+                    <field name="passport_name"/>
+                    <field name="passport_issue_date"/>
+                    <field name="passport_expiry_date"/>
+                    <field name="passport_issue_country"/>
+                </group>
+                <group string="Current Address">
+                    <label for="current_street" string="Address"/>
+                    <div class="o_address_format">
+                        <field name="current_street" placeholder="Street..." class="o_address_street"/>
+                        <field name="current_street2" placeholder="Street 2..." class="o_address_street"/>
+                        <field name="current_city" placeholder="City" class="o_address_city"/>
+                        <field name="current_state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'default_country_id': country_id}"/>
+                        <field name="current_zip" placeholder="ZIP" class="o_address_zip"/>
+                        <field name="current_country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                    </div>
+                </group>
+                
+            </xpath>
+            <xpath expr="//page[@name='public']/div/div[1]/group[1]" position="after">
+                <group string="Work Experience">
+                    <label for="total_exp_year" string="Total Experience"/>
+                    <div class="o_row" name="total_experience">
+                        <field name="total_exp_year" style="width:30%%"/>
+                        <span>Years</span>
+                        <field name="total_exp_month" style="width:30%%"/>
+                        <span>Months</span>
+                    </div>
+                    <label for="relevant_exp_year" string="Relevant Experience"/>
+                    <div class="o_row" name="relevant_experience">
+                        <field name="relevant_exp_year" style="width:30%%"/>
+                        <span>Years</span>
+                        <field name="relevant_exp_month" style="width:30%%"/>
+                        <span>Months</span>
+                    </div>
+                </group>
+                <group string="Salary Details">
+                    <field name="salary_proposed"/>
+                    <field name="salary_expected"/>
+                </group>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']/group[1]" position="inside">
+                <group string="Signature" groups="hr_recruitment.group_hr_recruitment_manager">
+                    <field name="signature" widget="image"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

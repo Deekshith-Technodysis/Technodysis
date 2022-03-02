@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Res Partner-->
+    <record id="view_partner_form_custom_inherited" model="ir.ui.view">
+        <field name="name">res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="hsn_no"/>
+                <field name="pan_no"/>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+            	<field name="is_client" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+                <field name="enable_wo" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+                <field name="is_taf_status" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+            	<field name="code" invisible="1"/>
+            	<field name="commission_percent" attrs="{'invisible':[('is_client', '=', False)]}"/>
+                <field name="enable_laptop_charges" attrs="{'invisible':[('is_client', '=', False)]}"/>
+                <field name="enable_travel_expense" attrs="{'invisible':[('is_client', '=', False)]}"/>
+                <field name="enable_markup_value" attrs="{'invisible':[('is_client', '=', False)]}"/>
+                <label for="markup_value" string="Markup Value"/>
+                <div class="o_row" name="total_experience">
+                    <field name="markup_value" attrs="{'invisible':[('enable_markup_value', '=', False)]}"/>
+                    <span>%</span>
+                </div>
+
+                <field name="inv_billing_type" attrs="{'required':[('is_client', '=', True)],'invisible':[('is_client', '=', False)]}"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="partner_workorder_overview_kanban" model="ir.ui.view">
+        <field name="name">res.partner.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_emphasize_colors o_stock_kanban" create="0">
+                <field name="color"/>
+                <field name="code" readonly="1"/>
+                <field name="count_workorder_confirmed"/>
+                <field name="count_workorder_draft"/>
+                <field name="count_workorder_waiting"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-if="['client'].indexOf(record.code.raw_value) > -1" t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''}" name="partner">
+                            <div>
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary" t-if="!selection_mode">
+                                            <a type="object" name="get_action_partner_type">
+                                                <field name="name"/>
+                                            </a>
+                                        </div>
+                                        <div class="o_primary" t-if="selection_mode">
+                                            <field name="name"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section" t-if="!selection_mode">
+                                        <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content" t-if="!selection_mode">
+                                    <div class="row">
+                                        <div class="col-6 o_kanban_primary_left">
+                                            <button class="btn btn-primary" name="get_action_partner_tree_ready" type="object">
+                                                <span t-if="record.code.raw_value =='client'"><field name="count_workorder_draft"/> To Process</span>
+                                            </button>
+                                        </div>
+                                        <div class="col-6 o_kanban_primary_right">
+                                            
+                                            <div t-if="record.count_workorder_draft.raw_value > 0" class="row">
+                                                <div class="col-12">
+                                                    <a name="get_action_partner_tree_ready" type="object">
+                                                        <field name="count_workorder_draft"/>
+                                                        Draft
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div t-if="record.count_workorder_waiting.raw_value > 0" class="row">
+                                                <div class="col-12">
+                                                    <a class="oe_kanban_stock_picking_type_list" name="get_action_workorder_tree_waiting" type="object">
+                                                        <field name="count_workorder_waiting"/>
+                                                        Waiting
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div t-if="record.count_workorder_confirmed.raw_value > 0" class="row">
+                                                <div class="col-12">
+                                                    <a class="oe_kanban_stock_picking_type_list" name="get_action_workorder_tree_confirmed" type="object">
+                                                        <field name="count_workorder_confirmed"/>
+                                                        Approved
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                    <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                        <div class="col-8" role="menuitem" aria-haspopup="true">
+                                            <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="res_partner_overview_workorder" model="ir.actions.act_window">
+        <field name="name">Overview</field>
+        <field name="res_model">res.partner</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">kanban</field>
+        <!-- <field name="context">{'search_default_enable_wo': True}</field> -->
+        <field name="view_id" ref="partner_workorder_overview_kanban"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact as Client
+          </p><p>
+            This feature is enabled only when a contact is defined as a Client.
+          </p>
+        </field>
+    </record>
+    <menuitem
+            action="res_partner_overview_workorder"
+            id="partner_workorder_overview_menu"
+            parent="hr_recruitment.menu_hr_recruitment_root" sequence="98"
+            name="WO-Overview"/>
+</odoo>

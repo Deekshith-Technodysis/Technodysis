@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Skills View -->
+    <record id="resume_line_view_form_custom_inherited" model="ir.ui.view">
+        <field name="name">hr.resume.line.form</field>
+        <field name="model">hr.resume.line</field>
+        <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_type']" position="after">
+            	<field name="latest_experience_check" invisible="1"/>
+                <field name="latest_experience" attrs="{'invisible':[('latest_experience_check', '=', False)]}"/>
+                <!-- <field name="latest_qualification_check" invisible="1"/>
+                <field name="latest_qualification" attrs="{'invisible':[('latest_qualification_check', '=', False)]}"/> -->
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="resume_line_view_form_custom_inherited" model="ir.ui.view">
+        <field name="name">hr.resume.line.form</field>
+        <field name="model">hr.resume.line</field>
+        <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_type_id']" position="replace">    
+                <field name="line_type_id" required="0" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="employee_skill_view_form_custom_inherited" model="ir.ui.view">
+        <field name="name">hr.employee.skill.form</field>
+        <field name="model">hr.employee.skill</field>
+        <field name="inherit_id" ref="hr_skills.employee_skill_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='skill_id']" position="after">
+                <field name="n_skill"/> 
+                <field name="display_skill"/>
+            </xpath>     
+            <xpath expr="//field[@name='skill_id']" position="replace">    
+                <field name="skill_id" required="0" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath> 
+            <xpath expr="//field[@name='skill_level_id']" position="replace">    
+                <field name="skill_level_id" required="0" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>   
+            <xpath expr="//field[@name='skill_level_id']" position="attributes">    
+                <attribute name="required">0</attribute>
+            </xpath>
+            <xpath expr="//field[@name='skill_type_id']" position="replace">    
+                <field name="skill_type_id" required="0" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+            
+        </field>
+    </record>
+</odoo>

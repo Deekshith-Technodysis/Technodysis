@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_applicant_view_form_inherit_recruitment" model="ir.ui.view">
+        <field name="name">hr.applicant.form.inherit.recruitment</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//button[@name='create_employee_from_applicant']" position="before">
+        		<button string="Compute Salary" class="oe_highlight" name="compute_salary" type="object" attrs="{'invisible': ['|',('salary_updated','=',True),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+                <button string="Confirm Salary" class="oe_highlight" name="confirm_salary" type="object" attrs="{'invisible': ['|',('stage_count_id', '!=', 1),'|',('salary_updated','=',False),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+        		<button name="print_offer_letter" class="oe_highlight" type="object" string="Send Offer Letter" attrs="{'invisible': ['|',('stage_count_id', '=', 1),('emp_id', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+                <button name="print_salary_annexure" class="oe_highlight" type="object" string="Send Salary Annexure" attrs="{'invisible': ['|',('stage_count_id', '!=', 2),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+                <button name="offer_accepted" class="oe_highlight" type="object" string="Offer Accepted" attrs="{'invisible': ['|',('stage_count_id', '!=', 3),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+                <button name="revise_offer" class="oe_stat_button" type="object" string="Revise" attrs="{'invisible': ['|',('stage_count_id', '!=', 3),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+                <!-- <button name="action_application_send" string="Send Offer Letter by Email" type="object" class="btn-primary" attrs="{'invisible': ['|',('stage_count_id', '=', 1),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager"/> -->
+        	</xpath>
+            <xpath expr="//button[@name='create_employee_from_applicant']" position="replace">
+                <button string="Create Employee" name="create_employee_from_applicant" type="object"
+                        class="oe_highlight o_create_employee" attrs="{'invisible': ['|',('emp_id', '!=', False),'|',('joining_date','=',False),'|',('stage_count_id','!=',4),('active', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//button[@name='archive_applicant']" position="replace">
+                <button string="Refuse" name="archive_applicant" type="object" attrs="{'invisible': [('emp_id', '!=', False)]}"/>
+            </xpath>
+        	
+        	<xpath expr="//sheet/group[1]/group[4]" position="after">
+                <group string="Salary" attrs="{'invisible': [('stage_count_id', '!=', 1)]}" groups="hr_recruitment.group_hr_recruitment_manager">
+                    <field name="access_id" invisible="1"/>
+                    <field name="url" invisible="1"/>
+                    <field name="salary_updated" invisible="1"/>
+                    <field name="annual_fixed_pay"/>
+                    <field name="annual_variable_pay"/>
+                    <!-- not using below field -->
+                    <field name="annual_perf_bonus" invisible="1"/>
+                    <field name="pt_deduction"/>
+
+                </group>
+                <group string="Joining Bonus Details">
+                    <field name="joining_bonus_delivered_by"/>
+                    <field name="joining_bonus_amount"/>
+                    <field name="add_bonus_for_salary"/>
+                </group>
+                <group string="Hourly salary calculation">
+                    <field name="hourly_salary_bool"/>
+                    <field name="amount_per_hour" attrs="{'invisible': [('hourly_salary_bool', '=', False)]}"/>
+                    <field name="no_of_hours" attrs="{'invisible': [('hourly_salary_bool', '=', False)]}"/>
+                    <field name="total_amount" attrs="{'invisible': [('hourly_salary_bool', '=', False)]}"/>
+                </group>
+                
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="offer_letter_type"/>
+            </xpath>
+            <xpath expr="//field[@name='stage_id']" position="replace">
+                <field name="stage_id" widget="statusbar" attrs="{'invisible': [('active', '=', False),('emp_id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='type_id']" position="after">
+                <field name="created_date"/>
+                <field name="employment_type"/>
+            </xpath>
+            <xpath expr="//label[@for='name']" position="before">
+                <h2 class="o_row">
+                    <div>
+                        <field name="sequence" readonly="1"/>
+                    </div>
+                </h2>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="hr" invisible="1"/>
+                <field name="client_id" required="1" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='medium_id']" position="replace">
+                <field name="medium_id" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='source_id']" position="replace">
+                <field name="source_id" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="replace">
+                <field name="job_id" required="1" options="{'no_create': True, 'no_create_edit': True}"/>
+            </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="after">
+            	<field name="stage_count_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='categ_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_name']" position="attributes">  
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='email_from']" position="attributes">    
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='partner_phone']" position="attributes"> 
+                <attribute name="required">0</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='partner_mobile']" position="attributes">    
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='type_id']" position="attributes">   
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='department_id']" position="attributes"> 
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='email_from']" position="attributes">    
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='salary_expected']" position="attributes">   
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='salary_proposed']" position="attributes">   
+                <attribute name="required">1</attribute>    
+            </xpath>    
+            <xpath expr="//field[@name='company_id']" position="attributes">    
+                <attribute name="required">1</attribute>    
+            </xpath>
+            <xpath expr="//field[@name='source_id']" position="after">
+                <field name="categ_ids" widget="many2many_tags" options="{'color_field': 'color','no_create': True, 'no_create_edit': True}"/>
+                <field name="onboarding_date"/>
+                <field name="emp_id"/>
+            </xpath>
+            <xpath expr="//sheet/group[1]" position="after">
+                <notebook colspan="4" groups="hr_recruitment.group_hr_recruitment_manager">
+                    <page name="applicant_details" string="Applicant details">
+                        <group>
+                            <group>
+                                <div class="row">
+                                    <div class="o_hr_skills_group o_group_resume col-lg-12 d-flex flex-column">
+                                        <separator string="Experience"/>
+                                        <field mode="tree" nolabel="1" name="applicant_resume_line_ids" widget="hr_resume">
+                                            <tree>
+                                                <field name="line_type_id"/>
+                                                <field name="name"/>
+                                                <field name="description"/>
+                                                <field name="date_start"/>
+                                                <field name="date_end"/>
+                                                <field name="display_type" invisible="1"/>
+                                                <field name="latest_experience"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </group>
+                            <group>
+                                <div class="row">
+                                    <div class="o_hr_skills_group o_group_skills col-lg-12 d-flex flex-column">
+                                    <separator string="Skills"/>
+                                        <field mode="tree" nolabel="1" name="applicant_skill_ids" widget="hr_skills">
+                                            <tree>
+                                                <field name="skill_type_id"/>
+                                                <field
+                                                    name="skill_id"
+                                                    domain="[('skill_type_id', '=', skill_type_id)]"
+                                                    options="{'no_create_edit':True}"/>
+                                                <field name="skill_level_id" domain="[('skill_type_id', '=', skill_type_id)]"/>
+                                                <field name="level_progress" widget="progressbar"/>
+                                            </tree>
+                                        </field>
+                                    </div>
+                                </div>
+                            </group>
+                            <group string="Personal Details" groups="hr_recruitment.group_hr_recruitment_manager">
+                                <label for="street" string="Current Address"/>
+                                <div class="o_address_format">
+                                    <field name="street" placeholder="Street..." class="o_address_street"/>
+                                    <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                    <field name="city" placeholder="City" class="o_address_city"/>
+                                    <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'default_country_id': country_id}"/>
+                                    <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                    <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                </div>
+                                <field name="relocation_needed"/>
+                                <field name="current_location"/>
+                                <field name="preferred_location"/>
+                                <field name="birthday"/>
+                                <field name="father_name"/>
+                                <field name="alternate_phone" required="1"/>
+                                <!-- <field name="nationality_id"/> -->
+                                <field name="identification_id"/>
+                                <field name="pan_no"/>
+                                <field name="gender" required="1"/>
+                                <field name="marital"/>
+
+                            </group>
+                            <group string="Passport Details">
+                                <field name="passport_id"/>
+                                <field name="passport_name"/>
+                                <field name="passport_issue_date"/>
+                                <field name="passport_expiry_date"/>
+                                <field name="passport_issue_country" options="{'no_create': True, 'no_create_edit': True}"/>                                
+                            </group>
+                            <group string="Education">
+                                <field name="certificate"/>
+                                <field name="study_field"/>
+                                <field name="study_school"/>
+                            </group>
+                            <group string="Work Experience">
+                                <label for="total_exp_year" string="Total Experience"/>
+                                <div class="o_row" name="total_experience">
+                                    <field name="total_exp_year" style="width:30%%"/>
+                                    <span>Years</span>
+                                    <field name="total_exp_month" style="width:30%%"/>
+                                    <span>Months</span>
+                                </div>
+                                <label for="relevant_exp_year" string="Relevant Experience"/>
+                                <div class="o_row" name="relevant_experience">
+                                    <field name="relevant_exp_year" style="width:30%%"/>
+                                    <span>Years</span>
+                                    <field name="relevant_exp_month" style="width:30%%"/>
+                                    <span>Months</span>
+                                </div>
+                            </group>
+                            <group string="Work Details">
+                                <field name="currently_employed" widget="radio"/>
+                                <field name="nature_of_role"/>
+                                <field name="employer_name"/>
+                                <field name="notice_period_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="last_working_day"/>
+                                <field name="salary_hike"/>
+                                <field name="hike_percent"/>
+                                <field name="last_salary"/>
+                                <!-- made last_variable_payout invisible, since its not being used -->
+                                <field name="last_variable_payout" invisible="1"/>
+                                <field name="overall_ctc"/>
+                                <field name="current_or_last_company"/>
+                                <field name="sourcing_date"/>
+                                <field name="other_offers"/>
+                                <field name="remarks" placeholder="Remarks" invisible="1"/>
+                            </group>
+                            
+
+                        </group>
+                        
+                    </page>
+                    <page name="business_details" string="Business Details">
+                        <group>
+                            <group string="Business Spoc Details">
+                                <field name="lead_contact_id" options="{'no_create': True, 'no_create_edit': True}" required="1"/>
+                                <field name="lead_contact_email" widget="email"/>
+                                <field name="lead_contact_number" widget="phone"/>
+                            </group>
+                            <group string="Business TA Details">
+                                <field name="talent_contact_id" options="{'no_create': True, 'no_create_edit': True}" required="1"/>
+                                <field name="talent_contact_email" widget="email"/>
+                                <field name="talent_contact_number" widget="phone"/>
+                            </group>
+                            <group string="Job Details">
+                                <field name="job_code"/>
+                                <field name="resume_no"/>
+                                <field name="contact_account"/>
+                                <field name="business_unit" required="1"/>
+                                <field name="jc_exp_level" options="{'no_create': True, 'no_create_edit': True}"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="recruitment_details" string="Onboarding Tracker">
+                        <group>
+                            <group string="Onboarding Details">
+                                <field name="initial_discussion"/>
+                                <field name="selection_date"/>
+                                <field name="doc_requirement"/>
+                                <field name="dnh_submission"/>
+                                <field name="workorder_approval" readonly="1"/>
+                                <field name="workorder_id" invisible="1"/>
+                                <field name="offer_letter_release" readonly="1"/>
+                                <field name="offer_letter_acceptance" readonly="1"/>
+                                <field name="embarck_trigger_date"/>
+                                <field name="ogt_clearance"/>
+                                <field name="offline_nda_date"/>
+                                <field name="offline_nda_date_lou"/>
+                                <field name="online_nda_date"/>
+                                <field name="expected_joining_date" required="1"/>
+                                <field name="joining_date"/>
+                                <field name="induction_date"/>
+                                <field name="onboarding_remarks"/>
+                            </group>
+                            <group string="HR Details">
+                                <field name="recruitment_hr_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="recruitment_hr_manager_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="onboarding_hr_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="onboarding_hr_manager_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="module_lead_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="sourcing_manager_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="hr_head_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                </group>    
+                        </group>    
+                    </page> 
+                    <page name="recruitment_status" string="Onboarding Status"> 
+                        <group> 
+                            <group> 
+                                <field name="dnh_status"/>  
+                                <field name="bgv_status"/>  
+                                <field name="ogt_status"/>  
+                                <field name="offline_nda_status"/>  
+                                <field name="online_nda_status"/>   
+                            </group>    
+                            <group> 
+                                <field name="jc_status"/>   
+                                <field name="wo_status"/>   
+                                <field name="offer_status"/>    
+                                <field name="joining_status"/> 
+                                <field name="is_taf_status" invisible="1"/>
+                                <field name="taf_status" attrs="{'invisible':[('is_taf_status','=',False)]}"/> 
+                                <field name="employee_status"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page name="salary_breakups" string="Salary Structure" attrs="{'invisible': [('salary_updated', '!=', True)]}">
+                        <field name="salary_lines" widget="one2many_list">
+                            <tree name="Salary Breakups" editable="bottom">
+                                <field name="name"/>
+                                <field name="salary"/>
+                                <field name="annual_salary"/>
+                                <field name="salary_type" invisible="1"/>
+                                <field name="salary_id" invisible="1"/>
+                            </tree>
+                        </field>
+ 
+                    </page>
+
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_applicant_view_search_bis_inherited" model="ir.ui.view">
+        <field name="name">hr.applicant.view.search</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_search_bis"/>
+        <field name="arch" type="xml">
+            <field name="job_id" position="after">
+                <field name="sequence" string="Application No"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="open_view_application_list" model="ir.actions.act_window">
+        <field name="name">Application</field>
+        <field name="res_model">hr.applicant</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" eval="False"/>
+    </record>
+    
+</odoo>
