@@ -120,10 +120,10 @@ class HrSourcing(models.Model):
     business_unit = fields.Char(string="Business Unit",required=True)
     resume_no = fields.Char(string="Resume No", copy=False)
 
-    l0_selected = fields.Date(string="L0 Selected",readonly=True)
-    l1_selected = fields.Date(string="L1 Selected",readonly=True)
-    l2_selected = fields.Date(string="L2 Selected",readonly=True)
-    l3_selected = fields.Date(string="L3 Selected",readonly=True)
+    l0_selected = fields.Date(string="L0 Selected",readonly=False)
+    l1_selected = fields.Date(string="L1 Selected",readonly=False)
+    l2_selected = fields.Date(string="L2 Selected",readonly=False)
+    l3_selected = fields.Date(string="L3 Selected",readonly=False)
 
     enable_bill_rate = fields.Boolean(string="Enable Bill Rate",default=False,related="job_type_id.enable_bill_rate")
 
