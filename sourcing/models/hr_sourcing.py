@@ -166,7 +166,7 @@ class HrSourcing(models.Model):
         ('pending', 'Pending to Trigger'),
         ('not_applicable','Not Applicable')], 'BGV Status',copy=False,default="not_applicable")
     work_location_id = fields.Many2one('hr.work.location',string="Work Location")
-    preferred_location = fields.Char(string="Preferred Location",required=True)
+    preferred_location = fields.Char(string="Preferred Location",required=False)
     expected_joining_date = fields.Date(string="Expected Joining Date",copy=False,required=True)
     study_field = fields.Many2one('hr.recruitment.degree',"Field of Study", groups="hr.group_hr_user", tracking=True,required=True)
     gender = fields.Selection([
