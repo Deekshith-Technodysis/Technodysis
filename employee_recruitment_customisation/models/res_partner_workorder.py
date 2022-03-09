@@ -17,8 +17,8 @@ class ResPartnerWorkorder(models.Model):
 	_name = 'res.partner.workorder'
 	_description = "Workorder"
 
-	name = fields.Char(string="Workorder No.",required=True, copy=False, readonly=True, default=lambda self: _('New'))
-	client_id = fields.Many2one('res.partner',string="Client Name",required=True,domain="[('enable_wo','=',True)]")
+	name = fields.Char(string="Workorder No.",required=False, copy=False, readonly=False, default=lambda self: _('New'))
+	client_id = fields.Many2one('res.partner',string="Client Name",required=False,domain="[('enable_wo','=',True)]")
 	
 	state = fields.Selection([
 		('draft', 'Draft'),
@@ -136,7 +136,7 @@ class ResPartnerWorkorderLines(models.Model):
 	business_unit = fields.Char(string="Business Unit")
 	
 	mark_up_percent = fields.Float(strong="Mark-Up %")
-	vendor_id = fields.Many2one('res.company',string="Vendor Name", required=True, default=lambda self: self.env.company)
+	vendor_id = fields.Many2one('res.company',string="Vendor Name", required=False, default=lambda self: self.env.company)
 	candidate_name = fields.Char(string="Candidate Name")
 	resume_number = fields.Char(string="Resume number")
 	total_exp_year = fields.Integer(string="Total Experience(Years)")
