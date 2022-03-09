@@ -32,7 +32,7 @@ class HrSourcing(models.Model):
     job_type_id = fields.Many2one('hr.job.type',string="Job Type",required=True)
     client_id = fields.Many2one('res.partner',string="Client",required=True)
     mobile = fields.Char(string="Candidate's Mobile No.",required=True)
-    email = fields.Char(string="Candidate's mail id",required=True)
+    email = fields.Char(string="Candidate's mail id",required=False)
 
     total_exp_year = fields.Integer(string="Total Experience(Years)",required=True)
     total_exp_month = fields.Integer(string="Total Experience")
