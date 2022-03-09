@@ -338,35 +338,35 @@ class JobApplication(models.Model):
                 line.last_salary = 0
 
 
-    @api.constrains('joining_status')
-    def _check_joining_status(self):
-        for line in self:
-            if not line.dnh_status:
-                raise ValidationError("Kindly Update DNH Status")
-            if not line.wo_status:
-                raise ValidationError("Kindly Update WO Status")
-            if not line.jc_status:
-                raise ValidationError("Kindly Update JC Status")
-            if not line.offer_status:
-                raise ValidationError("Kindly Update Offer Status")
-            if not line.bgv_status:
-                raise ValidationError("Kindly Update Embark Status")
+    # @api.constrains('joining_status')
+    # def _check_joining_status(self):
+    #     for line in self:
+    #         if not line.dnh_status:
+    #             raise ValidationError("Kindly Update DNH Status")
+    #         if not line.wo_status:
+    #             raise ValidationError("Kindly Update WO Status")
+    #         if not line.jc_status:
+    #             raise ValidationError("Kindly Update JC Status")
+    #         if not line.offer_status:
+    #             raise ValidationError("Kindly Update Offer Status")
+    #         if not line.bgv_status:
+    #             raise ValidationError("Kindly Update Embark Status")
 
-    @api.constrains('joining_date')
-    def _check_joining_date(self):
-        for line in self:
-            if not line.dnh_status:
-                raise ValidationError("Kindly Update DNH Status")
-            if not line.wo_status:
-                raise ValidationError("Kindly Update WO Status")
-            if not line.jc_status:
-                raise ValidationError("Kindly Update JC Status")
-            if not line.offer_status:
-                raise ValidationError("Kindly Update Offer Status")
-            if not line.joining_status:
-                raise ValidationError("Kindly Update Joining Status")
-            if not line.bgv_status:
-                raise ValidationError("Kindly Update Embark Status")
+    # @api.constrains('joining_date')
+    # def _check_joining_date(self):
+    #     for line in self:
+    #         if not line.dnh_status:
+    #             raise ValidationError("Kindly Update DNH Status")
+    #         if not line.wo_status:
+    #             raise ValidationError("Kindly Update WO Status")
+    #         if not line.jc_status:
+    #             raise ValidationError("Kindly Update JC Status")
+    #         if not line.offer_status:
+    #             raise ValidationError("Kindly Update Offer Status")
+    #         if not line.joining_status:
+    #             raise ValidationError("Kindly Update Joining Status")
+    #         if not line.bgv_status:
+    #             raise ValidationError("Kindly Update Embark Status")
 
 
     
