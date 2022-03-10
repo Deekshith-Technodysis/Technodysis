@@ -32,8 +32,8 @@ class JobApplication(models.Model):
 
 
     access_id = fields.Char('Security Token', copy=False)
-    sequence = fields.Char(string="Application No", required=False, copy=False, readonly=False, default=lambda self: _('New'))
-    created_date = fields.Date(string="Date of Record Creation",required=False, readonly=False, index=True, copy=False,default=datetime.today())
+    sequence = fields.Char(string="Application No", required=True, copy=False, readonly=True, default=lambda self: _('New'))
+    created_date = fields.Date(string="Date of Record Creation",required=True, readonly=True, index=True, copy=False,default=datetime.today())
     resume_no = fields.Char(string="Resume No", copy=False)
 
     jc_exp_level = fields.Many2one('hr.applicant.exp.level',string="JC Exp. level")
@@ -69,7 +69,7 @@ class JobApplication(models.Model):
     selection_date = fields.Date(string="Date of Selection",copy=False)
     doc_requirement = fields.Date(string="DNH Triggered date",copy=False)
     workorder_approval = fields.Date(string="WO Approval",readonly=False,copy=False)
-    workorder_id = fields.Many2one('res.partner.workorder',string="Workorder Ref",readonly=False)
+    workorder_id = fields.Many2one('res.partner.workorder',string="Workorder Ref",readonly=True)
     dnh_submission = fields.Date(string="DNH/WO submission",copy=False)
     offer_letter_release = fields.Date(string="Annexure release",copy=False)
     offer_letter_acceptance = fields.Date(string="Annexure acceptance",copy=False)
@@ -133,7 +133,7 @@ class JobApplication(models.Model):
         ('doctor', 'Doctor'),
         ('other', 'Other'),
     ], 'Highest Education', default='other', groups="hr.group_hr_user", tracking=True)
-    study_field = fields.Many2one('hr.recruitment.degree',"Field of Study", groups="hr.group_hr_user", tracking=True,required=False)
+    study_field = fields.Many2one('hr.recruitment.degree',"Field of Study", groups="hr.group_hr_user", tracking=True,required=True)
     type_id = fields.Many2one('hr.recruitment.degree',"Degree", groups="hr.group_hr_user", tracking=True,related="study_field")
     study_school = fields.Char("School", groups="hr.group_hr_user", tracking=True)
 
@@ -157,8 +157,8 @@ class JobApplication(models.Model):
     overall_ctc = fields.Float(string="Current CTC (Rs)")
     remarks = fields.Text(string="Remarks")
     # new fields added
-    current_or_last_company = fields.Char(string="Current/Last Company",required=False)
-    sourcing_date = fields.Date(string="Sourcing Date",required=False)
+    current_or_last_company = fields.Char(string="Current/Last Company",required=True)
+    sourcing_date = fields.Date(string="Sourcing Date",required=True)
 
     # Business Information
     lead_contact_id = fields.Many2one('res.partner',string="Spoc Contact Name")
@@ -217,7 +217,7 @@ class JobApplication(models.Model):
     offer_letter_type = fields.Selection([
         ('client', 'Client Employee'),
         ('internal', 'Internal Employee')
-    ], string='Offer letter Type',required=False, groups="hr.group_hr_user")
+    ], string='Offer letter Type',required=True, groups="hr.group_hr_user")
 
 
     # Onboarding Status
@@ -225,7 +225,7 @@ class JobApplication(models.Model):
         ('submitted', 'Submitted'),
         ('pending', 'Pending for Submission'),('cleared','Cleared'),
         ('failed','Failed'),('in_progress','In Progress'),
-        ('not_applicable','Not Applicable')], 'DNH Status',required=False,copy=False)
+        ('not_applicable','Not Applicable')], 'DNH Status',required=True,copy=False)
     bgv_status = fields.Selection([
         ('triggered', 'Triggered'),
         ('pending', 'Pending to Trigger'),
@@ -248,7 +248,7 @@ class JobApplication(models.Model):
     jc_status = fields.Selection([
         ('available', 'JC Available'),
         ('not_available','JC Not Available'),
-        ('not_applicable','Not Applicable')], 'JC Status',copy=False,required=False)
+        ('not_applicable','Not Applicable')], 'JC Status',copy=False,required=True)
     wo_status = fields.Selection([
         ('approved', 'Approved'),
         ('in_progress','Approval in Progress'),
@@ -260,13 +260,13 @@ class JobApplication(models.Model):
         ('accepted', 'Offer Accepted'),
         ('declined', 'Offer Declined'),
         ('aborted', 'Aborted'),
-        ('not_applicable','Not Applicable')], 'Offer Status',copy=False,required=False)
+        ('not_applicable','Not Applicable')], 'Offer Status',copy=False,required=True)
     joining_status = fields.Selection([
         ('joined', 'Joined'),
         ('pending','Pending Joiner'),
         ('dropped', 'Dropped Out'),('op_dropped', 'Opportunity Dropped Out'),
         ('aborted', 'Aborted'),
-        ('not_applicable','Not Applicable')], 'Joining Status',copy=False,required=False)
+        ('not_applicable','Not Applicable')], 'Joining Status',copy=False,required=True)
     employee_status = fields.Selection([
         ('active', 'Active'),
         ('resigned','Resigned'),
@@ -338,35 +338,35 @@ class JobApplication(models.Model):
                 line.last_salary = 0
 
 
-    # @api.constrains('joining_status')
-    # def _check_joining_status(self):
-    #     for line in self:
-    #         if not line.dnh_status:
-    #             raise ValidationError("Kindly Update DNH Status")
-    #         if not line.wo_status:
-    #             raise ValidationError("Kindly Update WO Status")
-    #         if not line.jc_status:
-    #             raise ValidationError("Kindly Update JC Status")
-    #         if not line.offer_status:
-    #             raise ValidationError("Kindly Update Offer Status")
-    #         if not line.bgv_status:
-    #             raise ValidationError("Kindly Update Embark Status")
+    @api.constrains('joining_status')
+    def _check_joining_status(self):
+        for line in self:
+            if not line.dnh_status:
+                raise ValidationError("Kindly Update DNH Status")
+            if not line.wo_status:
+                raise ValidationError("Kindly Update WO Status")
+            if not line.jc_status:
+                raise ValidationError("Kindly Update JC Status")
+            if not line.offer_status:
+                raise ValidationError("Kindly Update Offer Status")
+            if not line.bgv_status:
+                raise ValidationError("Kindly Update Embark Status")
 
-    # @api.constrains('joining_date')
-    # def _check_joining_date(self):
-    #     for line in self:
-    #         if not line.dnh_status:
-    #             raise ValidationError("Kindly Update DNH Status")
-    #         if not line.wo_status:
-    #             raise ValidationError("Kindly Update WO Status")
-    #         if not line.jc_status:
-    #             raise ValidationError("Kindly Update JC Status")
-    #         if not line.offer_status:
-    #             raise ValidationError("Kindly Update Offer Status")
-    #         if not line.joining_status:
-    #             raise ValidationError("Kindly Update Joining Status")
-    #         if not line.bgv_status:
-    #             raise ValidationError("Kindly Update Embark Status")
+    @api.constrains('joining_date')
+    def _check_joining_date(self):
+        for line in self:
+            if not line.dnh_status:
+                raise ValidationError("Kindly Update DNH Status")
+            if not line.wo_status:
+                raise ValidationError("Kindly Update WO Status")
+            if not line.jc_status:
+                raise ValidationError("Kindly Update JC Status")
+            if not line.offer_status:
+                raise ValidationError("Kindly Update Offer Status")
+            if not line.joining_status:
+                raise ValidationError("Kindly Update Joining Status")
+            if not line.bgv_status:
+                raise ValidationError("Kindly Update Embark Status")
 
 
     

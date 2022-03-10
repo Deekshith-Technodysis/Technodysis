@@ -10,9 +10,9 @@ class HrSourcing(models.Model):
     _order = "id desc"
     _inherit = ['mail.thread.cc', 'mail.activity.mixin', 'utm.mixin']
 
-    name = fields.Char(string="Subject / Application Name",required=False)
+    name = fields.Char(string="Subject / Application Name",required=True)
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
-    candidate_name = fields.Char(string="Applicant's Name",required=False)
+    candidate_name = fields.Char(string="Applicant's Name",required=True)
     stage_id = fields.Selection([
         ('l0', 'L0 Discussion'),
         ('l1', 'L1 Discussion'),
@@ -20,23 +20,23 @@ class HrSourcing(models.Model):
         ('l3', 'L3 Discussion'),
         ('done','Done'),
         ('reject','Rejected')], 'Stages',default="l0")
-    sourcing_date = fields.Date(string="Sourcing Date",required=False)
+    sourcing_date = fields.Date(string="Sourcing Date",required=True)
     sequence = fields.Char(string="Sequence")
-    category_id = fields.Many2many('hr.applicant.category',string="Category",required=False)
+    category_id = fields.Many2many('hr.applicant.category',string="Category",required=True)
     currently_employed = fields.Selection([
         ('yes', 'Yes'),
         ('no', 'No')], 'Currently Working ?',default="no")
 
     applicant_skill_ids = fields.One2many('hr.employee.skill', 'sourcing_id', string="Skills")
     applicant_resume_line_ids = fields.One2many('hr.resume.line', 'sourcing_id', string="Resumé lines")
-    job_type_id = fields.Many2one('hr.job.type',string="Job Type",required=False)
-    client_id = fields.Many2one('res.partner',string="Client",required=False)
-    mobile = fields.Char(string="Candidate's Mobile No.",required=False)
-    email = fields.Char(string="Candidate's mail id",required=False)
+    job_type_id = fields.Many2one('hr.job.type',string="Job Type",required=True)
+    client_id = fields.Many2one('res.partner',string="Client",required=True)
+    mobile = fields.Char(string="Candidate's Mobile No.",required=True)
+    email = fields.Char(string="Candidate's mail id",required=True)
 
-    total_exp_year = fields.Integer(string="Total Experience(Years)",required=False)
+    total_exp_year = fields.Integer(string="Total Experience(Years)",required=True)
     total_exp_month = fields.Integer(string="Total Experience")
-    relevant_exp_year = fields.Integer(string="Relevant Experience(Years)",required=False)
+    relevant_exp_year = fields.Integer(string="Relevant Experience(Years)",required=True)
     relevant_exp_month = fields.Integer(string="Relevant Experience")
     hourly_salary_bool = fields.Boolean(string="Hourly salary calculation",default=False)
 
@@ -55,8 +55,8 @@ class HrSourcing(models.Model):
 
 
     
-    notice_period_id = fields.Many2one('hr.applicant.notice.period',string="Notice Period",required=False)
-    current_location = fields.Char(string="Current Location",required=False)
+    notice_period_id = fields.Many2one('hr.applicant.notice.period',string="Notice Period",required=True)
+    current_location = fields.Char(string="Current Location",required=True)
     preffered_location_id = fields.Many2many('hr.work.other.location','source_loc_other_id',string="Open to work in Other location")
     other_offers_bool = fields.Selection([
         ('yes', 'Yes'),
@@ -92,13 +92,13 @@ class HrSourcing(models.Model):
     state_id = fields.Many2one("res.country.state", string='State', ondelete='restrict', domain="[('country_id', '=?', country_id)]")
 
     
-    current_or_last_company = fields.Char(string="Current/Last Company",required=False)
-    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=False)
-    lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter",required=False)
+    current_or_last_company = fields.Char(string="Current/Last Company",required=True)
+    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True)
+    lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter",required=True)
     module_lead_id = fields.Many2one('hr.employee',string="Module Lead")
-    ctc = fields.Float(string="CTC",required=False)
+    ctc = fields.Float(string="CTC",required=True)
     ectc = fields.Float(string="ECTC",readonly=False)
-    commission_percent = fields.Float("Commission Percent",required=False)
+    commission_percent = fields.Float("Commission Percent",required=True)
     training_bool = fields.Selection([
         ('yes', 'Yes'),
         ('no', 'No')], "Training")
@@ -117,13 +117,13 @@ class HrSourcing(models.Model):
     talent_contact_number = fields.Char(string="Contact Number",related="talent_contact_id.mobile")
     jc_no = fields.Char(string="JC No.")
     contact_account = fields.Char(string="Account")
-    business_unit = fields.Char(string="Business Unit",required=False)
+    business_unit = fields.Char(string="Business Unit",required=True)
     resume_no = fields.Char(string="Resume No", copy=False)
 
-    l0_selected = fields.Date(string="L0 Selected",readonly=False)
-    l1_selected = fields.Date(string="L1 Selected",readonly=False)
-    l2_selected = fields.Date(string="L2 Selected",readonly=False)
-    l3_selected = fields.Date(string="L3 Selected",readonly=False)
+    l0_selected = fields.Date(string="L0 Selected",readonly=True)
+    l1_selected = fields.Date(string="L1 Selected",readonly=True)
+    l2_selected = fields.Date(string="L2 Selected",readonly=True)
+    l3_selected = fields.Date(string="L3 Selected",readonly=True)
 
     enable_bill_rate = fields.Boolean(string="Enable Bill Rate",default=False,related="job_type_id.enable_bill_rate")
 
@@ -139,23 +139,23 @@ class HrSourcing(models.Model):
         ('pending','Pending Joiner'),
         ('dropped', 'Dropped Out'),('op_dropped', 'Opportunity Dropped Out'),
         ('aborted', 'Aborted'),
-        ('not_applicable','Not Applicable')], 'Joining Status',copy=False,required=False,default="not_applicable")
+        ('not_applicable','Not Applicable')], 'Joining Status',copy=False,required=True,default="not_applicable")
     jc_status = fields.Selection([
         ('available', 'JC Available'),
         ('not_available','JC Not Available'),
-        ('not_applicable','Not Applicable')], 'JC Status',copy=False,required=False,default="not_applicable")
+        ('not_applicable','Not Applicable')], 'JC Status',copy=False,required=True,default="not_applicable")
     offer_status = fields.Selection([
         ('offered', 'Offered'),
         ('in_progress','Offer in Progress'),
         ('accepted', 'Offer Accepted'),
         ('declined', 'Offer Declined'),
         ('aborted', 'Aborted'),
-        ('not_applicable','Not Applicable')], 'Offer Status',copy=False,required=False,default="not_applicable")
+        ('not_applicable','Not Applicable')], 'Offer Status',copy=False,required=True,default="not_applicable")
     dnh_status = fields.Selection([
         ('submitted', 'Submitted'),
         ('pending', 'Pending for Submission'),('cleared','Cleared'),
         ('failed','Failed'),('in_progress','In Progress'),
-        ('not_applicable','Not Applicable')], 'DNH Status',required=False,copy=False,default="not_applicable")
+        ('not_applicable','Not Applicable')], 'DNH Status',required=True,copy=False,default="not_applicable")
     wo_status = fields.Selection([
         ('approved', 'Approved'),
         ('in_progress','Approval in Progress'),
@@ -166,9 +166,9 @@ class HrSourcing(models.Model):
         ('pending', 'Pending to Trigger'),
         ('not_applicable','Not Applicable')], 'BGV Status',copy=False,default="not_applicable")
     work_location_id = fields.Many2one('hr.work.location',string="Work Location")
-    preferred_location = fields.Char(string="Preferred Location",required=False)
-    expected_joining_date = fields.Date(string="Expected Joining Date",copy=False,required=False)
-    study_field = fields.Many2one('hr.recruitment.degree',"Field of Study", groups="hr.group_hr_user", tracking=True,required=False)
+    preferred_location = fields.Char(string="Preferred Location",required=True)
+    expected_joining_date = fields.Date(string="Expected Joining Date",copy=False,required=True)
+    study_field = fields.Many2one('hr.recruitment.degree',"Field of Study", groups="hr.group_hr_user", tracking=True,required=True)
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
@@ -176,12 +176,12 @@ class HrSourcing(models.Model):
         ('dont_disclose','Dont want to disclose')
     ], groups="hr.group_hr_user")
     alternate_phone = fields.Char(string="Alternate No",copy=False,default="0000000000")
-    job_id = fields.Many2one('hr.job',string="Applied Job",required=False)
-    department_id = fields.Many2one('hr.department',string="Department",required=False)
+    job_id = fields.Many2one('hr.job',string="Applied Job",required=True)
+    department_id = fields.Many2one('hr.department',string="Department",required=True)
     offer_letter_type = fields.Selection([
         ('client', 'Client Employee'),
         ('internal', 'Internal Employee')
-    ], string='Offer letter Type',required=False, groups="hr.group_hr_user")
+    ], string='Offer letter Type',required=True, groups="hr.group_hr_user")
 
     # Interview Details
     l1_interview_date = fields.Datetime(string="Date and time of Interview")
@@ -444,5 +444,5 @@ class SourcingRefuseReason(models.Model):
     _name = "hr.sourcing.refuse.reason"
     _description = 'Refuse Reason of Sourcing'
 
-    name = fields.Char('Description', required=False, translate=True)
+    name = fields.Char('Description', required=True, translate=True)
     active = fields.Boolean('Active', default=True)
