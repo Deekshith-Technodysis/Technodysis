@@ -12,8 +12,8 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     description = fields.Text(string="Description")
-    billing_from = fields.Date(string="Billing from",required=True)
-    billing_to = fields.Date(string="Billing to",required=True)
+    billing_from = fields.Date(string="Billing from",required=False)
+    billing_to = fields.Date(string="Billing to",required=False)
     days_in_month = fields.Integer(string="Days in a period",compute="_fetch_period_days")
     kind_attention = fields.Many2one('res.partner',string="Kind attention")
     po_date = fields.Date(string="PO Date")
