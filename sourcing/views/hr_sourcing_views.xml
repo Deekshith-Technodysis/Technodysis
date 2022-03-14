@@ -21,7 +21,7 @@
 
                 </header>
         		<sheet>
-                    <div class="oe_button_box" name="button_box">
+                    <div class="oe_button_box" name="button_box" groups="sourcing.group_sourcing_manager">
                         <button type="action" class="oe_inline oe_stat_button" name="%(sourcing.application_form_action_view_active)d" icon="fa-bars" attrs="{'invisible':[('sourcing_app_count','=',0)]}">
                             <field name="sourcing_app_count" widget="statinfo"/>
                         </button>
