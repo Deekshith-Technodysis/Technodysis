@@ -12,6 +12,7 @@
     'website': 'https://www.technodysis.com',
     'depends': ['hr','website','hr_recruitment','mail','web','report_xlsx','base','hr_skills','contacts'],
     'data': [
+             'security/recruitment_security.xml',
              'security/ir.model.access.csv',
              'data/hr_recruitment_data.xml',
              'report/offer_letter_report_layout.xml',

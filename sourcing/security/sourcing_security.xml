@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
+	<data noupdate="1">
 		<record model="ir.module.category" id="sourcing_category">
 			<field name="name">Sourcing</field>
 			<field name="sequence">1</field>

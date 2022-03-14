@@ -202,7 +202,7 @@
         </field>
     </record>
 
-    <menuitem name="Workorder" id="res_partner_workorder_menu" sequence="2" parent="hr_recruitment.report_hr_recruitment" action="action_partner_workorder"/>
+    <menuitem name="Workorder" id="res_partner_workorder_menu" sequence="2" parent="hr_recruitment.report_hr_recruitment" groups="employee_recruitment_customisation.group_workorder_manager,employee_recruitment_customisation.group_workorder_user" action="action_partner_workorder"/>
 
     <record model="ir.ui.view" id="view_partner_workorder_line_form">
         <field name="name">Workorders</field>
@@ -301,7 +301,7 @@
         </field>
    </record>
 
-    <menuitem name="Detailed Workorder" id="res_partner_workorder_line_menu" sequence="2" parent="hr_recruitment.report_hr_recruitment" action="action_partner_line_workorder"/>
+    <menuitem name="Detailed Workorder" id="res_partner_workorder_line_menu" sequence="2" parent="hr_recruitment.report_hr_recruitment" groups="employee_recruitment_customisation.group_workorder_manager,employee_recruitment_customisation.group_workorder_user" action="action_partner_line_workorder"/>
 
 	
 </odoo>

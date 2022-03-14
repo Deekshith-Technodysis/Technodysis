@@ -133,5 +133,5 @@
             action="res_partner_overview_workorder"
             id="partner_workorder_overview_menu"
             parent="hr_recruitment.menu_hr_recruitment_root" sequence="98"
-            name="WO-Overview"/>
+            name="WO-Overview" groups="employee_recruitment_customisation.group_workorder_manager,employee_recruitment_customisation.group_workorder_user"/>
 </odoo>
