@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record model="ir.module.category" id="sourcing_category">
+			<field name="name">Sourcing</field>
+			<field name="sequence">1</field>
+		</record>
+
+	    <record id="group_sourcing_user" model="res.groups">
+	        <field name="name">User</field>
+	        <field name="category_id" ref="sourcing.sourcing_category"/>
+	    </record>
+	    <record id="group_sourcing_manager" model="res.groups">
+	        <field name="name">Manager</field>
+	        <field name="category_id" ref="sourcing.sourcing_category"/>
+	        <field name="implied_ids" eval="[(4,ref('sourcing.group_sourcing_user'))]"/>
+			<field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+	    </record>
+	</data>
+</odoo>

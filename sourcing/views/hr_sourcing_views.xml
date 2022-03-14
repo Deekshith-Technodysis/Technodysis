@@ -67,7 +67,7 @@
                         <page name="applicant_details" string="Applicant details">
                         <group>
                             
-                            <group string="Personal Details" groups="hr_recruitment.group_hr_recruitment_manager">
+                            <group string="Personal Details">
                                 <label for="street" string="Current Address"/>
                                 <div class="o_address_format">
                                     <field name="street" placeholder="Street..." class="o_address_street"/>
