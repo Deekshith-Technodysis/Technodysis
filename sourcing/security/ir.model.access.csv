@@ -1,12 +1,12 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_hr_work_location_user,hr.work.location,model_hr_work_location,sourcing.group_sourcing_user,1,1,1,0
-access_hr_work_other_location_user,hr.work.other.location,model_hr_work_other_location,sourcing.group_sourcing_user,1,1,1,0
+access_hr_work_location_user,hr.work.location,model_hr_work_location,sourcing.group_sourcing_user,1,0,0,0
+access_hr_work_other_location_user,hr.work.other.location,model_hr_work_other_location,sourcing.group_sourcing_user,1,0,0,0
 access_hr_sourcing_user,hr.sourcing,model_hr_sourcing,sourcing.group_sourcing_user,1,1,1,0
-access_hr_job_type_user,hr.job.type,model_hr_job_type,sourcing.group_sourcing_user,1,1,1,0
+access_hr_job_type_user,hr.job.type,model_hr_job_type,sourcing.group_sourcing_user,1,1,0,0
 access_hr_sourcing_refuse_reason_user,hr.sourcing.refuse.reason,model_hr_sourcing_refuse_reason,sourcing.group_sourcing_user,1,1,1,0
-access_sourcing_get_refuse_reason_user,access.sourcing.get.refuse.reason,model_sourcing_get_refuse_reason,sourcing.group_sourcing_user,1,1,1,0
-access_sourcing_application_reason_user,access.sourcing.application.reason,model_sourcing_application_reason,sourcing.group_sourcing_user,1,1,1,0
+access_sourcing_get_refuse_reason_user,access.sourcing.get.refuse.reason,model_sourcing_get_refuse_reason,sourcing.group_sourcing_user,1,1,0,0
+access_sourcing_application_reason_user,access.sourcing.application.reason,model_sourcing_application_reason,sourcing.group_sourcing_user,1,1,0,0
 
 access_hr_work_location_manager,hr.work.location,model_hr_work_location,sourcing.group_sourcing_manager,1,1,1,1
 access_hr_work_other_location_manager,hr.work.other.location,model_hr_work_other_location,sourcing.group_sourcing_manager,1,1,1,1
