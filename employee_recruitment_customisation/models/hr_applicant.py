@@ -283,6 +283,7 @@ class JobApplication(models.Model):
     amount_per_hour = fields.Float(string="Amount per hour")
     no_of_hours = fields.Float(string="Number of hours")
     total_amount = fields.Float(string="Total Amount",store=True,compute="fetch_total_amount")
+    offer_letter_sent = fields.Boolean(string="Offer Letter sent",default=False)
 
     @api.depends('amount_per_hour','no_of_hours','hourly_salary_bool')
     def fetch_total_amount(self):
@@ -395,7 +396,7 @@ class JobApplication(models.Model):
         stage_id = self.env['hr.recruitment.stage'].search([('sequence','=',1)])
         if stage_id:
             self.update({'stage_id':stage_id,
-                'salary_updated':False,'offer_letter_release':False,'offer_letter_acceptance':False})
+                'salary_updated':False,'offer_letter_release':False,'offer_letter_sent':False,'offer_letter_acceptance':False})
 
     @api.model
     def create(self, vals):
@@ -438,7 +439,7 @@ class JobApplication(models.Model):
             stage_id = self.env['hr.recruitment.stage'].search([('sequence','=',3)])
             if stage_id:
                 date = fields.Date.today()
-                self.update({'offer_letter_release':date})
+                self.update({'offer_letter_release':date,'offer_letter_sent':True})
 
     def print_salary_annexure(self):
         template_id = self.env.ref('employee_recruitment_customisation.salary_annexure_mail_template_id').id
@@ -702,7 +703,7 @@ class JobApplication(models.Model):
         for applicant in self:
             applicant.write(
                 {'stage_id': applicant.job_id.id and default_stage[applicant.job_id.id],
-                 'refuse_reason_id': False,'salary_updated':False,'offer_letter_release':False,'offer_letter_acceptance':False})
+                 'refuse_reason_id': False,'salary_updated':False,'offer_letter_release':False,'offer_letter_sent':False,'offer_letter_acceptance':False})
 
 
             

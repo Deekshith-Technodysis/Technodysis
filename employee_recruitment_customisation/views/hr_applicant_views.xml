@@ -8,7 +8,7 @@
         	<xpath expr="//button[@name='create_employee_from_applicant']" position="before">
         		<button string="Compute Salary" class="oe_highlight" name="compute_salary" type="object" attrs="{'invisible': ['|',('salary_updated','=',True),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <button string="Confirm Salary" class="oe_highlight" name="confirm_salary" type="object" attrs="{'invisible': ['|',('stage_count_id', '!=', 1),'|',('salary_updated','=',False),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
-        		<button name="print_offer_letter" class="oe_highlight" type="object" string="Send Offer Letter" attrs="{'invisible': ['|',('stage_count_id', '=', 1),('emp_id', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+        		<button name="print_offer_letter" class="oe_highlight" type="object" string="Send Offer Letter" attrs="{'invisible': ['|',('stage_count_id', '!=', 4),('offer_letter_sent', '=', True)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <button name="print_salary_annexure" class="oe_highlight" type="object" string="Send Salary Annexure" attrs="{'invisible': ['|',('stage_count_id', '!=', 2),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <button name="offer_accepted" class="oe_highlight" type="object" string="Offer Accepted" attrs="{'invisible': ['|',('stage_count_id', '!=', 3),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <button name="revise_offer" class="oe_stat_button" type="object" string="Revise" attrs="{'invisible': ['|',('stage_count_id', '!=', 3),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
@@ -16,7 +16,7 @@
         	</xpath>
             <xpath expr="//button[@name='create_employee_from_applicant']" position="replace">
                 <button string="Create Employee" name="create_employee_from_applicant" type="object"
-                        class="oe_highlight o_create_employee" attrs="{'invisible': ['|',('emp_id', '!=', False),'|',('joining_date','=',False),'|',('stage_count_id','!=',4),('active', '=', False)]}"/>
+                        class="oe_highlight o_create_employee" attrs="{'invisible': ['|',('emp_id', '!=', False),'|',('offer_letter_sent','=',False),'|',('stage_count_id','!=',4),('active', '=', False)]}"/>
             </xpath>
             <xpath expr="//button[@name='archive_applicant']" position="replace">
                 <button string="Refuse" name="archive_applicant" type="object" attrs="{'invisible': [('emp_id', '!=', False)]}"/>
@@ -263,6 +263,7 @@
                                 <field name="workorder_approval" readonly="1"/>
                                 <field name="workorder_id" invisible="1"/>
                                 <field name="offer_letter_release" readonly="1"/>
+                                <field name="offer_letter_sent"/>
                                 <field name="offer_letter_acceptance" readonly="1"/>
                                 <field name="embarck_trigger_date"/>
                                 <field name="ogt_clearance"/>

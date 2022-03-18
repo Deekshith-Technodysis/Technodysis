@@ -16,7 +16,7 @@
                     <button class="oe_stat_button" name="update_records"
                             string="Approve" type="object" attrs="{'invisible':[('state', '!=','waiting')]}"/>
                     <button class="oe_stat_button" name="reset_workorder"
-                            string="Reset to Draft" type="object" attrs="{'invisible':[('state', '!=','waiting')]}" groups="hr_recruitment.group_hr_recruitment_manager"/>
+                            string="Reset to Draft" type="object" attrs="{'invisible':[('state', '!=','waiting')]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                     <!-- <field name="state" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/> -->
                     <field name="state" widget="statusbar"/>
                 </header>

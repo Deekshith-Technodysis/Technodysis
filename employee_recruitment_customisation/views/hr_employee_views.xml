@@ -80,7 +80,7 @@
             </xpath>
             <xpath expr="//page[@name='personal_information']/group[1]" position="inside">
                 <group string="Signature" groups="hr_recruitment.group_hr_recruitment_manager">
-                    <field name="signature" widget="image"/>
+                    <field name="signature" widget="signature"/>
                 </group>
             </xpath>
         </field>

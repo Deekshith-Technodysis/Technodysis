@@ -510,6 +510,17 @@
                     </tr>
                   </tbody>
                 </table>
+                Best Wishes,<br/>
+                          <strong>From Technodysis Private Limited,</strong><br/>
+
+                          <t t-if="o.hr.signature">
+                            <img t-att-src="image_data_uri(o.hr.signature)" style="max-height: 2cm; max-width: 4cm;"/>
+                          </t>
+                          <br/><br/>
+                          <strong>
+                          <span t-esc="o.hr.name"/><br/>
+                          <span t-esc="o.hr.job_id.name"/><br/>
+                          <br/></strong>
               </div>
           </div>
         </t>
