@@ -263,7 +263,7 @@
                                 <field name="workorder_approval" readonly="1"/>
                                 <field name="workorder_id" invisible="1"/>
                                 <field name="offer_letter_release" readonly="1"/>
-                                <field name="offer_letter_sent"/>
+                                <field name="offer_letter_sent" invisible="1"/>
                                 <field name="offer_letter_acceptance" readonly="1"/>
                                 <field name="embarck_trigger_date"/>
                                 <field name="ogt_clearance"/>
