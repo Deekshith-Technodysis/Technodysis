@@ -676,7 +676,7 @@ class JobApplication(models.Model):
                     'default_resume_line_ids':[(6, 0, [resume.id for resume in applicant.applicant_resume_line_ids])],
                     'default_employee_skill_ids':[(6, 0, [skill.id for skill in applicant.applicant_skill_ids])],
                     'default_certificate': applicant.certificate,
-                    'default_study_field': applicant.study_field,
+                    'default_study_field': applicant.study_field.name,
                     'default_study_school': applicant.study_school,
                     'default_father_name':applicant.father_name,
                     'default_birthday':applicant.birthday,
