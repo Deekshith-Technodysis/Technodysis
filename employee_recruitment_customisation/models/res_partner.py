@@ -63,8 +63,11 @@ class ResPartner(models.Model):
 
 	def _get_action(self, action_xmlid):
 		action = self.env["ir.actions.actions"]._for_xml_id(action_xmlid)
+		# client_id = self.env['res.partner'].search([('enable_wo','=',True)])
+
 		context = {
 			'search_default_client_id': [self.id],
+			'search_default_enable_wo': True,
 			'default_client_id': self.id,
 			'default_company_id': self.company_id.id,
 		}

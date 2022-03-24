@@ -17,7 +17,7 @@
                         <p align="justify">
                           Welcome to <strong>Technodysis Private Limited!</strong> <br/><br/><br/>
 
-                          With reference to your application and subsequent interview with us for a career in our organization, we are pleased to inform you that you have been selected for employment in our organization as<strong> <span t-esc="o.job_id.name"/></strong>. We take this opportunity to thank and appreciate your decision to join Technodysis Private Limited and requested to join us on <strong><span t-esc="o.joining_date"/></strong>. <br/><br/>
+                          With reference to your application and subsequent interview with us for a career in our organization, we are pleased to inform you that you have been selected for employment in our organization as<strong> <span t-esc="o.job_id.name"/></strong>. We take this opportunity to thank and appreciate your decision to join Technodysis Private Limited. <br/><br/>
 
                           We will be shortly arranging an introductory session to you. The date and time will be communicated by our HR Department in a separate communication. We expect that this session will provide you with an overview of our organization, its policies, practices and career opportunities during your career with us. Much more than that, this session will be a platform for us to get into a common understanding on your roles and responsibilities and expectations so that your tenure in the organization can create immense value. We look forward to a long-term relationship in a mutually rewarding way. <br/><br/>
 
@@ -67,16 +67,12 @@
                           We are pleased to appoint you as <strong><span t-esc="o.job_id.name"/> </strong>in Technodysis Private Limited. This appointment is subject to you joining the organization and on the basis of following terms. Please note that the employment terms are as per the policies of the organization.
                           <br/><br/>
 
-                          The effective date of your appointment will be <t t-if="o.joining_date"><span t-esc="o.joining_date"/></t>
-                          <t t-else="">__________________</t>.<br/><br/>
                           <div class="list-inline" align="justify" style="margin-left:17px">
                             <p style="text-indent:30px">
                               <span style="color:#006fc1"><b>1. &#160;&#160; APPOINTMENT</b></span>
                               <div style="margin-left:60px">
                                 <p>
-                                  <b>a.</b> &#160;&#160;Your date of appointment is effective from <strong>
-                                <t t-if="o.joining_date"><span t-esc="o.joining_date"/></t>
-                                <t t-else="">__________________</t></strong>, unless otherwise a formal communication from the organization.<br/>
+                                  <b>a.</b> &#160;&#160;Your date of appointment is effective from date of joining, unless otherwise a formal communication from the organization.<br/>
                                   <b>b.</b> &#160;&#160;Validity of this offer of appointment is subject to your successful submission and verification of personal, academic, experiential or any other relevant documentation that organization feels essential for ensuring the integrity and authenticity of the information furnished to the organization. Organization at its discretion can take up the background verification of all such information/documents submitted.
                                 </p>
                               </div>

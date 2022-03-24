@@ -45,7 +45,6 @@
                                             <field name="resume_number" readonly="1"/>
                                             <field name="skill" readonly="1"/>
                                             <field name="qualification" invisible="1"/>
-                                            <label for="study_field" string="Highest Qualification"/>
                                             <field name="study_field" readonly="1"/>
                                             <field name="vendor_id" readonly="1"/>
                                             <field name="relocation_needed" readonly="1"/>
@@ -93,6 +92,23 @@
                                     <field name="client_id"/>
                                     <field name="currently_employed"/>
                                     <field name="salary_expected"/>
+                                    <field name="study_field" invisible="1"/>
+                                    <field name="mark_up_percent" invisible="1"/>
+                                    <field name="job_code" invisible="1"/>
+                                    <field name="relocation_needed" invisible="1"/>
+                                    <field name="currently_employed" invisible="1"/>
+                                    <field name="employer_name" invisible="1"/>
+                                    <field name="jc_exp_level" invisible="1"/>
+                                    <field name="expected_joining_date" invisible="1"/>
+                                    <field name="total_exp_year" invisible="1"/>
+                                    <field name="total_exp_month" invisible="1"/>
+                                    <field name="hike_percent" invisible="1"/>
+                                    <field name="salary_hike" invisible="1"/>
+                                    <field name="last_salary" invisible="1"/>
+                                    <field name="current_hike_percent" invisible="1"/>
+                                    <field name="contact_account" invisible="1"/>
+                                    <field name="business_unit" invisible="1"/>
+                                    <field name="remarks" invisible="1"/>
                                 </tree>
                             </field>
                         </page>

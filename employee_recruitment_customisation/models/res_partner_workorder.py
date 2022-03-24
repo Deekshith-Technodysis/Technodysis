@@ -160,7 +160,7 @@ class ResPartnerWorkorderLines(models.Model):
 
 	skill = fields.Char(string="Skill",compute="_fetch_skill",store=True)
 	qualification = fields.Char(string="Highest Education",compute="_fetch_qualification",store=True)
-	study_field = fields.Many2one('hr.recruitment.degree',"Field of Study", tracking=True)
+	study_field = fields.Many2one('hr.recruitment.degree',"Highest qualification", tracking=True)
 	relocation_needed = fields.Selection([
 		('yes', 'Yes'),
 		('no', 'No')], 'Relocation Needed ?',default="no")
