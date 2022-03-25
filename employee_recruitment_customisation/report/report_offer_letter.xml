@@ -49,16 +49,7 @@
                         </div>
                       </div>
 
-                      <div><strong>
-                        <p align="justify">
-                          <span t-esc="o.partner_name"/>
-                          <t t-if="o.street">,<br/><t t-esc="o.street"/> <t t-esc="o.street2"/></t>
-                          <t t-if="o.city">,<br/><t t-esc="o.city"/></t>
-                          <t t-if="o.state_id">,<t t-esc="o.state_id.name"/></t>
-                          <t t-if="o.country_id">,<t t-esc="o.country_id.name"/></t>
-                          <t t-if="o.zip"> - <t t-esc="o.zip"/><br/></t>
-                        </p>
-                        </strong>
+                      <div><br/>
                         <p align="justify">
                           Dear <strong><span t-esc="o.partner_name"/>,</strong><br/>
                         </p>
@@ -87,7 +78,9 @@
                                 <p>
                                   
                                   <b>a.</b> &#160;&#160;Basic salary of <strong>Rs. <span t-esc="'%.2f' % (o.basic_salary)"/> per annum. </strong><br/>
-                                  <b>b.</b> &#160;&#160;Variable pay of Rs. <strong><span t-esc="'%.2f' % (o.annual_variable_pay)"/> per annum </strong><br/>
+                                  <t t-if="o.annual_variable_pay">
+                                    <b>b.</b> &#160;&#160;Variable pay of Rs. <strong><span t-esc="'%.2f' % (o.annual_variable_pay)"/> per annum </strong><br/>
+                                  </t>
                                 </p>
                               </div>
                               <div style="margin-left:30px">
@@ -95,8 +88,9 @@
                               </div>
                               <div style="margin-left:60px">
                                 <p>
-                                  <b>c.</b> &#160;&#160;Your salary will be reviewed periodically as per the organization’s policies. <br/>
-                                  <b>d.</b> &#160;&#160;Any possible changes in your salary are subject to the discretion of the organization and also  will be based on your contributions to the organization in the form of performance and results. <br/>
+                                  <b>a.</b> &#160;&#160;Your salary will be reviewed periodically as per the organization’s policies. <br/>
+                                  <b>b.</b> &#160;&#160;Any possible changes in your salary are subject to the discretion of the organization and also  will be based on your contributions to the organization in the form of performance and results. <br/>
+                                  <b>c.</b> &#160;&#160;All applicable taxes will be deducted based on the government policies.<br/>
                                 </p>
                               </div>
                             </p>
@@ -109,18 +103,18 @@
                               <div style="margin-left:60px">
                                 <b>a.</b>&#160;&#160;Leaves, holidays and working hours as applicable to your role, location and client’s policies if applicable<br/>
                                 <b>b.</b>&#160;&#160;Perquisites, if any, as applicable to your role<br/>
-                                <b>c.</b>&#160;&#160;Applicable Allowances for assignment specific relocation as per the policy <br/>
-                                <b>d.</b>&#160;&#160;ESI or Medical Insurance as applicable, gratuity plan, survivor benefit plan and industrial injury benefits as per the policy<br/>
+                                <b>c.</b>&#160;&#160;While Joining to Technodysis, any long leaves more than 7 days which are planned, from date of joining to next 12 months to be declared.<br/>
+                                <b>d.</b>&#160;&#160;Applicable Allowances for assignment specific relocation as per the policy <br/>
+                                <b>e.</b>&#160;&#160;ESI or Medical Insurance as applicable, gratuity plan, survivor benefit plan and industrial injury benefits as per the policy<br/>
                               </div>
                             </p>
                             <br/>
                             <p style="text-indent:30px">
                               <span style="color:#006fc1"><b>4. &#160;&#160; PROBATION</b></span>
                               <div style="margin-left:60px">
-                                <b>a.</b>&#160;&#160;You will be on probation for a period of six (6) months from the date of your appointment. On completion of the probationary period, your appointment shall be confirmed and communicated to you in writing if the Company finds you to be suitable for the appointed post. Unless confirmation is communicated in writing, your probation period is deemed extended.<br/>
-                                <b>b.</b>&#160;&#160;A probationary period is considered to be a phase where employee will be undergoing skill orientation activities, role specific knowledge gaining activities and enablement for the role. During this phase organization may also plan for any trainings/certifications. All such initiatives are considered as future readiness of the employee. Hence, any decisions of separation in the form of resignation during this period will be considered to be causing business, financial and reputational losses to the organization. Hence, in any such situations where losses are incurred, the organization may decide to recover such losses from the employee, which might be determined on case to case basis. <br/>
+                                <b>a.</b>&#160;&#160;You will be on probation for a period of twelve (12) months from the date of your appointment. On completion of the probationary period, your appointment shall be confirmed and communicated to you in writing if the Company finds you to be suitable for the appointed post. Unless confirmation is communicated in writing, your probation period is deemed extended.<br/>
+                                <b>b.</b>&#160;&#160;A probationary period is considered to be a phase where employee will be undergoing skill orientation activities, role specific knowledge gaining activities and enablement for the role. During this phase organization may also plan for any trainings/certifications. All such initiatives are considered as future readiness of the employee. Hence, any decisions of separation within 2 years after the completion of trainings/certifications, will be considered to be causing business, financial and reputational losses to the organization. Hence, in any such situations where losses are incurred, the organization will recover such losses from the employee, which might be determined on case to case basis. <br/>
                                 
-                                In an event that you are on a sponsored dedicated training by Technodysis, any exit for a period of six months also attracts the estimated cost of such trainings, applicable certification costs, etc., to be recovered from the candidate. This is applicable during the probationary period only. 
                               </div>
                             </p>
                             <br/>
@@ -176,8 +170,8 @@
                                   </div>
                                   <div style="margin-left:60px">
                                     <b>a.</b>&#160;&#160;The retirement age in our organization is 58 years. Upon successful service of an employee on completion of 58 years separation from active service of the organization comes into effect.<br/>
-                                    <b>b.</b>&#160;&#160;Your employment with the organization can also be terminated either by the Company or by you by giving the other party <b>‘One Month’</b> notice. For successful completion of notice period you are required to comply with the separation process.<br/>
-                                    <b>c.</b>&#160;&#160;A separation that might take place due to any possible acts by an employee which qualify for instant separation such as policy related violations, integrity issues, background verification failure, inability to comply to the needs of the customer, etc., In all such situations, you shall comply with the Company’s termination procedures, sign all documents and return all Company/Clients property.<br/>
+                                    <b>b.</b>&#160;&#160;Your employment with the organization can also be terminated either by the Company or by you by giving the other party <b>‘One Month’</b> notice. For successful completion of notice period you are required to comply with the separation process. This notice of 'One Month' doesn't apply incase you move into non-billability or into free pool. Either parties reserve the right to terminate this contract within a day of you moving into non-billability or into free pool.<br/>
+                                    <b>c.</b>&#160;&#160;A separation that might take place due to any possible acts by an employee which qualify for instant separation such as policy related violations, integrity issues, background verification failure,sexual harassment, Bad conduct, Performance issue etc., In all such situations, you shall comply with the Company’s termination procedures, sign all documents and return all Company/Clients property.<br/>
                                   </div>
                                   <div style="margin-left:30px">
                                     In an adverse situation of unclean separation, company is not liable to pay any dues to employee.
@@ -188,9 +182,10 @@
                                   <span style="color:#006fc1"><b>9. &#160;&#160; GENERAL</b></span>
                                   <div style="margin-left:60px">
                                     <b>a.</b>&#160;&#160;We trust that you have not provided us with any false declaration or wilfully suppressed any material information. If you have, you will be liable for removal from service without notice. Please note that you are required to inform us if there are any agreements, oral or written, which you have entered into and which relate to your commitments under this Agreement.<br/>
-                                    <b>b.</b>&#160;&#160;Your employment terms may be specifically enforced legally, if required. In this connection, if any of the provisions of this Agreement are declared or found to be void or unenforceable due to any reason whatsoever, the remaining provisions of this Agreement shall continue in full force and effect.<br/>
-                                    <b>c.</b>&#160;&#160;These employment terms supersede and replace any existing agreement or understanding, if any, between Technodysis and you relating to the same subject matter.<br/>
-                                    <b>d.</b>&#160;&#160;You warrant that you are not prevented by a court or by any other administrative or judicial order from providing the services required under this agreement. In the event that you are not a citizen of the country of posting, you should have a valid work permit to work in the country of posting.<br/>
+                                    <b>b.</b>&#160;&#160;We also trust that you have not suppressed any health related information that may potentially qualify you as ineligible to work permanently or for a prolanged duration. Any evidence of such separation of information is deemed to qualifies for removal from service without notice. <br/>
+                                    <b>c.</b>&#160;&#160;Your employment terms may be specifically enforced legally, if required. In this connection, if any of the provisions of this Agreement are declared or found to be void or unenforceable due to any reason whatsoever, the remaining provisions of this Agreement shall continue in full force and effect.<br/>
+                                    <b>d.</b>&#160;&#160;These employment terms supersede and replace any existing agreement or understanding, if any, between Technodysis and you relating to the same subject matter.<br/>
+                                    <b>e.</b>&#160;&#160;You warrant that you are not prevented by a court or by any other administrative or judicial order from providing the services required under this agreement. In the event that you are not a citizen of the country of posting, you should have a valid work permit to work in the country of posting.<br/>
                                   </div>
                                 </p>
                               
@@ -226,11 +221,11 @@
                                   [Employee’s Signature]
                                   <br/>
                                   <br/>
-                                  <br/>
 
-                                </div><br/></p>
+                                </div></p>
+                                <br/>
 
-                              <hr/>
+                              <hr style="margin-top:10px;"/>
                               <p align="left">
                                 <span t-esc="o.partner_name"/><br/>
                                 <br/>
@@ -253,15 +248,10 @@
                               <t t-if="o.job_id">
                                 Job Role:<br/>
                               </t>
-                              <t t-if="o.department_id">
-                                Department:<br/>
-                              </t>
                               <t t-if="o.add_bonus_for_salary">
                                 Joining Bonus<br/>
                               </t>
-                              <t t-if="o.joining_date">
-                                Effective Date:<br/>
-                              </t>
+
                             </div>
                             <div class="col-6">
                               <t t-if="o.partner_name">
@@ -270,14 +260,8 @@
                               <t t-if="o.job_id">
                                 <span t-esc="o.job_id.name"/><br/>
                               </t>
-                              <t t-if="o.department_id">
-                                <span t-esc="o.department_id.name"/><br/>
-                              </t>
                               <t t-if="o.add_bonus_for_salary">
                                 <span t-field="o.joining_bonus_amount"/><br/>
-                              </t>
-                              <t t-if="o.joining_date">
-                                <span t-esc="o.joining_date"/><br/>
                               </t>
                             </div>
                             <div class="col-3">
@@ -389,6 +373,46 @@
                             </p>
 
                           </span>
+                          I have read and understood the above compensation structure and I am hereby providing my acceptance for the same.
+                          <br/>
+                          <div class="row">
+                            <div class="col-6">
+                              <p align="left">
+                                <t t-if="o.hr.signature">
+                                  <img t-att-src="image_data_uri(o.hr.signature)" style="max-height: 2cm; max-width: 4cm;"/>
+                                </t>
+                              <br/></p>
+                              <hr/>
+                              <p align="left">
+                                <span t-esc="o.hr.name"/><br/>
+                                <br/>
+                                Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> 
+                                <br/>
+                                Place: Bangalore
+                                <br/>
+                              </p><br/>
+                            </div>
+                            <div class="col-6">
+                              <p align="left">
+                                <div style="max-height: 2cm; max-width: 4cm;">
+                                  [Employee’s Signature]
+                                  <br/>
+                                  <br/>
+
+                                </div></p>
+                                <br/>
+
+                              <hr style="margin-top:10px;"/>
+                              <p align="left">
+                                <span t-esc="o.partner_name"/><br/>
+                                <br/>
+                                Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> 
+                                <br/>
+                                Place: Bangalore
+                                <br/>
+                                </p><br/>
+                            </div>
+                          </div>
                         </div>
                         <div class="row" style="page-break-before:always;"/>
                           <br/>
