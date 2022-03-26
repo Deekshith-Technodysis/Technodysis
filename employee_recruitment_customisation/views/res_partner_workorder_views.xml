@@ -135,6 +135,7 @@
         <field name="arch" type="xml">
             <search string="Workorder list">
                 <field name="client_id"/>
+                <field name="name"/>
                 <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]" help="Workorders in Draft State"/>
                 <filter name="waiting" string="Waiting" domain="[('state', '=', 'waiting')]" help="Workorders in Waiting State"/>
                 <filter name="confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]" help="Workorders in Confirmed State"/>
