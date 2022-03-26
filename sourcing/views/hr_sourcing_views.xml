@@ -294,6 +294,9 @@
         <field name="arch" type="xml">
             <search string="Search Sourcing">
                 <field name="refuse_reason_id"/>
+                <field name="sequence"/>
+                <field name="name"/>
+                <field name="candidate_name"/>
                 <filter string="Archived / Refused" name="inactive" domain="[('active', '=', False)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Stage" name="stage" domain="[]" context="{'group_by': 'stage_id'}"/>
