@@ -165,7 +165,8 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     employee_id = fields.Many2one('hr.employee',string="Employee",domain="[('client_work_address','=',partner_id)]")
-    billing_rate = fields.Float(string="Billing Rate",digits=(16, 2),compute="_fetch_billing_rate",store=True)
+    # billing_rate = fields.Float(string="Billing Rate",digits=(16, 2),compute="_fetch_billing_rate",store=True)
+    billing_rate = fields.Float(string="Billing Rate",digits=(16, 2),store=True)
     worked_days = fields.Float(string="Worked Days")
     leaves_taken = fields.Float(string="Leaves Taken")
     billed_days = fields.Float(string="Billed Days")
@@ -174,10 +175,13 @@ class AccountMoveLine(models.Model):
     travel_expense = fields.Float(string="Travel Expense")
 
     
-    unit_price = fields.Float(string='Unit Price', digits='Product Price',compute="_fetch_unit_price",store=True)
+    # unit_price = fields.Float(string='Unit Price', digits='Product Price',compute="_fetch_unit_price",store=True)
+    unit_price = fields.Float(string='Unit Price', digits='Product Price',store=True)
 
-    markup_value = fields.Float(string="Markup Value",compute="compute_final_price_value")
-    price_unit = fields.Float(string='Unit Price', digits='Product Price',compute="compute_final_price_value",store=True)
+    # markup_value = fields.Float(string="Markup Value",compute="compute_final_price_value")
+    # price_unit = fields.Float(string='Unit Price', digits='Product Price',compute="compute_final_price_value",store=True)
+    markup_value = fields.Float(string="Markup Value")
+    price_unit = fields.Float(string='Unit Price', digits='Product Price',store=True)
 
     # Fields for accord 
     total_hours_worked = fields.Float(string="Hours worked in Saturday/Sunday")
@@ -186,7 +190,8 @@ class AccountMoveLine(models.Model):
     charges = fields.Float(string="Charges per day")
     remarks = fields.Text(string="Remarks")
 
-    @api.depends('move_id.partner_id','unit_price')
+    # @api.depends('move_id.partner_id','unit_price')
+    @api.onchange('move_id.partner_id','unit_price','employee_id')
     def compute_final_price_value(self):
         for line in self:
             if line.move_id.partner_id.enable_markup_value:
@@ -197,7 +202,8 @@ class AccountMoveLine(models.Model):
                 line.price_unit = line.unit_price + line.laptop_charges + line.travel_expense
                 line.markup_value = False
 
-    @api.depends('commission_percent','employee_id')
+    # @api.depends('commission_percent','employee_id')
+    @api.onchange('move_id.partner_id','commission_percent','employee_id')
     def _fetch_billing_rate(self):
         actual_ctc = 0
         for line in self:
@@ -206,7 +212,8 @@ class AccountMoveLine(models.Model):
             line.billing_rate = ((actual_ctc + ( (actual_ctc)* line.commission_percent/100))/12)
             # line.billing_rate = ((line.employee_id.salary_proposed/12))
 
-    @api.depends('worked_days','leaves_taken','billed_days','move_id.inv_billing_type','total_amount')
+    # @api.depends('worked_days','leaves_taken','billed_days','move_id.inv_billing_type','total_amount')
+    @api.onchange('worked_days','leaves_taken','billed_days','move_id.inv_billing_type','total_amount','employee_id','move_id.partner_id')
     def _fetch_unit_price(self):
         unit_price = 0
         for line in self:
