@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Company View -->
+
+    <record model="ir.ui.view" id="view_hr_sourcing_pivot">
+        <field name="name">hr.sourcing.pivot</field>
+        <field name="model">hr.sourcing</field>
+        <field name="arch" type="xml">
+            <pivot string="Souring" sample="1">
+                <field name="job_id" type="row"/>
+                <field name="stage_id" type="col"/>
+            </pivot>
+        </field>
+    </record>
+    <!-- Sourcing View -->
     <record id="hr_sourcing_view_form" model="ir.ui.view">
         <field name="name">hr.sourcing.form</field>
         <field name="model">hr.sourcing</field>
@@ -281,7 +292,7 @@
     <record id="hr_sourcing_action" model="ir.actions.act_window">
         <field name="name">Sourcing</field>
         <field name="res_model">hr.sourcing</field>
-        <field name='view_mode'>tree,form</field>
+        <field name='view_mode'>tree,form,pivot</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create new records

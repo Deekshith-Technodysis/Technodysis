@@ -84,6 +84,8 @@ class JobApplication(models.Model):
         ('fte', 'FTE'),
         ('trainee', 'Trainee'),
         ('intern', 'Intern')], 'Employment Type')
+    # need to update value for existing records from employment type to job type id
+    job_type_id = fields.Many2one('hr.job.type',string="Employment Type",required=True)
 
     # Applicant address
     relocation_needed = fields.Selection([
@@ -614,6 +616,11 @@ class JobApplication(models.Model):
                 
                 
             self.update({'salary_updated':True})
+
+    def action_change_employment(self):
+        stage_id = self.env['hr.recruitment.stage'].search([('sequence','=',1)])
+        if stage_id:
+            self.update({'stage_id':stage_id,'salary_updated':False})
 
     # ---rewritten the standard function----
     def create_employee_from_applicant(self):
