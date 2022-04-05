@@ -19,15 +19,15 @@
         	<form string="Sourcing">
                 <header>
                     <field name="stage_id" widget="statusbar"/>
-                    <button name="l0_select" string="L0 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l0')]}"/>
-                    <button name="l1_select" string="L1 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l1')]}"/>
-                    <button name="l2_select" string="L2 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l2')]}"/>
-                    <button name="l3_select" string="L3 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l3')]}"/>
-                    <button name="sourcing_done" string="Done" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'not in', ('l0','l1','l2'))]}"/>
-                    <!-- <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('reject','done'))]}"/> -->
-                    <button name="create_application" string="Create Application" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', '!=', 'done'),'|',('sourcing_app_count','=',1),('active', '=', False)]}"/>
-                    <button string="Refuse" name="archive_applicant" type="object" attrs="{'invisible': [('active', '=', False)]}"/>
-                    <button string="Restore" name="toggle_active" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <button name="l0_select" string="L0 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l0')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="l1_select" string="L1 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l1')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="l2_select" string="L2 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l2')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="l3_select" string="L3 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l3')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="sourcing_done" string="Done" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'not in', ('l0','l1','l2'))]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <!-- <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('reject','done'))]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/> -->
+                    <button name="create_application" string="Create Application" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', '!=', 'done'),'|',('sourcing_app_count','=',1),('active', '=', False)]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button string="Refuse" name="archive_applicant" type="object" attrs="{'invisible': [('active', '=', False)]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button string="Restore" name="toggle_active" type="object" attrs="{'invisible': [('active', '=', True)]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
 
 
                 </header>

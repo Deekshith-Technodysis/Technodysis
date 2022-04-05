@@ -15,3 +15,11 @@ access_hr_job_type_manager,hr.job.type,model_hr_job_type,sourcing.group_sourcing
 access_hr_sourcing_refuse_reason_manager,hr.sourcing.refuse.reason,model_hr_sourcing_refuse_reason,sourcing.group_sourcing_manager,1,1,1,1
 access_sourcing_get_refuse_reason_manager,access.sourcing.get.refuse.reason,model_sourcing_get_refuse_reason,sourcing.group_sourcing_manager,1,1,1,1
 access_sourcing_application_reason_manager,access.sourcing.application.reason,model_sourcing_application_reason,sourcing.group_sourcing_manager,1,1,1,1
+
+access_hr_work_location_officer,hr.work.location,model_hr_work_location,sourcing.group_sourcing_officer,1,1,1,0
+access_hr_work_other_location_officer,hr.work.other.location,model_hr_work_other_location,sourcing.group_sourcing_officer,1,1,1,0
+access_hr_sourcing_officer,hr.sourcing,model_hr_sourcing,sourcing.group_sourcing_officer,1,1,1,0
+access_hr_job_type_officer,hr.job.type,model_hr_job_type,sourcing.group_sourcing_officer,1,1,1,0
+access_hr_sourcing_refuse_reason_officer,hr.sourcing.refuse.reason,model_hr_sourcing_refuse_reason,sourcing.group_sourcing_officer,1,1,1,0
+access_sourcing_get_refuse_reason_officer,access.sourcing.get.refuse.reason,model_sourcing_get_refuse_reason,sourcing.group_sourcing_officer,1,1,1,0
+access_sourcing_application_reason_officer,access.sourcing.application.reason,model_sourcing_application_reason,sourcing.group_sourcing_officer,1,1,1,0

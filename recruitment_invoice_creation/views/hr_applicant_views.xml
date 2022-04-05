@@ -19,8 +19,8 @@
         	</xpath>
         	<xpath expr="//field[@name='company_id']" position="after">
         		<field name="create_invoice_bool" invisible="1"/>
-        		<field name="invoice_id"/>
-        		<field name="is_invoiced"/>
+        		<field name="invoice_id" invisible="1"/>
+        		<field name="is_invoiced" invisible="1"/>
         	</xpath>
         </field>
     </record>
