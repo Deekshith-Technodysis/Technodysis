@@ -35,9 +35,9 @@ class HrSourcing(models.Model):
     email = fields.Char(string="Candidate's mail id",required=True)
 
     total_exp_year = fields.Integer(string="Total Experience(Years)",required=True)
-    total_exp_month = fields.Integer(string="Total Experience")
+    total_exp_month = fields.Integer(string="Total Experience(Months)")
     relevant_exp_year = fields.Integer(string="Relevant Experience(Years)",required=True)
-    relevant_exp_month = fields.Integer(string="Relevant Experience")
+    relevant_exp_month = fields.Integer(string="Relevant Experience(Months)")
     hourly_salary_bool = fields.Boolean(string="Hourly salary calculation",default=False)
 
     amount_per_hour = fields.Float(string="Amount per hour")

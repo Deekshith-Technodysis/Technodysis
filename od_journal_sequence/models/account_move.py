@@ -13,7 +13,7 @@ class AccountMove(models.Model):
         for move in self:
             name = move.name or "/"
             if (
-                    move.state == "draft"
+                    move.state == "posted"
                     and (not move.name or move.name == "/")
                     and move.journal_id
                     and move.journal_id.sequence_id

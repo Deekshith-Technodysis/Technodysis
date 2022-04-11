@@ -285,6 +285,17 @@
         		<field name="sequence"/>
         		<field name="name"/>
                 <field name="candidate_name"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="client_id"/>
+                <field name="job_type_id"/>
+                <field name="stage_id"/>
+                <field name="total_exp_year" optional="hidden"/>
+                <field name="total_exp_month" optional="hidden"/>
+                <field name="relevant_exp_year" optional="hidden"/>
+                <field name="relevant_exp_month" optional="hidden"/>
+                <field name="preferred_location" optional="hidden"/>
+                <field name="notice_period_id" optional="hidden"/>
         	</tree>
         </field>
     </record>
