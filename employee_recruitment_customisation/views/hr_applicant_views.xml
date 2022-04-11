@@ -56,8 +56,7 @@
             </xpath>
             <xpath expr="//field[@name='type_id']" position="after">
                 <field name="created_date"/>
-                <label for="employment_type" string="Import this value to below field"/>
-                <field name="employment_type"/>
+                <field name="employment_type" invisible="1"/>
                 <field name="job_type_id"/>
             </xpath>
             <xpath expr="//label[@for='name']" position="before">
