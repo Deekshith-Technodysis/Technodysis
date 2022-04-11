@@ -15,6 +15,7 @@
     		 'views/hr_job_type.xml',
              'views/hr_applicant_views.xml',
              'views/account_move_views.xml',
+             'views/hr_employee_views.xml',
             ],
     'installable': True,
     'auto_install': False,
