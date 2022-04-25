@@ -12,6 +12,7 @@ class HrEmployee(models.Model):
 
     invoice_id = fields.Many2one('account.move',string="Invoice Id",copy=False)
     invoice_count = fields.Integer(string='Invoice', compute='_invoice_count')
+    client_hired_date = fields.Date(string="Hired by Client Date") 
 
     def _invoice_count(self):
         for order in self:
@@ -39,4 +40,22 @@ class HrEmployee(models.Model):
             })],
         }
         account_move_obj = self.env['account.move'].create(invoice_vals)
-        self.update({'invoice_id':account_move_obj.id,'active':False})
+        date = fields.Date.today()
+        self.update({'invoice_id':account_move_obj.id,'active':False,'client_hired_date':date})
+
+
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
+from odoo import api, fields, models
+
+
+class HrDepartureWizard(models.TransientModel):
+    _inherit = 'hr.departure.wizard'
+    _description = 'Departure Wizard'
+
+    departure_reason = fields.Selection([
+        ('fired', 'Terminated'),
+        ('resigned', 'Resigned'),
+        ('retired', 'Retired')
+    ], string="Departure Reason", default="fired")

@@ -18,6 +18,9 @@
 	        <xpath expr="//field[@name='coach_id']" position="inside">
 	        	<field name="invoice_id"/>
 	        </xpath>
+	        <xpath expr="//field[@name='is_module_lead']" position="after">
+	        	<field name="client_hired_date" readonly="1"/>
+	        </xpath>
         </field>
     </record>
 </odoo>

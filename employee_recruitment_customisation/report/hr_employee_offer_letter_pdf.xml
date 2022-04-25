@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+      <record id="paperformat_offer_letter" model="report.paperformat">
+            <field name="name">Offer Letter</field>
+            <field name="format">custom</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">40</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
       <record id="action_report_offer_doc" model="ir.actions.report">
            <field name="name">Offer Letter</field>
            <field name="model">hr.applicant</field>
@@ -9,6 +23,7 @@
            <field name="print_report_name">'%s - Offer Letter' % (object.partner_name)</field>
            <field name="binding_model_id" ref="model_hr_applicant"/>
           <field name="binding_type">report</field>
+          <field name="paperformat_id" ref="employee_recruitment_customisation.paperformat_offer_letter"/>
       </record>
       <record id="action_salary_annexure" model="ir.actions.report">
           <field name="name">Salary Annexure</field>

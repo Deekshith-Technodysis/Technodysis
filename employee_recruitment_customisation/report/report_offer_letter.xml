@@ -5,10 +5,11 @@
             <!-- <t t-call="web.external_layout"> -->
               <t t-call="employee_recruitment_customisation.external_layout_offer_letter">
                 <t t-foreach="docs" t-as="o">
-                    <div class="page" style="font-size: 13px;">
+                    <div class="page" style="font-size: 14px;">
                       <div style="padding-top:-20px !important;" class="oe_structure"/>
                       <h6 align="center" style="color:#006fc1"><b>OFFER LETTER</b></h6>
                       <h6 align="center" style="color:#006fc1"><b>WELCOME TO TECHNODYSIS PRIVATE LIMITED</b></h6>
+                      <br/>
                       <div align="left">
                         <p align="justify"><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> <br/>
                           Dear <span t-esc="o.partner_name"/>,
@@ -109,6 +110,7 @@
                               </div>
                             </p>
                             <br/>
+                            <br/><br/><br/>
                             <p style="text-indent:30px">
                               <span style="color:#006fc1"><b>4. &#160;&#160; PROBATION</b></span>
                               <div style="margin-left:60px">
@@ -177,7 +179,7 @@
                                     In an adverse situation of unclean separation, company is not liable to pay any dues to employee.
                                   </div>
                                 </p>
-                                <br/>
+                                <br/><br/>
                                 <p style="text-indent:30px">
                                   <span style="color:#006fc1"><b>9. &#160;&#160; GENERAL</b></span>
                                   <div style="margin-left:60px">
@@ -208,6 +210,7 @@
                               <hr/>
                               <p align="left">
                                 <span t-esc="o.hr.name"/><br/>
+                                <span t-esc="o.hr.job_id.name"/><br/>
                                 <br/>
                                 Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> 
                                 <br/>
@@ -246,7 +249,7 @@
                                 Employee name:<br/>
                               </t>
                               <t t-if="o.job_id">
-                                Job Role:<br/>
+                                Designation:<br/>
                               </t>
                               <t t-if="o.add_bonus_for_salary">
                                 Joining Bonus<br/>
@@ -290,7 +293,7 @@
                                 <th style="text-align:right"><b></b></th>
                               </tr>
                               <tr>
-                                <th style="text-align:center"><b>Compensation Structure</b></th>
+                                <th style="text-align:center"><b>Particulars</b></th>
                                 <th style="text-align:right"></th>
                                 <th style="text-align:right"></th>
                               </tr>
@@ -356,7 +359,7 @@
                                 
                               </tr>
                               <tr>
-                                <td ><span><b>Total CTC</b></span></td>
+                                <td ><span><b>Annual CTC</b></span></td>
                                 <td style="text-align:right"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 <td style="text-align:right"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 
@@ -385,7 +388,8 @@
                               <hr/>
                               <p align="left">
                                 <span t-esc="o.hr.name"/><br/>
-                                <br/>
+                                <span t-esc="o.hr.job_id.name"/><br/>
+                                
                                 Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> 
                                 <br/>
                                 Place: Bangalore
@@ -402,7 +406,7 @@
                                 </div></p>
                                 <br/>
 
-                              <hr style="margin-top:10px;"/>
+                              <hr style="margin-top:3px;"/>
                               <p align="left">
                                 <span t-esc="o.partner_name"/><br/>
                                 <br/>
@@ -414,7 +418,8 @@
                             </div>
                           </div>
                         </div>
-                        <div class="row" style="page-break-before:always;"/>
+                        <!-- <div class="row" style="page-break-before:always;"/> -->
+                        <div class="row"/>
                           <br/>
                           <div class="annexure-2">
                             <h6 align="center" style="color:#006fc1"><b>ANNEXURE - 2</b></h6>

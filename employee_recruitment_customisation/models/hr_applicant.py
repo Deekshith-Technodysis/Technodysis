@@ -433,7 +433,8 @@ class JobApplication(models.Model):
                 })
         if template:
             email_values = {'email_to': self.email_from,
-                           'email_from': self.hr.work_email,
+                            'email_from': self.onboarding_hr_id.work_email,
+                           'email_cc': self.hr.work_email,
                            'attachment_ids': attachment,
                            }
 
@@ -458,7 +459,8 @@ class JobApplication(models.Model):
             })
         if template:
             email_values = {'email_to': self.email_from,
-                           'email_from': self.hr.work_email,
+                           'email_from': self.onboarding_hr_id.work_email,
+                           'email_cc':self.hr.work_email,
                            'attachment_ids': attachment,
                            }
 
