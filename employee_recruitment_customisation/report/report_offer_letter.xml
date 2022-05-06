@@ -171,7 +171,7 @@
                                     Separation from employment can happen due to various reasons;
                                   </div>
                                   <div style="margin-left:60px">
-                                    <b>a.</b>&#160;&#160;The retirement age in our organization is 58 years. Upon successful service of an employee on completion of 58 years separation from active service of the organization comes into effect.<br/>
+                                    <b>a.</b>&#160;&#160;The retirement age in our organization is <b>58 years</b>. Upon successful service of an employee on completion of 58 years separation from active service of the organization comes into effect.<br/>
                                     <b>b.</b>&#160;&#160;Your employment with the organization can also be terminated either by the Company or by you by giving the other party <b>‘One Month’</b> notice. For successful completion of notice period you are required to comply with the separation process. This notice of 'One Month' doesn't apply incase you move into non-billability or into free pool. Either parties reserve the right to terminate this contract within a day of you moving into non-billability or into free pool.<br/>
                                     <b>c.</b>&#160;&#160;A separation that might take place due to any possible acts by an employee which qualify for instant separation such as policy related violations, integrity issues, background verification failure,sexual harassment, Bad conduct, Performance issue etc., In all such situations, you shall comply with the Company’s termination procedures, sign all documents and return all Company/Clients property.<br/>
                                   </div>
@@ -179,7 +179,7 @@
                                     In an adverse situation of unclean separation, company is not liable to pay any dues to employee.
                                   </div>
                                 </p>
-                                <br/><br/>
+                                <br/><br/><br/>
                                 <p style="text-indent:30px">
                                   <span style="color:#006fc1"><b>9. &#160;&#160; GENERAL</b></span>
                                   <div style="margin-left:60px">
@@ -195,19 +195,20 @@
                         </div>
                         <br/>
                         <div style="page-break-inside: avoid;">
+                          <p style="text-indent:30px">
                           <span align="left" style="color:#006fc1"><b>DISCLAIMER</b></span ><br/>
-                          <span>Please accept the offer and confirm your acceptance for the same by signing a copy of this letter.</span>
+                          <p style="text-indent:30px">Please accept the offer and confirm your acceptance for the same by signing a copy of this letter.</p>
                           <br/>
                           <br/>
                           <br/>
-                          <div class="row">
+                          <div class="row" style="margin-left:30px">
                             <div class="col-6">
                               <p align="left">
                                 <t t-if="o.hr.signature">
                                   <img t-att-src="image_data_uri(o.hr.signature)" style="max-height: 2cm; max-width: 4cm;"/>
                                 </t>
                               <br/></p>
-                              <hr/>
+                              <hr style="margin-top:10px;"/>
                               <p align="left">
                                 <span t-esc="o.hr.name"/><br/>
                                 <span t-esc="o.hr.job_id.name"/><br/>
@@ -228,7 +229,7 @@
                                 </div></p>
                                 <br/>
 
-                              <hr style="margin-top:10px;"/>
+                              <hr style="margin-top:4px;"/>
                               <p align="left">
                                 <span t-esc="o.partner_name"/><br/>
                                 <br/>
@@ -239,6 +240,7 @@
                                 </p><br/>
                             </div>
                           </div>
+                        </p>
                         </div>
                         <div class="row" style="page-break-before:always;"/>
                         <div class="annexure-1">
@@ -277,28 +279,29 @@
                             <tbody>
                               <tr>
                                 <th>Annual Fixed Pay</th>
-                                <th style="text-align:right"><b><t t-esc="o.annual_fixed_pay"/></b></th>
-                                <th style="text-align:right"><b></b></th>
+                                <th style="text-align:center"><b><t t-esc="'%.2f' % (o.annual_fixed_pay)"/></b></th>
+                                <th style="text-align:center"><b></b></th>
                               </tr>
                               <tr>
                                 <th>Annual Variable Pay</th>
-                                <th style="text-align:right"><t t-esc="o.annual_variable_pay"/></th>
-                                <th style="text-align:right"><b></b></th>
+                                <th style="text-align:center"><t t-esc="'%.2f' % (o.annual_variable_pay)"/></th>
+                                <th style="text-align:center"><b></b></th>
                               </tr>
                               <tr>
                                 <th><b>Total CTC</b></th>
-                                <th style="text-align:right"><b><t t-if="o.annual_fixed_pay">
-                                  <span t-esc="o.annual_fixed_pay + o.annual_variable_pay"/><br/>
+                                <th style="text-align:center"><b><t t-if="o.annual_fixed_pay">
+                                  <span t-esc="'%.2f' % (o.annual_fixed_pay + o.annual_variable_pay)"/><br/>
                                 </t></b></th>
-                                <th style="text-align:right"><b></b></th>
+                                <th style="text-align:center"><b></b></th>
+                              </tr>
+                              <tr>
+                                
+                                <th style="text-align:right"><br/></th>
+                                <th style="text-align:right"><br/></th>
+                                <th style="text-align:right"><br/></th>
                               </tr>
                               <tr>
                                 <th style="text-align:center"><b>Particulars</b></th>
-                                <th style="text-align:right"></th>
-                                <th style="text-align:right"></th>
-                              </tr>
-                              <tr>
-                                <th></th>
                                 <th style="text-align:center"><b>Yearly</b></th>
                                 <th style="text-align:center"><b>Monthly</b></th>
                               </tr>
@@ -315,8 +318,8 @@
                                       <!-- </t> -->
                                       
                                     </td>
-                                    <td style="text-align:right"><span t-field="salary_ids.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
-                                    <td style="text-align:right"><span t-field="salary_ids.salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td style="text-align:center"><span t-field="salary_ids.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td style="text-align:center"><span t-field="salary_ids.salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
                                     
                                     <t t-set="total_fixed_ctc" t-value="total_fixed_ctc + salary_ids.salary"/>
                                   </t>
@@ -324,14 +327,14 @@
                               </tr>
                               <tr>
                                 <td><span><strong>Total Salary</strong></span></td>
-                                <td style="text-align:right"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc*12)"></span></strong></td>
-                                <td style="text-align:right"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc)"></span></strong></td>
+                                <td style="text-align:center"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc*12)"></span></strong></td>
+                                <td style="text-align:center"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc)"></span></strong></td>
                                 
                               </tr>
                               <tr>
                                 <td><br/></td>
-                                <td style="text-align:right"></td>
-                                <td style="text-align:right"></td>
+                                <td style="text-align:center"></td>
+                                <td style="text-align:center"></td>
                                 
                               </tr>
                               <t t-set="total_deduction" t-value="0.0"/>
@@ -339,29 +342,29 @@
                                 <t t-if="salary_ids_deduction.salary_type == 'deduction'">
                                   <t t-if="not salary_ids_deduction.name =='Employee PT Deduction'">
                                     <td ><span t-field="salary_ids_deduction.name"/></td>
-                                    <td style="text-align:right"><span t-field="salary_ids_deduction.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                                    <td style="text-align:center"><span t-field="salary_ids_deduction.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
                                     <t t-set="total_deduction" t-value="total_deduction + salary_ids_deduction.salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
-                                    <td style="text-align:right"><span t-field="salary_ids_deduction.salary"/></td>
+                                    <td style="text-align:center"><span t-field="salary_ids_deduction.salary"/></td>
                                 
                                   </t>
                                 </t>
                               </tr>
                               <tr>
                                 <td ><span><b>Total Fixed CTC</b></span></td>
-                                <td style="text-align:right"><b><span t-esc="round(o.annual_fixed_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                                <td style="text-align:right"><b><span t-esc="round(o.annual_fixed_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 
                               </tr>
                               <tr t-if="o.annual_variable_pay">
                                 <td ><span><b>Annual Variable Pay</b></span></td>
-                                <td style="text-align:right"><b><span t-esc="(o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                                <td style="text-align:right"><b><span t-esc="round(o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="(o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round(o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 
                               </tr>
                               <tr>
                                 <td ><span><b>Annual CTC</b></span></td>
-                                <td style="text-align:right"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                                <td style="text-align:right"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 
                               </tr>
                             </tbody>
@@ -473,7 +476,7 @@
                 <div class="row">
                   <div class="col-3">
                     <t t-if="o.partner_name">
-                      Employee name:<br/>
+                      Employee Name:<br/>
                     </t>
                     <t t-if="o.annual_fixed_pay">
                       Annual Fixed Pay<br/>
@@ -493,16 +496,16 @@
                       <span t-esc="o.partner_name"/><br/>
                     </t>
                     <t t-if="o.annual_fixed_pay">
-                      <span t-esc="o.annual_fixed_pay"/><br/>
+                      <span t-esc="'%.2f' % (o.annual_fixed_pay)"/><br/>
                     </t>
                     <t t-if="o.annual_variable_pay">
-                      <span t-esc="o.annual_variable_pay"/><br/>
+                      <span t-esc="'%.2f' % (o.annual_variable_pay)"/><br/>
                     </t>
                     <t t-if="o.add_bonus_for_salary">
-                      <span t-field="o.joining_bonus_amount"/><br/>
+                      <span t-esc="'%.2f' % (o.joining_bonus_amount)"/><br/>
                     </t>
                     <t t-if="o.annual_fixed_pay">
-                      <span t-esc="o.annual_fixed_pay + o.annual_variable_pay"/><br/>
+                      <span t-esc="'%.2f' % (o.annual_fixed_pay + o.annual_variable_pay)"/><br/>
                     </t>
                   </div>
                   <div class="col-3">
@@ -530,8 +533,8 @@
                             <!-- </t> -->
                             
                           </td>
-                          <td style="text-align:right"><span t-field="salary_ids.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
-                          <td style="text-align:right"><span t-field="salary_ids.salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                          <td style="text-align:center"><span t-field="salary_ids.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                          <td style="text-align:center"><span t-field="salary_ids.salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
                           
                           <t t-set="total_fixed_ctc" t-value="total_fixed_ctc + salary_ids.salary"/>
                         </t>
@@ -539,8 +542,8 @@
                     </tr>
                     <tr>
                       <td><span><strong>Total Salary</strong></span></td>
-                      <td style="text-align:right"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc*12)"></span></strong></td>
-                      <td style="text-align:right"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc)"></span></strong></td>
+                      <td style="text-align:center"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc*12)"></span></strong></td>
+                      <td style="text-align:center"><strong>₹<span t-esc="'%.2f' % (total_fixed_ctc)"></span></strong></td>
                       
                     </tr>
                     <t t-set="total_deduction" t-value="0.0"/>
@@ -548,29 +551,29 @@
                       <t t-if="salary_ids_deduction.salary_type == 'deduction'">
                         <t t-if="not salary_ids_deduction.name =='Employee PT Deduction'">
                           <td ><span t-field="salary_ids_deduction.name"/></td>
-                          <td style="text-align:right"><span t-field="salary_ids_deduction.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
+                          <td style="text-align:center"><span t-field="salary_ids_deduction.annual_salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td>
                           <t t-set="total_deduction" t-value="total_deduction + salary_ids_deduction.salary" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/>
-                          <td style="text-align:right"><span t-field="salary_ids_deduction.salary"/></td>
+                          <td style="text-align:center"><span t-field="salary_ids_deduction.salary"/></td>
                       
                         </t>
                       </t>
                     </tr>
                     <tr>
                       <td ><span><b>Total Fixed CTC</b></span></td>
-                      <td style="text-align:right"><b><span t-esc="round(o.annual_fixed_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                      <td style="text-align:right"><b><span t-esc="round(o.annual_fixed_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                       
                     </tr>
                     <tr t-if="o.annual_variable_pay">
                       <td ><span><b>Annual Variable Pay</b></span></td>
-                      <td style="text-align:right"><b><span t-esc="(o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                      <td style="text-align:right"><b><span t-esc="round(o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="(o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round(o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                       
                     </tr>
                     <tr>
                       <td ><span><b>Total CTC</b></span></td>
-                      <td style="text-align:right"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                      <td style="text-align:right"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                       
                     </tr>
                   </tbody>
