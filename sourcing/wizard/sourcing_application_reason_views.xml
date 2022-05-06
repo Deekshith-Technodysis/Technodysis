@@ -7,8 +7,8 @@
                 <form string="Create Application">
                     <group class="oe_title">
                     	<group>
-                    		<field name="expected_joining_date"/>
-                    		<field name="official_np_lwd"/>
+                    		<field name="expected_joining_date" required="1"/>
+                    		<field name="official_np_lwd" required="1"/>
                     	</group>
                     </group>
                     <group class="oe_title">

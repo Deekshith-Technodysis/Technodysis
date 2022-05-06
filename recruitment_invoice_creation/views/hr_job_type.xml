@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_job_type_form">
+        <field name="name">Job Type</field>
+        <field name="model">hr.job.type</field>
+        <field name="inherit_id" ref="sourcing.view_job_type_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='enable_bill_rate']" position="after">
+	            <group name="enable_direct_invoice_creation">
+	                <field name="enable_direct_invoice_creation"/>
+	            </group>
+	        </xpath>
+        </field>
+    </record>
+</odoo>

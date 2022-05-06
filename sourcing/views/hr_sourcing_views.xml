@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Company View -->
+
+    <record model="ir.ui.view" id="view_hr_sourcing_pivot">
+        <field name="name">hr.sourcing.pivot</field>
+        <field name="model">hr.sourcing</field>
+        <field name="arch" type="xml">
+            <pivot string="Souring" sample="1">
+                <field name="job_id" type="row"/>
+                <field name="stage_id" type="col"/>
+            </pivot>
+        </field>
+    </record>
+    <!-- Sourcing View -->
     <record id="hr_sourcing_view_form" model="ir.ui.view">
         <field name="name">hr.sourcing.form</field>
         <field name="model">hr.sourcing</field>
@@ -8,15 +19,15 @@
         	<form string="Sourcing">
                 <header>
                     <field name="stage_id" widget="statusbar"/>
-                    <button name="l0_select" string="L0 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l0')]}"/>
-                    <button name="l1_select" string="L1 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l1')]}"/>
-                    <button name="l2_select" string="L2 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l2')]}"/>
-                    <button name="l3_select" string="L3 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l3')]}"/>
-                    <button name="sourcing_done" string="Done" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'not in', ('l0','l1','l2'))]}"/>
-                    <!-- <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('reject','done'))]}"/> -->
-                    <button name="create_application" string="Create Application" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', '!=', 'done'),'|',('sourcing_app_count','=',1),('active', '=', False)]}"/>
-                    <button string="Refuse" name="archive_applicant" type="object" attrs="{'invisible': [('active', '=', False)]}"/>
-                    <button string="Restore" name="toggle_active" type="object" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <button name="l0_select" string="L0 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l0')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="l1_select" string="L1 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l1')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="l2_select" string="L2 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l2')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="l3_select" string="L3 Select" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'l3')]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button name="sourcing_done" string="Done" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'not in', ('l0','l1','l2'))]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <!-- <button name="reject" string="Reject" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('reject','done'))]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/> -->
+                    <button name="create_application" string="Create Application" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', '!=', 'done'),'|',('sourcing_app_count','=',1),('active', '=', False)]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button string="Refuse" name="archive_applicant" type="object" attrs="{'invisible': [('active', '=', False)]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
+                    <button string="Restore" name="toggle_active" type="object" attrs="{'invisible': [('active', '=', True)]}" groups="sourcing.group_sourcing_manager,sourcing.group_sourcing_officer"/>
 
 
                 </header>
@@ -274,6 +285,17 @@
         		<field name="sequence"/>
         		<field name="name"/>
                 <field name="candidate_name"/>
+                <field name="mobile"/>
+                <field name="email"/>
+                <field name="client_id"/>
+                <field name="job_type_id"/>
+                <field name="stage_id"/>
+                <field name="total_exp_year" optional="hidden"/>
+                <field name="total_exp_month" optional="hidden"/>
+                <field name="relevant_exp_year" optional="hidden"/>
+                <field name="relevant_exp_month" optional="hidden"/>
+                <field name="preferred_location" optional="hidden"/>
+                <field name="notice_period_id" optional="hidden"/>
         	</tree>
         </field>
     </record>
@@ -281,7 +303,7 @@
     <record id="hr_sourcing_action" model="ir.actions.act_window">
         <field name="name">Sourcing</field>
         <field name="res_model">hr.sourcing</field>
-        <field name='view_mode'>tree,form</field>
+        <field name='view_mode'>tree,form,pivot</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create new records

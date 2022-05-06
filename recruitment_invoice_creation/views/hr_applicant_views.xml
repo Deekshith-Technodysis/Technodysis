@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_applicant_view_form_invoice_recruitment_custom_inherit" model="ir.ui.view">
+        <field name="name">hr.applicant.form.inherit.recruitment</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="employee_recruitment_customisation.hr_applicant_view_form_inherit_recruitment"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//button[@name='confirm_salary']" position="before">
+                <button name="create_invoice_action" class="oe_stat_button" type="object" string="Generate Invoice" attrs="{'invisible': [('create_invoice_bool','=',False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+        	</xpath>
+        	<xpath expr="//button[@name='compute_salary']" position="replace">
+        		<button string="Compute Salary" class="oe_highlight" name="compute_salary" type="object" attrs="{'invisible': ['|',('create_invoice_bool','=',True),'|',('salary_updated','=',True),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+        	</xpath>
+        	<xpath expr="//button[@name='print_salary_annexure']" position="replace">
+        		<button name="print_salary_annexure" class="oe_highlight" type="object" string="Send Salary Annexure" attrs="{'invisible': ['|',('create_invoice_bool','=',True),'|',('stage_count_id', '!=', 2),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+        	</xpath>
+        	<xpath expr="//button[@name='confirm_salary']" position="replace">
+        		<button string="Confirm Salary" class="oe_highlight" name="confirm_salary" type="object" attrs="{'invisible': ['|',('create_invoice_bool','=',True),'|',('stage_count_id', '!=', 1),'|',('salary_updated','=',False),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+        	</xpath>
+        	<xpath expr="//field[@name='company_id']" position="after">
+        		<field name="create_invoice_bool" invisible="1"/>
+        		<field name="invoice_id" invisible="1"/>
+        		<field name="is_invoiced" invisible="1"/>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

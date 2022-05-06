@@ -38,9 +38,9 @@
 					    </p>
 					    <br/>
 					    Thanks &amp; Regards,<br/>
-					    ${object.hr.name}<br/>
-					    ${object.hr.work_email}<br/>
-					    ${object.hr.mobile_phone}<br/>
+					    ${object.onboarding_hr_id.name}<br/>
+					    ${object.onboarding_hr_id.work_email}<br/>
+					    ${object.onboarding_hr_id.mobile_phone}<br/>
 					    ${object.company_id.website}<br/>
 				</div>
             </field>
@@ -69,7 +69,7 @@
 				        
 				        Regards,
 				        <br/>
-				        ${object.hr.name}
+				        ${object.onboarding_hr_id.name}
 				        <br/>
 				    </p>
 				</div>

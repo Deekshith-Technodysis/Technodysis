@@ -15,7 +15,9 @@
                         </group>
                     </group>
                     <group>
-                        <field name="enable_bill_rate"/>
+                        <group name="enable_bill_rate">
+                            <field name="enable_bill_rate"/>
+                        </group>
                     </group>
                 </sheet>
             </form>

@@ -12,6 +12,7 @@
                 <button name="print_salary_annexure" class="oe_highlight" type="object" string="Send Salary Annexure" attrs="{'invisible': ['|',('stage_count_id', '!=', 2),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <button name="offer_accepted" class="oe_highlight" type="object" string="Offer Accepted" attrs="{'invisible': ['|',('stage_count_id', '!=', 3),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <button name="revise_offer" class="oe_stat_button" type="object" string="Revise" attrs="{'invisible': ['|',('stage_count_id', '!=', 3),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
+                <button name="action_change_employment" class="oe_stat_button" type="object" string="Modify Employment" attrs="{'invisible': ['|',('stage_count_id', '=', 1),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/>
                 <!-- <button name="action_application_send" string="Send Offer Letter by Email" type="object" class="btn-primary" attrs="{'invisible': ['|',('stage_count_id', '=', 1),('active', '=', False)]}" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user"/> -->
         	</xpath>
             <xpath expr="//button[@name='create_employee_from_applicant']" position="replace">
@@ -55,7 +56,8 @@
             </xpath>
             <xpath expr="//field[@name='type_id']" position="after">
                 <field name="created_date"/>
-                <field name="employment_type"/>
+                <field name="employment_type" invisible="1"/>
+                <field name="job_type_id"/>
             </xpath>
             <xpath expr="//label[@for='name']" position="before">
                 <h2 class="o_row">

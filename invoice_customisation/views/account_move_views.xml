@@ -25,11 +25,11 @@
                 <field name="remarks"/>
             </xpath>
             <xpath expr="//field[@name='invoice_line_ids']//field[@name='price_unit']" position="before">
-                <field name="worked_days" readonly="1"/>
-                <field name="leaves_taken" readonly="1"/>
-                <field name="billed_days" readonly="1"/>
-                <field name="laptop_charges" readonly="1" optional="hidden"/>
-                <field name="travel_expense" readonly="1" optional="hidden"/>
+                <field name="worked_days" readonly="0"/>
+                <field name="leaves_taken" readonly="0"/>
+                <field name="billed_days" readonly="0"/>
+                <field name="laptop_charges" readonly="0" optional="hidden"/>
+                <field name="travel_expense" readonly="0" optional="hidden"/>
                 <field name="markup_value"/>
                 <field name="unit_price"/>
                 <field name="commission_percent" optional="hidden"/>

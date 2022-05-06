@@ -35,9 +35,9 @@ class HrSourcing(models.Model):
     email = fields.Char(string="Candidate's mail id",required=True)
 
     total_exp_year = fields.Integer(string="Total Experience(Years)",required=True)
-    total_exp_month = fields.Integer(string="Total Experience")
+    total_exp_month = fields.Integer(string="Total Experience(Months)")
     relevant_exp_year = fields.Integer(string="Relevant Experience(Years)",required=True)
-    relevant_exp_month = fields.Integer(string="Relevant Experience")
+    relevant_exp_month = fields.Integer(string="Relevant Experience(Months)")
     hourly_salary_bool = fields.Boolean(string="Hourly salary calculation",default=False)
 
     amount_per_hour = fields.Float(string="Amount per hour")
@@ -110,10 +110,10 @@ class HrSourcing(models.Model):
 
     # Business Information
     lead_contact_id = fields.Many2one('res.partner',string="Spoc Contact Name")
-    lead_contact_email = fields.Char(string="Email",related="lead_contact_id.email")
+    lead_contact_email = fields.Char(string="Spoc Email",related="lead_contact_id.email")
     lead_contact_number = fields.Char(string="Contact Number",related="lead_contact_id.mobile")
     talent_contact_id = fields.Many2one('res.partner',string="TA Contact Name")
-    talent_contact_email = fields.Char(string="Email",related="talent_contact_id.email")
+    talent_contact_email = fields.Char(string="TA Email",related="talent_contact_id.email")
     talent_contact_number = fields.Char(string="Contact Number",related="talent_contact_id.mobile")
     jc_no = fields.Char(string="JC No.")
     contact_account = fields.Char(string="Account")
@@ -395,6 +395,7 @@ class HrSourcing(models.Model):
                 'amount_per_hour':self.amount_per_hour,
                 'no_of_hours':self.no_of_hours,
                 'total_amount':self.total_amount,
+                'job_type_id':self.job_type_id.id
 
                 # 'preffered_location_id'
 
