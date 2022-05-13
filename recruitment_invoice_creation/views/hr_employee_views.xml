@@ -12,7 +12,7 @@
                 </button>
 	        </xpath>
 	        <xpath expr="//header/button[1]" position="before">
-	            <button string="Hired by Client" class="oe_highlight" name="hired_by_client" type="object" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user" attrs="{'invisible':[('invoice_count','!=',0)]}"/>
+	            <button string="Hired by Client" class="oe_highlight" name="hired_by_client" type="object" groups="hr_recruitment.group_hr_recruitment_manager,hr_recruitment.group_hr_recruitment_user,hr.group_hr_user" attrs="{'invisible':[('invoice_count','!=',0)]}"/>
 	        </xpath>
 	        
 	        <xpath expr="//field[@name='coach_id']" position="inside">
