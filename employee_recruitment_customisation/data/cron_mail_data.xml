@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <!--Email template -->
+        <record id="email_template_msa" model="mail.template">
+            <field name="name">MSA Expiry Notification</field>
+            <field name="subject">MSA Expiry Notification</field>
+            <field name="model_id" ref="employee_recruitment_customisation.model_res_partner" />
+            <field name="auto_delete" eval="True" />
+            <field name="body_html"><![CDATA[
+                    <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                        <p> Dear  ${object.name}.</p>
+                    </br>
+                    <p>
+                    	The MSA of the “${object.name}”, is expiring on the date ${object.msa_end_date}. Kindly renew the MSA.
+                    </p>
+                </br>
+                Thanks
+                    </div>
+                ]]>
+            </field>
+        </record>
+        
+        
+    </data>
+</odoo>

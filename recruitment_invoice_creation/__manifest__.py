@@ -10,12 +10,14 @@
     'company': 'Technodysis',
     'maintainer': 'Technodysis',
     'website': 'https://www.technodysis.com',
-    'depends': ['hr_recruitment','sourcing'],
+    'depends': ['hr_recruitment','sourcing','hr'],
     'data': [
     		 'views/hr_job_type.xml',
              'views/hr_applicant_views.xml',
              'views/account_move_views.xml',
              'views/hr_employee_views.xml',
+             'data/cron_jobs.xml',
+             'data/cron_mail_data.xml'
             ],
     'installable': True,
     'auto_install': False,

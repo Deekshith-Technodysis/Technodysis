@@ -3,6 +3,8 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from ast import literal_eval
+from dateutil.relativedelta import relativedelta
+from datetime import datetime, timedelta
 
 class ResPartner(models.Model):
 	_inherit = 'res.partner'
@@ -14,8 +16,8 @@ class ResPartner(models.Model):
 		help="Check if the TAF Status has to be enabled")
 	commission_percent = fields.Float(string="Commission(%)")
 	inv_billing_type = fields.Selection([
-        ('mid_month', '21/22 days'),
-        ('full_month', '30/31 days')], 'Invoice Billing Type')
+		('mid_month', '21/22 days'),
+		('full_month', '30/31 days')], 'Invoice Billing Type')
 
 	enable_laptop_charges = fields.Boolean(string="Enable Laptop Charges ?",default=False)
 	enable_travel_expense = fields.Boolean(string="Enable Travel Expense ?",default=False)
@@ -24,6 +26,48 @@ class ResPartner(models.Model):
 
 	hsn_no = fields.Char(string="HSN/SAC")
 	pan_no = fields.Char(string="PAN")
+
+	# MSA
+	msa_start_date = fields.Date(string="Start Date")
+	msa_end_date = fields.Date(string="End Date")
+	msa_rate = fields.Float(string="Rate")
+	notify_to = fields.Many2many('res.users','partner_user_ids',string="Notify To")
+
+	@api.model
+	def _cron_msa_notify(self):
+		su_id =self.env['res.users'].search([('id','=',2)])
+		date = datetime.date(datetime.today())
+		var = date + relativedelta(months=+1)
+		if su_id:
+			for partner in self.env['res.partner'].search([('msa_end_date', '=', var)]):
+				template_id =  self.env['ir.model.data'].get_object_reference('employee_recruitment_customisation',
+									'email_template_msa')[1]
+				template_browse = self.env['mail.template'].browse(template_id)
+				if template_browse:
+					for notify in partner.notify_to:
+						values = template_browse.generate_email(su_id.employee_id.id, ['subject', 'body_html', 'email_from', 'email_to', 'partner_to', 'email_cc', 'reply_to', 'scheduled_date','attachment_ids'])
+						values['email_from'] = su_id.partner_id.email
+						values['email_to'] = notify.employee_id.work_email
+						values['res_id'] = False
+						values['author_id'] = su_id.partner_id.id
+						values['body_html'] = (("Dear %s,<br/> \
+												The MSA of the “%s”, is expiring on the date %s. Kindly renew the MSA.<br/>\
+												Thanks")%(notify.employee_id.name,partner.name,partner.msa_end_date))
+						# author = self.env['res.users'].browse(self.env['res.users']._context['uid']).partner_id.id 
+						if not values['email_to'] and not values['email_from']:
+							pass
+						msg_id = self.env['mail.mail'].create({
+							'email_to': values['email_to'],
+							'auto_delete': True,
+							'email_from':values['email_from'],
+							'subject':values['subject'],
+							'body_html':values['body_html'],
+							'author_id':values['author_id']
+							})
+						mail_mail_obj = self.env['mail.mail']
+						if msg_id:
+							mail_mail_obj.sudo().send(msg_id)
+			return True
 
 	@api.onchange('enable_markup_value')
 	def _update_markup_value(self):

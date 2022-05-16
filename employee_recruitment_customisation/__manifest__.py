@@ -27,6 +27,8 @@
              'views/hr_skills_views.xml',
              'views/res_partner_views.xml',
              'views/res_partner_workorder_views.xml',
+             'data/cron_jobs.xml',
+             'data/cron_mail_data.xml'
             ],
     'installable': True,
     'auto_install': False,

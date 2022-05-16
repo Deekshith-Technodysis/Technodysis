@@ -27,6 +27,14 @@
 
                 <field name="inv_billing_type" attrs="{'required':[('is_client', '=', True)],'invisible':[('is_client', '=', False)]}"/>
             </xpath>
+            <xpath expr="//sheet/group[1]" position="inside">
+                <group string="MSA" attrs="{'invisible':[('company_type', '=', 'person')]}">
+                    <field name="msa_start_date" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+                    <field name="msa_end_date" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+                    <field name="msa_rate" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+                    <field name="notify_to" widget="many2many_tags" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
+                </group>
+            </xpath>
             
         </field>
     </record>
