@@ -33,8 +33,9 @@
             <xpath expr="//field[@name='job_id']" position="after">
                 <field name="joining_date"/>
             </xpath>
-
-
+            <xpath expr="//notebook" position="after">
+                <field name="internal_note" placeholder="Internal Note"/>
+            </xpath>
             <xpath expr="//page[@name='personal_information']/group[1]/group[1]" position="after">
                 <group string="Passport Details">
                     <field name="passport_id"/>

@@ -30,8 +30,9 @@ class ResPartner(models.Model):
 	# MSA
 	msa_start_date = fields.Date(string="Start Date")
 	msa_end_date = fields.Date(string="End Date")
-	msa_rate = fields.Float(string="Rate")
 	notify_to = fields.Many2many('res.users','partner_user_ids',string="Notify To")
+
+	msa_doc_ids = fields.One2many('msa.doc.line','msa_partner_id',string="MSA Lines")
 
 	@api.model
 	def _cron_msa_notify(self):
@@ -152,3 +153,12 @@ class ResPartner(models.Model):
 
 	def get_action_partner_type(self):
 		return self._get_action('employee_recruitment_customisation.res_action_partner')
+
+
+
+class MsaDocLine(models.Model):
+    _name = 'msa.doc.line'
+
+    msa_partner_id = fields.Many2one('res.partner',string="Partner Id")
+    name = fields.Char(string="Doc Name")
+    doc = fields.Binary(string="Document")

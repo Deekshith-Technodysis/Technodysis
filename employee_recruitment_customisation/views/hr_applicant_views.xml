@@ -67,7 +67,7 @@
                 </h2>
             </xpath>
             <xpath expr="//field[@name='user_id']" position="after">
-                <field name="hr" invisible="1"/>
+                <field name="hr" invisible=""/>
                 <field name="client_id" required="1" options="{'no_create': True, 'no_create_edit': True}"/>
             </xpath>
             <xpath expr="//field[@name='medium_id']" position="replace">

@@ -30,6 +30,7 @@
                                 <strong>Invoice No: </strong> <span t-esc="o.name" style="margin-left:55px;"/><br/>
                                 <strong>Category of Service:</strong> Information Technology Service<br/>
                                 Reference  &#160;&#160;&#160;&#160; <br/>
+                                <!-- Billing Period : <span t-esc="o.billing_from" style="margin-left:35px;"/> to <span t-esc="o.billing_to"/><br/> -->
                                 Billing Period : <span t-esc="o.billing_from" style="margin-left:35px;"/> to <span t-esc="o.billing_to"/><br/>
                                 Kind attention : <span t-esc="o.kind_attention.name" style="margin-left:35px;"/><br/>
                                 Description: <span t-esc="o.description" style="margin-left:50px;"/><br/>
