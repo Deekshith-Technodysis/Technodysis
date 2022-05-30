@@ -12,7 +12,7 @@
                       <br/>
                       <div align="left">
                         <p align="justify"><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> <br/>
-                          Dear <span t-esc="o.partner_name"/>,
+                          Dear Mr/Ms. <span t-esc="o.partner_name"/>,
                         </p>
                         <br/>
                         <p align="justify">
@@ -52,7 +52,7 @@
 
                       <div><br/>
                         <p align="justify">
-                          Dear <strong><span t-esc="o.partner_name"/>,</strong><br/>
+                          Dear Mr/Ms. <strong><span t-esc="o.partner_name"/>,</strong><br/>
                         </p>
                     
                         
@@ -260,7 +260,7 @@
                             </div>
                             <div class="col-6">
                               <t t-if="o.partner_name">
-                                <span t-esc="o.partner_name"/><br/>
+                                Mr/Ms. <span t-esc="o.partner_name"/><br/>
                               </t>
                               <t t-if="o.job_id">
                                 <span t-esc="o.job_id.name"/><br/>

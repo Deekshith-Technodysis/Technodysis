@@ -9,3 +9,5 @@ access_res_partner_workorder_line_user,res.partner.workorder.line,model_res_part
 access_res_partner_workorder_manager,res.partner.workorder,model_res_partner_workorder,employee_recruitment_customisation.group_workorder_manager,1,1,1,1
 access_res_partner_workorder_line_manager,res.partner.workorder.line,model_res_partner_workorder_line,employee_recruitment_customisation.group_workorder_manager,1,1,1,1
 
+access_msa_doc_ids,msa.doc.line,model_msa_doc_line,,1,1,1,1
+

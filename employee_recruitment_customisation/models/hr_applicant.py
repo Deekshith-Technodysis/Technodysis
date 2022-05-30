@@ -410,9 +410,13 @@ class JobApplication(models.Model):
     @api.onchange('user_id')
     def onchange_recruiter(self):
         for line in self:
-            emp_id = self.env['hr.employee'].search([('user_id','=',line.user_id.id)])
-            if emp_id:
-                line.hr = emp_id.id
+            if line.user_id:
+                emp_id = self.env['hr.employee'].search([('user_id','=',line.user_id.id)])
+                if emp_id:
+                    for emp in emp_id:
+                        line.hr = emp.id
+            else:
+                line.hr = False
 
 
     def print_offer_letter(self):
@@ -432,6 +436,10 @@ class JobApplication(models.Model):
                 'res_id': self.id
                 })
         if template:
+            if not self.onboarding_hr_id:
+                raise ValidationError(_("Kindly Select the Onboarding Hr to send Mail"))
+            if not self.hr:
+                raise ValidationError(_("Kindly Select the Assigned to in order to send Mail"))
             email_values = {'email_to': self.email_from,
                             'email_from': self.onboarding_hr_id.work_email,
                            'email_cc': self.hr.work_email,
@@ -458,6 +466,10 @@ class JobApplication(models.Model):
             'res_id': self.id
             })
         if template:
+            if not self.onboarding_hr_id:
+                raise ValidationError(_("Kindly Select the Onboarding Hr to send Mail"))
+            if not self.hr:
+                raise ValidationError(_("Kindly Select the Assigned to in order to send Mail"))
             email_values = {'email_to': self.email_from,
                            'email_from': self.onboarding_hr_id.work_email,
                            'email_cc':self.hr.work_email,

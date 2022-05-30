@@ -11,7 +11,7 @@ class HrEmployee(models.Model):
 	emp_id = fields.Char(string="Employee id",required=True, copy=False, readonly=True, default=lambda self: _('New'))
 	alternate_phone = fields.Char(string="Alternate No")
 	is_billable = fields.Boolean(string="Is billable Candidate")
-	client_work_address = fields.Many2one('res.partner',string="Client work address")
+	client_work_address = fields.Many2one('res.partner',string="Client work address",tracking=True)
 
 	# Current Address
 	current_street = fields.Char()
@@ -36,14 +36,14 @@ class HrEmployee(models.Model):
 	pan_no = fields.Char(string="PAN No")
 
 	# CTC details
-	salary_expected = fields.Float(string="Expected CTC (Rupees)")
-	salary_proposed = fields.Float(string="Actual Salary",groups="hr.group_hr_user")
+	salary_expected = fields.Float(string="Expected CTC (Rupees)",tracking=True)
+	salary_proposed = fields.Float(string="Actual Salary",groups="hr.group_hr_user",tracking=True)
 
 	enable_laptop_charges = fields.Boolean(string="Enable Laptop Charges ?",related="client_work_address.enable_laptop_charges")
-	laptop_charges = fields.Float(string="Laptop Charges")
+	laptop_charges = fields.Float(string="Laptop Charges",tracking=True)
 
 	enable_travel_expense = fields.Boolean(string="Enable Travel Expense ?",related="client_work_address.enable_travel_expense")
-	travel_expense = fields.Float(string="Travel Expense")
+	travel_expense = fields.Float(string="Travel Expense",tracking=True)
 
 	# Modifying standard fields
 	gender = fields.Selection([
@@ -68,6 +68,7 @@ class HrEmployee(models.Model):
 	], 'Highest Education', default='other', groups="hr.group_hr_user", tracking=True)
 	father_name = fields.Char(string="Father's Name")
 	joining_date = fields.Date(string="Joining Date",copy=False)
+	internal_note = fields.Text(string="Internal Note",tracking=True)
 
 	@api.model
 	def create(self, vals):

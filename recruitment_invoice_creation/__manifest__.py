@@ -12,6 +12,7 @@
     'website': 'https://www.technodysis.com',
     'depends': ['hr_recruitment','sourcing','hr'],
     'data': [
+             'security/ir.model.access.csv',
     		 'views/hr_job_type.xml',
              'views/hr_applicant_views.xml',
              'views/account_move_views.xml',

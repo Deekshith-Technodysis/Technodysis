@@ -96,9 +96,9 @@ class HrSourcing(models.Model):
     recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True)
     lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter",required=True)
     module_lead_id = fields.Many2one('hr.employee',string="Module Lead")
-    ctc = fields.Float(string="CTC",required=True)
-    ectc = fields.Float(string="ECTC",readonly=False)
-    commission_percent = fields.Float("Commission Percent",required=True)
+    ctc = fields.Float(string="CTC",required=True,tracking=True)
+    ectc = fields.Float(string="ECTC",readonly=False,tracking=True)
+    commission_percent = fields.Float("Commission Percent",required=True,tracking=True)
     training_bool = fields.Selection([
         ('yes', 'Yes'),
         ('no', 'No')], "Training")

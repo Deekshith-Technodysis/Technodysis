@@ -31,9 +31,19 @@
                 <group string="MSA" attrs="{'invisible':[('company_type', '=', 'person')]}">
                     <field name="msa_start_date" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
                     <field name="msa_end_date" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
-                    <field name="msa_rate" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
                     <field name="notify_to" widget="many2many_tags" attrs="{'invisible':[('company_type', '=', 'person')]}"/>
                 </group>
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="msa_docs" string="MSA Documents">
+                    <field name="msa_doc_ids" >
+                        <tree create="true" editable="bottom">
+                            <field name="name"/>
+                            <field name="msa_partner_id" invisible="1"/>
+                            <field name="doc" widget="binary" filename="name"/>
+                        </tree>
+                    </field>
+                </page>
             </xpath>
             
         </field>

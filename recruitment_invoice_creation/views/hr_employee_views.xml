@@ -25,8 +25,20 @@
                     <field name="sow_start_date"/>
                     <field name="sow_end_date"/>
                     <field name="sow_rate"/>
+                    <field name="sow_ref"/>
                     <field name="notify_to" widget="many2many_tags"/>
                 </group>
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="after">
+            	<page name="sow_docs" string="Sow Documents">
+            		<field name="sow_doc_ids" >
+            			<tree create="true" editable="bottom">
+            				<field name="name"/>
+            				<field name="sow_emp_id" invisible="1"/>
+            				<field name="doc" widget="binary" filename="name"/>
+            			</tree>
+            		</field>
+            	</page>
             </xpath>
         </field>
     </record>
