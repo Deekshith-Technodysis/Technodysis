@@ -18,6 +18,8 @@ class HrEmployee(models.Model):
     # SOW
     sow_start_date = fields.Date(string="Start Date")
     sow_end_date = fields.Date(string="End Date")
+    sow_rate = fields.Date(string="Sow Rate")
+    sow_ref = fields.Char(string="Sow Ref No.")
     notify_to = fields.Many2many('res.users','emp_user_ids',string="Notify To")
 
     sow_doc_ids = fields.One2many('sow.doc.line','sow_emp_id',string="Sow Line")
