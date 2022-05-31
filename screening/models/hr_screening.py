@@ -17,15 +17,15 @@ class HrScreening(models.Model):
         ('screened', 'Screened'),
         ('not_screened', 'Not Screened'),
         ('cancel', 'Cancel'),], 'Stages',default="draft",copy=False,tracking=True)
-    screening_date = fields.Date(string="Sourcing Date")
+    screening_date = fields.Date(string="Screening Date")
     sequence = fields.Char(string="Sequence",readonly=True, default=lambda self: _('New'), copy=False)
     category_id = fields.Many2many('hr.applicant.category',string="Category")
     currently_employed = fields.Selection([
         ('yes', 'Yes'),
         ('no', 'No')], 'Currently Working ?',default="no")
 
-    applicant_skill_ids = fields.One2many('hr.employee.skill', 'sourcing_id', string="Skills")
-    applicant_resume_line_ids = fields.One2many('hr.resume.line', 'sourcing_id', string="Resumé lines")
+    applicant_skill_ids = fields.One2many('hr.employee.skill', 'screening_id', string="Skills")
+    applicant_resume_line_ids = fields.One2many('hr.resume.line', 'screening_id', string="Resumé lines")
     job_type_id = fields.Many2one('hr.job.type',string="Job Type")
     client_id = fields.Many2one('res.partner',string="Client")
     mobile = fields.Char(string="Candidate's Mobile No.",required=True,tracking=True)
