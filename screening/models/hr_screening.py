@@ -222,9 +222,9 @@ class HrScreening(models.Model):
 
     def name_get(self):
         result = []
-        for application in self:
-            name = str(application.sequence) + ' ' + str(application.name)
-            result.append((application.id, name))
+        for line in self:
+            name = str(line.sequence) + ' ' + str(line.candidate_name)
+            result.append((line.id, name))
         return result
 
     def create_application(self):
