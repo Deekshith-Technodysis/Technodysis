@@ -11,6 +11,17 @@
             </pivot>
         </field>
     </record>
+    <!--  -->
+    <record  model="ir.actions.act_window" id="sourcing_form_action_view_active">
+        <field name="name">Sourcing Applications</field>
+        <field name="res_model">hr.sourcing</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+                      (0, 0, {'view_mode': 'tree', 'view_id': ref('sourcing.hr_sourcing_view_tree')}),
+                      (0, 0, {'view_mode': 'form', 'view_id': ref('sourcing.hr_sourcing_view_form')})]"/>
+        <field name="domain">[('origin_id', '=', active_id)]</field>
+    </record>
+    <!--  -->
     <!-- Screening View -->
     <record id="hr_screening_view_form" model="ir.ui.view">
         <field name="name">hr.screening.form</field>
@@ -19,14 +30,15 @@
         	<form string="Screening">
                 <header>
                     <field name="stage_id" widget="statusbar"/>
-                    <button name="action_screen" string="Screened" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('cancel','screened'))]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
-                    <button name="action_not_screen" string="Non Screened" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in',('not_screened','screened','cancel'))]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
-                    <button name="action_cancel" string="Cancel" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', 'in', ('screened','cancel'))]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
-                    <button string="Reset" name="reset_screening" type="object" attrs="{'invisible': [('stage_id', '=', 'draft')]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
-
-
+                    <button name="action_screen" string="Screened" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '=', 'screened')]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
+                    <button name="action_sourcing" string="Create Sourcing Application" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'screened')]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
                 </header>
         		<sheet>
+                    <div class="oe_button_box" name="button_box" groups="screening.group_screening_manager">
+                        <button type="action" class="oe_inline oe_stat_button" name="%(screening.sourcing_form_action_view_active)d" icon="fa-bars" attrs="{'invisible':[('screening_app_count','=',0)]}">
+                            <field name="screening_app_count" widget="statinfo"/>
+                        </button>
+                    </div>
                     
                     <widget name="web_ribbon" title="Refused" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
                     <field name="active" invisible="1"/>
@@ -37,28 +49,30 @@
                             </div>
                         </h2>
                         <label for="name" class="oe_edit_only"/>
-                        <h1><field name="name"/></h1>
+                        <h1><field name="name" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/></h1>
+                        <label for="candidate_name" class="oe_edit_only"/>
+                        <h1><field name="candidate_name"/></h1>
                     </div>
                     <group>
                         <group>
                             
-                            <field name="job_id" options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="job_type_id" options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="department_id" options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="offer_letter_type"/>
-                            <field name="client_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                            <field name="job_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="job_type_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="department_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="offer_letter_type" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="client_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                             <field name="mobile"/>
                             <field name="email"/>
                             <field name="dob"/>
                             <field name="company_id" invisible="1"/>
                         </group>
                         <group>
-                            <field name="category_id" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="current_location"/>
+                            <field name="category_id" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="current_location" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                             <field name="preffered_location_id" widget="many2many_tags" options="{'no_create': True, 'no_create_edit': True}"/>
                             <field name="currently_employed" widget="selection"/>
                             <field name="work_location_id" options="{'no_create': True, 'no_create_edit': True}"/>
-                            <field name="preferred_location"/>
+                            <field name="preferred_location" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                             
                         </group>
                     </group>
@@ -77,12 +91,12 @@
                                     <field name="zip" placeholder="ZIP" class="o_address_zip"/>
                                     <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
                                 </div>
-                                <field name="alternate_phone"/>
-                                <field name="gender"/>
-                                <field name="notice_period_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="alternate_phone" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                                <field name="gender" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                                <field name="notice_period_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="other_offers_bool" widget="selection"/>
                                 <field name="offer_price" attrs="{'invisible': [('other_offers_bool', '!=', 'yes')]}"/>
-                                <field name="screening_date"/>
+                                <field name="screening_date" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="joining_date" attrs="{'invisible': [('other_offers_bool', '!=', 'yes')]}"/>
                                 
                             </group>
@@ -136,7 +150,7 @@
                                 </div>
                             </group>
                             <group string="Education">
-                                <field name="study_field" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="study_field" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="degree_year_of_passing"/>
                                 <field name="university_name"/>
                                 <field name="puc_passing_year"/>
@@ -153,14 +167,14 @@
                             <group string="Work Experience">
                                 <label for="total_exp_year" string="Total Experience"/>
                                 <div class="o_row" name="total_experience">
-                                    <field name="total_exp_year" style="width:30%%"/>
+                                    <field name="total_exp_year" style="width:30%%" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                     <span>Years</span>
                                     <field name="total_exp_month" style="width:30%%"/>
                                     <span>Months</span>
                                 </div>
                                 <label for="relevant_exp_year" string="Relevant Experience"/>
                                 <div class="o_row" name="relevant_experience">
-                                    <field name="relevant_exp_year" style="width:30%%"/>
+                                    <field name="relevant_exp_year" style="width:30%%" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                     <span>Years</span>
                                     <field name="relevant_exp_month" style="width:30%%"/>
                                     <span>Months</span>
@@ -172,14 +186,14 @@
 
                             </group>
                             <group string="Work Details">
-                                <field name="current_or_last_company"/>
-                                <field name="recruiter_id" options="{'no_create': True, 'no_create_edit': True}"/>
-                                <field name="lead_co_ordinator_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="current_or_last_company" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                                <field name="recruiter_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                                <field name="lead_co_ordinator_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="module_lead_id" domain="[('is_module_lead', '=',True)]" options="{'no_create': True, 'no_create_edit': True}"/>
-                                <field name="ctc"/>
+                                <field name="ctc" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="ectc"/>
-                                <field name="expected_joining_date"/>
-                                <field name="commission_percent"/>
+                                <field name="expected_joining_date" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                                <field name="commission_percent" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="training_bool" widget="selection"/>
                                 <field name="availability"/>
                                 <field name="change_reason"/>
@@ -192,12 +206,12 @@
                     <page name="business_details" string="Business Details">
                         <group>
                             <group string="Business Spoc Details">
-                                <field name="lead_contact_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="lead_contact_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="lead_contact_email" widget="email"/>
                                 <field name="lead_contact_number" widget="phone"/>
                             </group>
                             <group string="Business TA Details">
-                                <field name="talent_contact_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="talent_contact_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="talent_contact_email" widget="email"/>
                                 <field name="talent_contact_number" widget="phone"/>
                             </group>
@@ -205,7 +219,7 @@
                                 <field name="resume_no"/>
                                 <field name="jc_no"/>
                                 <field name="contact_account"/>
-                                <field name="business_unit"/>
+                                <field name="business_unit" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                             </group>
                         </group>
                     </page>
@@ -214,12 +228,12 @@
                     <page name="onboarding_status" string="Onboarding Status" invisible="1">
                         <group>
                             
-                            <field name="jc_status"/>
-                            <field name="dnh_status"/>
+                            <field name="jc_status" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="dnh_status" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                             <field name="wo_status"/>
                             <field name="bgv_status"/>
-                            <field name="offer_status"/>
-                            <field name="joining_status"/> 
+                            <field name="offer_status" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                            <field name="joining_status" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/> 
                         </group>
                     </page>
                     </notebook>
@@ -284,6 +298,8 @@
 
    <menuitem id='base_hr_screening_menu' name="Screening" parent='hr_recruitment.menu_hr_recruitment_root' groups="screening.group_screening_manager,screening.group_screening_user"/>
    <menuitem action='hr_screening_action' id='hr_screening_menu' groups="screening.group_screening_manager,screening.group_screening_user" parent='base_hr_screening_menu' sequence="1"/>
+
+   
 
   
 </odoo>

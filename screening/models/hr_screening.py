@@ -10,13 +10,12 @@ class HrScreening(models.Model):
     _order = "sequence desc"
     _inherit = ['mail.thread.cc', 'mail.activity.mixin', 'utm.mixin']
 
-    name = fields.Char(string="Applicant's Name",required=True,tracking=True)
+    name = fields.Char(string="Subject / Application Name")
+    candidate_name = fields.Char(string="Applicant's Name",required=True)
     company_id = fields.Many2one('res.company', string='Company', index=True, default=lambda self: self.env.company.id)
     stage_id = fields.Selection([
-        ('draft', 'Draft'),
         ('screened', 'Screened'),
-        ('not_screened', 'Not Screened'),
-        ('cancel', 'Cancel'),], 'Stages',default="draft",copy=False,tracking=True)
+        ('not_screened', 'Not Screened')], 'Stages',default="not_screened",copy=False,tracking=True)
     screening_date = fields.Date(string="Screening Date")
     sequence = fields.Char(string="Sequence",readonly=True, default=lambda self: _('New'), copy=False)
     category_id = fields.Many2many('hr.applicant.category',string="Category")
@@ -131,9 +130,15 @@ class HrScreening(models.Model):
 
     enable_bill_rate = fields.Boolean(string="Enable Bill Rate",default=False,related="job_type_id.enable_bill_rate")
 
-    application_status = fields.Selection(
+    sourcing_status = fields.Selection(
             [('draft', 'Draft'),
-             ('application_created', 'Application Created')], string='Application Status', readonly=True, copy=False, default='draft')
+             ('sourcing_created', 'Sourcing Created')], string='Sourcing Status', readonly=True, copy=False, default='draft')
+    screening_app_count = fields.Integer(string='Sourcing', compute='_sourcing_count')
+
+    def _sourcing_count(self):
+        for order in self:
+            sourcing_count = self.env['hr.sourcing'].search([('origin_id', '=', order.id)])
+            order.screening_app_count = len(sourcing_count)
 
 
     # onboarding status
@@ -190,36 +195,9 @@ class HrScreening(models.Model):
     active = fields.Boolean("Active", default=True, help="If the active field is set to false, it will allow you to hide the case without removing it.")
     
 
-    def reset_screening(self):
-        """ Reinsert the applicant into the recruitment pipe in the first stage"""
-        for scr in self:
-            scr.write(
-                {'stage_id': 'draft',})
-
     def action_screen(self):
         for scr in self:
-            # if scr.sequence == _('New'):
-            #     self.sequence = self.env['ir.sequence'].next_by_code('hr.screening') or _('New')
             scr.write({'stage_id': 'screened'})
-
-    def action_not_screen(self):
-        for scr in self:
-            # if scr.sequence == _('New'):
-            #     self.sequence = self.env['ir.sequence'].next_by_code('hr.not.screening') or _('New')
-            scr.write({'stage_id': 'not_screened'})
-
-    def action_cancel(self):
-        for scr in self:
-            scr.write({'stage_id': 'cancel'})
-
-
-    # def toggle_active(self):
-    #     res = super(HrScreening, self).toggle_active()
-    #     screening_active = self.filtered(lambda screening: screening.active)
-    #     if screening_active:
-    #         screening_active.reset_screening()
-    #     screening_inactive = self.filtered(lambda screening: not screening.active)
-    #     return res
 
     
 
@@ -265,4 +243,98 @@ class HrScreening(models.Model):
             'views': [[False, 'form']]
         }
 
-    
+    def action_sourcing(self):
+        sourcing_count = self.env['hr.sourcing']
+        if not sourcing_count:
+            categ_ids = [x.id for x in list(self.category_id)]
+            self.sourcing_status = 'sourcing_created'
+            date = fields.Date.today()
+            
+            vals = {
+                'origin_id': self.id,
+                'candidate_name':self.candidate_name,
+                'name': self.name,
+                'job_id':self.job_id.id,
+                'client_id':self.client_id.id,
+                'mobile':self.mobile,
+                'email':self.email,
+                'dob':self.dob,
+                'category_id':[(6, 0, categ_ids)],
+                'current_location':self.current_location,
+                'street':self.street,
+                'street2':self.street2,
+                'zip':self.zip,
+                'city':self.city,
+                'country_id':self.country_id.id,
+                'state_id':self.state_id.id,
+                'notice_period_id':self.notice_period_id.id,
+                'other_offers_bool':self.other_offers_bool,
+                'father_name':self.father_name,
+                'commission_percent':self.commission_percent,
+                # skills need to be added
+                'applicant_skill_ids':[(6, 0, [skill.id for skill in self.applicant_skill_ids])],
+                'applicant_resume_line_ids':[(6, 0, [skill.id for skill in self.applicant_resume_line_ids])],
+                'total_exp_year':self.total_exp_year,
+                'total_exp_month':self.total_exp_month,
+                'relevant_exp_year':self.relevant_exp_year,
+                'relevant_exp_month':self.relevant_exp_month,
+                'current_or_last_company':self.current_or_last_company,
+                'recruiter_id':self.recruiter_id.id,
+                'lead_co_ordinator_id':self.lead_co_ordinator_id.id,
+                'selection_date':self.selection_date,
+                'lead_contact_id':self.lead_contact_id.id,
+                'lead_contact_email':self.lead_contact_email,
+                'lead_contact_number':self.lead_contact_number,
+                'talent_contact_id':self.talent_contact_id.id,
+                'talent_contact_email':self.talent_contact_email,
+                'talent_contact_number':self.talent_contact_number,
+                'resume_no':self.resume_no,
+                'ectc':self.ectc,
+                'ctc':self.ctc,
+                'jc_no':self.jc_no,
+                'contact_account':self.contact_account,
+                'business_unit':self.business_unit,
+                'sourcing_date':date,
+                'joining_status':self.joining_status,
+                'jc_status':self.jc_status,
+                'offer_status':self.offer_status,
+                'dnh_status':self.dnh_status,
+                'wo_status':self.wo_status,
+                'bgv_status':self.bgv_status,
+                'work_location_id':self.work_location_id.id,
+                'preferred_location':self.preferred_location,
+                'expected_joining_date':self.expected_joining_date,
+                'study_field':self.study_field.id,
+                'gender':self.gender,
+                'alternate_phone':self.alternate_phone,
+                'department_id':self.department_id.id,
+                'offer_letter_type':self.offer_letter_type,
+                # 'currently_employed':self.currently_employed,
+                'aadhar_no':self.aadhar_no,
+                'current_or_last_company':self.current_or_last_company,
+                'module_lead_id':self.module_lead_id.id,
+                'hourly_salary_bool':self.hourly_salary_bool,
+                'amount_per_hour':self.amount_per_hour,
+                'no_of_hours':self.no_of_hours,
+                'total_amount':self.total_amount,
+                'job_type_id':self.job_type_id.id,
+                'change_reason':self.change_reason,
+
+                # 'preffered_location_id'
+
+
+
+            }
+            source_obj = self.env['hr.sourcing'].create(vals)            
+        else:
+            if self.sourcing_status == 'sourcing_created':
+                raise UserError(_("Sourcing already created, Please Check and Confirm your Sourcing Application"))
+            else:
+                raise UserError(_("Application already created, Please update the reasons and confirm the record"))
+
+
+
+class HrSourcing(models.Model):
+    _inherit = 'hr.sourcing'
+
+    origin_id = fields.Many2one('hr.screening',string="Screening Id")
