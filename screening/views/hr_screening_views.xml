@@ -31,7 +31,7 @@
                 <header>
                     <field name="stage_id" widget="statusbar"/>
                     <button name="action_screen" string="Screened" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '=', 'screened')]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
-                    <button name="action_sourcing" string="Create Sourcing Application" type="object" class="oe_highlight" attrs="{'invisible': [('stage_id', '!=', 'screened')]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
+                    <button name="action_sourcing" string="Create Sourcing Application" type="object" class="oe_highlight" attrs="{'invisible': ['|',('stage_id', '!=', 'screened'),('screening_app_count','=',1)]}" groups="screening.group_screening_manager,screening.group_screening_officer"/>
                 </header>
         		<sheet>
                     <div class="oe_button_box" name="button_box" groups="screening.group_screening_manager">
