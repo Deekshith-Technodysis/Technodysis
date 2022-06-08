@@ -99,7 +99,7 @@ class HrScreening(models.Model):
 
     
     current_or_last_company = fields.Char(string="Current/Last Company")
-    recruiter_id = fields.Many2one('hr.employee',string="Recruiter")
+    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True)
     lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter")
     module_lead_id = fields.Many2one('hr.employee',string="Module Lead")
     ctc = fields.Float(string="CTC",tracking=True)

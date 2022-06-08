@@ -187,7 +187,7 @@
                             </group>
                             <group string="Work Details">
                                 <field name="current_or_last_company" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
-                                <field name="recruiter_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
+                                <field name="recruiter_id" options="{'no_create': True, 'no_create_edit': True}"/>
                                 <field name="lead_co_ordinator_id" options="{'no_create': True, 'no_create_edit': True}" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
                                 <field name="module_lead_id" domain="[('is_module_lead', '=',True)]" options="{'no_create': True, 'no_create_edit': True}"/>
                                 <field name="ctc" attrs="{'required': [('stage_id', '!=', 'not_screened')]}"/>
