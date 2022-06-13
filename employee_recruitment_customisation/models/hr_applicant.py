@@ -308,11 +308,11 @@ class JobApplication(models.Model):
     #       template.send_mail(self.id, email_values=email_values,force_send=True)
     # above function removed , since we are using the existing offer letter send option
 
-    @api.onchange('annual_fixed_pay','annual_variable_pay')
+    @api.onchange('annual_fixed_pay','annual_variable_pay','annual_perf_bonus')
     def salary_proposed_cal(self):
         for line in self:
-            if line.annual_fixed_pay or line.annual_variable_pay:
-                line.salary_proposed = line.annual_fixed_pay + line.annual_variable_pay
+            if line.annual_fixed_pay or line.annual_variable_pay or line.annual_perf_bonus:
+                line.salary_proposed = line.annual_fixed_pay + line.annual_variable_pay + line.annual_perf_bonus
             else:
                 line.salary_proposed = False
 

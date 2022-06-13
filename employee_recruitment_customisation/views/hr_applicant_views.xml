@@ -31,7 +31,7 @@
                     <field name="annual_fixed_pay"/>
                     <field name="annual_variable_pay"/>
                     <!-- not using below field -->
-                    <field name="annual_perf_bonus" invisible="1"/>
+                    <field name="annual_perf_bonus"/>
                     <field name="pt_deduction"/>
 
                 </group>

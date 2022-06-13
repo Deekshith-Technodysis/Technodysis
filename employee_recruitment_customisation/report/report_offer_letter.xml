@@ -97,6 +97,23 @@
                             </p>
                             <br/>
                             <p style="text-indent:30px">
+                              <span style="color:#006fc1"><b>VARIABLE &amp; PERFORMANCE PAY</b></span><br/>
+                              <div style="margin-left:30px">
+                                Over and above the Annual Fixed Pay, you shall be eligible for a minimum performance incentive, which will be paid as per the Company’s internal policy. The incentive is contingent on your individual and overall profit performance of the company and shall be subject to terms and conditions as the Company may decide.<br/>
+                              </div>
+                              <div style="margin-left:30px">
+                                During the Term, Employee shall be eligible to earn an annual performance bonus, as Variable and Performance payoff subject to following clauses<br/>
+                              </div>
+                              <div style="margin-left:60px">
+                                <b>a.</b>&#160;&#160;Employee is eligible to earn Variable and Performance pay after completion of 1 year with the Company.<br/>
+                                <b>b.</b>&#160;&#160;Performance payout will depend upon the attainment of annual Company and individual performance goals as determined by the Management of the company, prior to Closing, after the Closing; provided, that for any year during which the Closing occurs.<br/>
+                                <b>c.</b>&#160;&#160;After completion of one year in the company from joining date, Employee’s annual performance bonus shall be prorated based on Employee’s performance for the period through Closing as determined by the Management of the company and the period of such year after the Closing as determined by the Management of the Company.<br/>
+                                <b>d.</b>&#160;&#160;However, the Employee shall have no right to incentive or time-apportioned incentive if he is no longer employed by the Company or is under notice (whether given by the Employee or the Company) at or prior to the date when an incentive might otherwise have been payable.<br/>
+                                <b>e.</b>&#160;&#160;Variable pay will be paid out as per the Variable pay out announcement from the Management.<br/>
+                              </div>
+                            </p>
+                            <br/>
+                            <p style="text-indent:30px">
                               <span style="color:#006fc1"><b>3. &#160;&#160; OTHER BENEFITS</b></span><br/>
                               <div style="margin-left:30px">
                                 You shall be eligible for other benefits related to leaves, perquisites, etc., in accordance with the statutory norms and prevailing terms of employment in the organization. Company reserves the right to change these benefits as and when it deems necessary and will be published accordingly. Some of the notable benefits may be;<br/>
@@ -110,7 +127,6 @@
                               </div>
                             </p>
                             <br/>
-                            <br/><br/><br/>
                             <p style="text-indent:30px">
                               <span style="color:#006fc1"><b>4. &#160;&#160; PROBATION</b></span>
                               <div style="margin-left:60px">
@@ -179,7 +195,7 @@
                                     In an adverse situation of unclean separation, company is not liable to pay any dues to employee.
                                   </div>
                                 </p>
-                                <br/><br/><br/>
+                                <br/>
                                 <p style="text-indent:30px">
                                   <span style="color:#006fc1"><b>9. &#160;&#160; GENERAL</b></span>
                                   <div style="margin-left:60px">
@@ -194,12 +210,10 @@
                           </div>
                         </div>
                         <br/>
-                        <div style="page-break-inside: avoid;">
+                        <div>
                           <p style="text-indent:30px">
                           <span align="left" style="color:#006fc1"><b>DISCLAIMER</b></span ><br/>
                           <p style="text-indent:30px">Please accept the offer and confirm your acceptance for the same by signing a copy of this letter.</p>
-                          <br/>
-                          <br/>
                           <br/>
                           <div class="row" style="margin-left:30px">
                             <div class="col-6">
@@ -208,16 +222,15 @@
                                   <img t-att-src="image_data_uri(o.hr.signature)" style="max-height: 2cm; max-width: 4cm;"/>
                                 </t>
                               <br/></p>
-                              <hr style="margin-top:10px;"/>
+                              <hr style="margin-top:4px;"/>
                               <p align="left">
                                 <span t-esc="o.hr.name"/><br/>
                                 <span t-esc="o.hr.job_id.name"/><br/>
-                                <br/>
                                 Date: <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %B %Y')"/> 
                                 <br/>
                                 Place: Bangalore
                                 <br/>
-                              </p><br/>
+                              </p>
                             </div>
                             <div class="col-6">
                               <p align="left">
@@ -237,12 +250,12 @@
                                 <br/>
                                 Place: Bangalore
                                 <br/>
-                                </p><br/>
+                                </p>
                             </div>
                           </div>
                         </p>
                         </div>
-                        <div class="row" style="page-break-before:always;"/>
+                        <div class="row" style="page-break-after:avoid;"/>
                         <div class="annexure-1">
                           <h6 align="center" style="color:#006fc1"><b>ANNEXURE - 1</b></h6><br/>
                           <div class="row">
@@ -274,7 +287,7 @@
                           </div>
                           <br/>
                           <span style="color:#006fc1"><b>Compensation Structure</b></span>
-                          <table class="table table-sm table-bordered">
+                          <table class="table table-sm table-bordered" style="font-size:11px">
                             
                             <tbody>
                               <tr>
@@ -283,14 +296,20 @@
                                 <th style="text-align:center"><b></b></th>
                               </tr>
                               <tr>
+                                <th>Annual Performance Bonus</th>
+                                <th style="text-align:center"><t t-esc="'%.2f' % (o.annual_perf_bonus)"/></th>
+                                <th style="text-align:center"><b></b></th>
+                              </tr>
+                              <tr>
                                 <th>Annual Variable Pay</th>
                                 <th style="text-align:center"><t t-esc="'%.2f' % (o.annual_variable_pay)"/></th>
                                 <th style="text-align:center"><b></b></th>
                               </tr>
+                              
                               <tr>
                                 <th><b>Total CTC</b></th>
                                 <th style="text-align:center"><b><t t-if="o.annual_fixed_pay">
-                                  <span t-esc="'%.2f' % (o.annual_fixed_pay + o.annual_variable_pay)"/><br/>
+                                  <span t-esc="'%.2f' % (o.annual_fixed_pay + o.annual_variable_pay + o.annual_perf_bonus)"/><br/>
                                 </t></b></th>
                                 <th style="text-align:center"><b></b></th>
                               </tr>
@@ -355,6 +374,12 @@
                                 <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 
                               </tr>
+                              <tr t-if="o.annual_perf_bonus">
+                                <td ><span><b>Annual Performance Bonus</b></span></td>
+                                <td style="text-align:center"><b><span t-esc="(o.annual_perf_bonus)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round(o.annual_perf_bonus/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                
+                              </tr>
                               <tr t-if="o.annual_variable_pay">
                                 <td ><span><b>Annual Variable Pay</b></span></td>
                                 <td style="text-align:center"><b><span t-esc="(o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
@@ -363,8 +388,8 @@
                               </tr>
                               <tr>
                                 <td ><span><b>Annual CTC</b></span></td>
-                                <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                                <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay + o.annual_variable_pay + o.annual_perf_bonus)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                                <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay/12)+(o.annual_variable_pay/12) + (o.annual_perf_bonus/12))" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                                 
                               </tr>
                             </tbody>
@@ -474,12 +499,15 @@
               <div class="annexure-1">
                 <h6 align="center" style="color:#006fc1"><b>ANNEXURE - 1</b></h6><br/>
                 <div class="row">
-                  <div class="col-3">
+                  <div class="col-4">
                     <t t-if="o.partner_name">
                       Employee Name:<br/>
                     </t>
                     <t t-if="o.annual_fixed_pay">
                       Annual Fixed Pay<br/>
+                    </t>
+                    <t t-if="o.annual_perf_bonus">
+                      Annual Performance Bonus<br/>
                     </t>
                     <t t-if="o.annual_variable_pay">
                       Annual Variable Pay<br/>
@@ -498,6 +526,9 @@
                     <t t-if="o.annual_fixed_pay">
                       <span t-esc="'%.2f' % (o.annual_fixed_pay)"/><br/>
                     </t>
+                    <t t-if="o.annual_perf_bonus">
+                      <span t-esc="'%.2f' % (o.annual_perf_bonus)"/><br/>
+                    </t>
                     <t t-if="o.annual_variable_pay">
                       <span t-esc="'%.2f' % (o.annual_variable_pay)"/><br/>
                     </t>
@@ -505,10 +536,10 @@
                       <span t-esc="'%.2f' % (o.joining_bonus_amount)"/><br/>
                     </t>
                     <t t-if="o.annual_fixed_pay">
-                      <span t-esc="'%.2f' % (o.annual_fixed_pay + o.annual_variable_pay)"/><br/>
+                      <span t-esc="'%.2f' % (o.annual_fixed_pay + o.annual_variable_pay + o.annual_perf_bonus)"/><br/>
                     </t>
                   </div>
-                  <div class="col-3">
+                  <div class="col-2">
                   </div>
                 </div>
                 <br/>
@@ -564,6 +595,11 @@
                       <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                       
                     </tr>
+                    <tr t-if="o.annual_perf_bonus">
+                      <td ><span><b>Annual Performance Bonus</b></span></td>
+                      <td style="text-align:center"><b><span t-esc="(o.annual_perf_bonus)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round(o.annual_perf_bonus/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                    </tr>
                     <tr t-if="o.annual_variable_pay">
                       <td ><span><b>Annual Variable Pay</b></span></td>
                       <td style="text-align:center"><b><span t-esc="(o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
@@ -572,8 +608,8 @@
                     </tr>
                     <tr>
                       <td ><span><b>Total CTC</b></span></td>
-                      <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay)+o.annual_variable_pay)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
-                      <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay/12)+o.annual_variable_pay/12)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round(o.annual_fixed_pay +o.annual_variable_pay + o.annual_perf_bonus)" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
+                      <td style="text-align:center"><b><span t-esc="round((o.annual_fixed_pay/12)+(o.annual_variable_pay/12)+(o.annual_perf_bonus/12))" t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'></span></b></td>
                       
                     </tr>
                   </tbody>
