@@ -17,7 +17,7 @@
             </field>
             <xpath expr="//field[@name='invoice_line_ids']//field[@name='product_id']" position="after">
                 <field name="pay_element" attrs="{'column_invisible': [('parent.fte_lumen_invoice', '!=', True)]}"/>
-                <field name="vendor_margin" attrs="{'column_invisible':[('parent.enable_direct_invoice_creation','=',False)]}"/>
+                <field name="vendor_margin" attrs="{'column_invisible':[('parent.fte_lumen_invoice','=',False)]}"/>
             </xpath>
             <xpath expr="//field[@name='line_ids']//field[@name='account_id']" position="after">
                 <field name="pay_element" attrs="{'column_invisible': [('parent.fte_lumen_invoice', '!=', True)]}" optional="hidden"/>

@@ -17,6 +17,12 @@ class AccountMove(models.Model):
 
     fte_lumen_invoice = fields.Boolean(string="Check if this is a Lumen FTE Invoice")
 
+    @api.onchange('fte_lumen_invoice')
+    def update_vendor_margin(self):
+        for line in self:
+            for lines in line.line_ids:
+                if not line.fte_lumen_invoice:
+                    lines.vendor_margin = 0
     
 
     def unlink(self):
