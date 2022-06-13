@@ -14,6 +14,7 @@ class HrEmployee(models.Model):
     invoice_id = fields.Many2one('account.move',string="Invoice Id",copy=False)
     invoice_count = fields.Integer(string='Invoice', compute='_invoice_count')
     client_hired_date = fields.Date(string="Hired by Client Date") 
+    job_type_id = fields.Many2one('hr.job.type',string="Employment Type")
 
     # SOW
     sow_start_date = fields.Date(string="Start Date")
@@ -68,6 +69,8 @@ class HrEmployee(models.Model):
     def hired_by_client(self):
         if self.invoice_id:
             raise UserError(_('Invoice is already generated for this employee. Kindly check it'))
+        if not self.job_type_id:
+            raise UserError(_('Please update Employment Type before creating invoice'))
         journal = self.env['account.move'].with_context(default_move_type='out_invoice')._get_default_journal()
         if not journal:
             raise UserError(_('Please define an accounting sales journal for the company %s (%s).') % (self.company_id.name, self.company_id.id))
@@ -77,6 +80,7 @@ class HrEmployee(models.Model):
             'l10n_in_gst_treatment':self.client_work_address.l10n_in_gst_treatment,
             'journal_id': journal.id,  # company comes from the journal
             'invoice_origin': self.name,
+            'job_type_id':self.job_type_id,
             'hr_employee_id':self.id,
             'invoice_line_ids': [],
             'company_id': self.company_id.id,
