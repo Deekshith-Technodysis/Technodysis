@@ -30,12 +30,16 @@ class HrScreening(models.Model):
     mobile = fields.Char(string="Candidate's Mobile No.",required=True,tracking=True)
     email = fields.Char(string="Candidate's mail id",required=True,tracking=True)
 
+    # _sql_constraints = [
+
+    # ('email_uniq', 'unique(email)', 'Email id is unique change your custom email id'),
+
+    # ('mobile_uniq','unique(mobile)','Phone number is unique so change your phone number')
+
+    # ]
+
     _sql_constraints = [
-
-    ('email_uniq', 'unique(email)', 'Email id is unique change your custom email id'),
-
-    ('mobile_uniq','unique(mobile)','Phone number is unique so change your phone number')
-
+        ('code_company_uniq', 'unique (email,company_id)', 'The code of the account must be unique per company !')
     ]
 
     
