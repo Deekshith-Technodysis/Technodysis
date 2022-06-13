@@ -79,12 +79,6 @@ class JobApplication(models.Model):
     offline_nda_date = fields.Date(string="Offline NDA date",copy=False)
     online_nda_date = fields.Date(string="Online NDA",copy=False)
     onboarding_remarks = fields.Text(string="Remarks",copy=False)
-    employment_type = fields.Selection([
-        ('contract', 'Contract'),
-        ('fte', 'FTE'),
-        ('trainee', 'Trainee'),
-        ('intern', 'Intern')], 'Employment Type')
-    # need to update value for existing records from employment type to job type id
     job_type_id = fields.Many2one('hr.job.type',string="Employment Type",required=True)
 
     # Applicant address
