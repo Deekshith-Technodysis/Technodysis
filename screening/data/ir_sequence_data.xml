@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    	<!-- <record id="seq_rec_not_screened" model="ir.sequence">
+            <field name="name">Not Screened</field>
+            <field name="code">hr.not.screening</field>
+            <field name="padding">5</field>
+            <field name="prefix">NS/</field>
+            <field name="suffix">/%(year)s</field>
+            <field name="company_id" eval="False"/>
+        </record> -->
+        <record id="seq_rec_screened" model="ir.sequence">
+            <field name="name">Screened</field>
+            <field name="code">hr.screening</field>
+            <field name="padding">5</field>
+            <field name="prefix">SR/</field>
+            <field name="suffix">/%(year)s</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -10,13 +10,14 @@
     'company': 'Technodysis',
     'maintainer': 'Technodysis',
     'website': 'https://www.technodysis.com',
-    'depends': ['hr_recruitment','sourcing','hr'],
+    'depends': ['hr_recruitment','sourcing','hr','invoice_customisation'],
     'data': [
              'security/ir.model.access.csv',
     		 'views/hr_job_type.xml',
              'views/hr_applicant_views.xml',
              'views/account_move_views.xml',
              'views/hr_employee_views.xml',
+             'reports/report_invoice_lumen.xml',
              'data/cron_jobs.xml',
              'data/cron_mail_data.xml'
             ],

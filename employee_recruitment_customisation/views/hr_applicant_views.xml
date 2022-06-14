@@ -31,7 +31,7 @@
                     <field name="annual_fixed_pay"/>
                     <field name="annual_variable_pay"/>
                     <!-- not using below field -->
-                    <field name="annual_perf_bonus" invisible="1"/>
+                    <field name="annual_perf_bonus"/>
                     <field name="pt_deduction"/>
 
                 </group>
@@ -56,7 +56,6 @@
             </xpath>
             <xpath expr="//field[@name='type_id']" position="after">
                 <field name="created_date"/>
-                <field name="employment_type" invisible="1"/>
                 <field name="job_type_id"/>
             </xpath>
             <xpath expr="//label[@for='name']" position="before">

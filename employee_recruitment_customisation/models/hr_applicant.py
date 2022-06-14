@@ -79,12 +79,6 @@ class JobApplication(models.Model):
     offline_nda_date = fields.Date(string="Offline NDA date",copy=False)
     online_nda_date = fields.Date(string="Online NDA",copy=False)
     onboarding_remarks = fields.Text(string="Remarks",copy=False)
-    employment_type = fields.Selection([
-        ('contract', 'Contract'),
-        ('fte', 'FTE'),
-        ('trainee', 'Trainee'),
-        ('intern', 'Intern')], 'Employment Type')
-    # need to update value for existing records from employment type to job type id
     job_type_id = fields.Many2one('hr.job.type',string="Employment Type",required=True)
 
     # Applicant address
@@ -314,11 +308,11 @@ class JobApplication(models.Model):
     #       template.send_mail(self.id, email_values=email_values,force_send=True)
     # above function removed , since we are using the existing offer letter send option
 
-    @api.onchange('annual_fixed_pay','annual_variable_pay')
+    @api.onchange('annual_fixed_pay','annual_variable_pay','annual_perf_bonus')
     def salary_proposed_cal(self):
         for line in self:
-            if line.annual_fixed_pay or line.annual_variable_pay:
-                line.salary_proposed = line.annual_fixed_pay + line.annual_variable_pay
+            if line.annual_fixed_pay or line.annual_variable_pay or line.annual_perf_bonus:
+                line.salary_proposed = line.annual_fixed_pay + line.annual_variable_pay + line.annual_perf_bonus
             else:
                 line.salary_proposed = False
 

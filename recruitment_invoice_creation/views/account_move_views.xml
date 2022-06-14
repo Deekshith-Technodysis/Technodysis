@@ -9,7 +9,20 @@
         	<field name="invoice_date" position="after">
         		<field name="application_id" readonly="1"/>
         		<field name="hr_employee_id" readonly="1"/>
+                <field name="job_type_id" attrs="{'readonly':[('application_id','=',True)]}"/>
+                <field name="enable_direct_invoice_creation" invisible="1"/>
         	</field>
+            <field name="payment_reference" position="after">
+                <field name="fte_lumen_invoice"/>
+            </field>
+            <xpath expr="//field[@name='invoice_line_ids']//field[@name='product_id']" position="after">
+                <field name="pay_element" attrs="{'column_invisible': [('parent.fte_lumen_invoice', '!=', True)]}"/>
+                <field name="vendor_margin" attrs="{'column_invisible':[('parent.fte_lumen_invoice','=',False)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']//field[@name='account_id']" position="after">
+                <field name="pay_element" attrs="{'column_invisible': [('parent.fte_lumen_invoice', '!=', True)]}" optional="hidden"/>
+                <field name="vendor_margin" invisible="1"/>
+            </xpath>
         </field>
     </record>
 

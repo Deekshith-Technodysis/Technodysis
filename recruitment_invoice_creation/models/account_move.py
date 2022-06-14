@@ -12,8 +12,18 @@ class AccountMove(models.Model):
 
     application_id = fields.Many2one('hr.applicant',string="Application Id")
     hr_employee_id = fields.Many2one('hr.employee',string="Employee Id")
+    job_type_id = fields.Many2one('hr.job.type',string="Employment Type",required=True)
+    enable_direct_invoice_creation = fields.Boolean(string="Enable Direct invoice creation",related="job_type_id.enable_direct_invoice_creation")
 
+    fte_lumen_invoice = fields.Boolean(string="Check if this is a Lumen FTE Invoice")
 
+    @api.onchange('fte_lumen_invoice')
+    def update_vendor_margin(self):
+        for line in self:
+            for lines in line.line_ids:
+                if not line.fte_lumen_invoice:
+                    lines.vendor_margin = 0
+    
 
     def unlink(self):
         for move in self:
@@ -23,3 +33,19 @@ class AccountMove(models.Model):
                 raise UserError(_("Since this invoice belogns to the employee who is onboarded to client, You cannot delete this entry"))
         self.line_ids.unlink()
         return super(AccountMove, self).unlink()
+
+
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+
+    pay_element = fields.Float(string="Pay Element")
+    vendor_margin = fields.Float(string="Vendor Margin")
+
+
+    @api.onchange('vendor_margin')
+    def _fetch_unit_price_on_vendor_margin(self):
+        unit_price = 0
+        for line in self:
+            if line.move_id.fte_lumen_invoice == True:
+                unit_price = (line.pay_element * line.vendor_margin)/100
+                line.unit_price = unit_price
