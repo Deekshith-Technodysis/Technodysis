@@ -82,6 +82,9 @@
                                   <t t-if="o.annual_variable_pay">
                                     <b>b.</b> &#160;&#160;Variable pay of Rs. <strong><span t-esc="'%.2f' % (o.annual_variable_pay)"/> per annum </strong><br/>
                                   </t>
+                                  <t t-if="o.annual_perf_bonus">
+                                    <b>b.</b> &#160;&#160;Performance Bonus of Rs. <strong><span t-esc="'%.2f' % (o.annual_perf_bonus)"/> per annum </strong>
+                                  </t>
                                 </p>
                               </div>
                               <div style="margin-left:30px">
@@ -95,7 +98,6 @@
                                 </p>
                               </div>
                             </p>
-                            <br/>
                             <p style="text-indent:30px">
                               <span style="color:#006fc1"><b>VARIABLE &amp; PERFORMANCE PAY</b></span><br/>
                               <div style="margin-left:30px">
