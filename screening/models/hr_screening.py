@@ -251,6 +251,7 @@ class HrScreening(models.Model):
         sourcing_count = self.env['hr.sourcing']
         if not sourcing_count:
             categ_ids = [x.id for x in list(self.category_id)]
+            preffered_location_ids = [x.id for x in list(self.preffered_location_id)]
             self.sourcing_status = 'sourcing_created'
             date = fields.Date.today()
             
@@ -259,6 +260,7 @@ class HrScreening(models.Model):
                 'name': self.name,
                 'candidate_name':self.candidate_name,
                 'category_id':[(6, 0, categ_ids)],
+                'preffered_location_id':[(6, 0, preffered_location_ids)],
                 'currently_employed':self.currently_employed,
                 'applicant_skill_ids':[(6, 0, [skill.id for skill in self.applicant_skill_ids])],
                 'applicant_resume_line_ids':[(6, 0, [skill.id for skill in self.applicant_resume_line_ids])],
