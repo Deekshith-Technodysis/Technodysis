@@ -87,6 +87,7 @@ class HrEmployee(models.Model):
             'invoice_line_ids': [(0, 0, {
                 'name': str(self.name) +'-'+str(self.emp_id),
                 'quantity': 1.0,
+                'pay_element':self.salary_proposed,
             })],
         }
         account_move_obj = self.env['account.move'].create(invoice_vals)
