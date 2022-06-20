@@ -74,6 +74,8 @@ class HrEmployee(models.Model):
         journal = self.env['account.move'].with_context(default_move_type='out_invoice')._get_default_journal()
         if not journal:
             raise UserError(_('Please define an accounting sales journal for the company %s (%s).') % (self.company_id.name, self.company_id.id))
+        bank_ids = self.client_work_address.bank_ids.filtered(lambda bank: bank.company_id is False or bank.company_id == self.company_id)
+        partner_bank_id = bank_ids and bank_ids[0]
         invoice_vals = {
             'move_type': 'out_invoice',
             'partner_id': self.client_work_address.id,
@@ -84,9 +86,11 @@ class HrEmployee(models.Model):
             'hr_employee_id':self.id,
             'invoice_line_ids': [],
             'company_id': self.company_id.id,
+            'partner_bank_id': partner_bank_id,
             'invoice_line_ids': [(0, 0, {
                 'name': str(self.name) +'-'+str(self.emp_id),
                 'quantity': 1.0,
+                'pay_element':self.salary_proposed,
             })],
         }
         account_move_obj = self.env['account.move'].create(invoice_vals)

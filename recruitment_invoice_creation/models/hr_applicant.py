@@ -46,6 +46,8 @@ class JobApplication(models.Model):
             raise UserError(_('Please define an accounting sales journal for the company %s (%s).') % (self.company_id.name, self.company_id.id))
         if self.salary_proposed <= 1:
             raise UserError(_('Salary Proposed for this application is %s. Kindly Update it') % (self.salary_proposed))
+        bank_ids = self.client_id.bank_ids.filtered(lambda bank: bank.company_id is False or bank.company_id == self.company_id)
+        partner_bank_id = bank_ids and bank_ids[0]
         invoice_vals = {
             'move_type': 'out_invoice',
             'partner_id': self.client_id.id,
@@ -56,6 +58,8 @@ class JobApplication(models.Model):
             'application_id':self.id,
             'invoice_line_ids': [],
             'company_id': self.company_id.id,
+            'partner_bank_id': partner_bank_id,
+
             'invoice_line_ids': [(0, 0, {
                 'name': str(self.name) +'-'+str(self.partner_name),
                 'quantity': 1.0,
