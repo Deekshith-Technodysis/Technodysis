@@ -12,12 +12,12 @@ class AccountMove(models.Model):
 
     application_id = fields.Many2one('hr.applicant',string="Application Id")
     hr_employee_id = fields.Many2one('hr.employee',string="Employee Id")
-    job_type_id = fields.Many2one('hr.job.type',string="Employment Type",required=True)
+    job_type_id = fields.Many2one('hr.job.type',string="Employment Type",required=False)
     enable_direct_invoice_creation = fields.Boolean(string="Enable Direct invoice creation",related="job_type_id.enable_direct_invoice_creation")
 
     fte_lumen_invoice = fields.Boolean(string="Check if this is a Lumen FTE Invoice")
 
-    @api.onchange('fte_lumen_invoice')
+    @api.onchange('job_type_id')
     def update_vendor_margin(self):
         for line in self:
             for lines in line.line_ids:
