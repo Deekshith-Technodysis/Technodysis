@@ -106,6 +106,7 @@
                                 <field name="aadhar_no"/>
                                 <field name="official_np_lwd"/>
                                 <field name="official_np_lwd_comments"/>
+                                <field name="remarks"/>
                             </group>
                             
                             
@@ -286,6 +287,9 @@
             <search string="Search Screening">
                 <field name="sequence"/>
                 <field name="name"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="job_id"/>
                 <filter string="Archived / Refused" name="inactive" domain="[('active', '=', False)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Stage" name="stage" domain="[]" context="{'group_by': 'stage_id'}"/>

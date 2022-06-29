@@ -16,7 +16,7 @@ class HrScreening(models.Model):
     stage_id = fields.Selection([
         ('screened', 'Screened'),
         ('not_screened', 'Not Screened')], 'Stages',default="not_screened",copy=False,tracking=True)
-    screening_date = fields.Date(string="Screening Date")
+    screening_date = fields.Date(string="Screening Date",required=True)
     sequence = fields.Char(string="Sequence",readonly=True, default=lambda self: _('New'), copy=False)
     category_id = fields.Many2many('hr.applicant.category',string="Category")
     currently_employed = fields.Selection([
@@ -44,7 +44,7 @@ class HrScreening(models.Model):
 
     
 
-    total_exp_year = fields.Integer(string="Total Experience(Years)")
+    total_exp_year = fields.Integer(string="Total Experience(Years)",required=True)
     total_exp_month = fields.Integer(string="Total Experience(Months)")
     relevant_exp_year = fields.Integer(string="Relevant Experience(Years)")
     relevant_exp_month = fields.Integer(string="Relevant Experience(Months)")
@@ -103,7 +103,7 @@ class HrScreening(models.Model):
 
     
     current_or_last_company = fields.Char(string="Current/Last Company")
-    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True)
+    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True,default=lambda self: self.env.user.employee_id.id)
     lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter")
     module_lead_id = fields.Many2one('hr.employee',string="Module Lead")
     ctc = fields.Float(string="CTC",tracking=True)
@@ -188,12 +188,14 @@ class HrScreening(models.Model):
         ('dont_disclose','Dont want to disclose')
     ])
     alternate_phone = fields.Char(string="Alternate No",copy=False,default="0000000000")
-    job_id = fields.Many2one('hr.job',string="Applied Job")
+    job_id = fields.Many2one('hr.job',string="Applied Job",required=True)
     department_id = fields.Many2one('hr.department',string="Department")
     offer_letter_type = fields.Selection([
         ('client', 'Client Employee'),
         ('internal', 'Internal Employee')
     ], string='Offer letter Type')
+
+    remarks = fields.Text(string="Remarks",required=True)
 
 
     active = fields.Boolean("Active", default=True, help="If the active field is set to false, it will allow you to hide the case without removing it.")
