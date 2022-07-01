@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models, _
-from datetime import date, timedelta
+from datetime import date, timedelta,datetime
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 class HrScreening(models.Model):
@@ -16,7 +16,7 @@ class HrScreening(models.Model):
     stage_id = fields.Selection([
         ('screened', 'Screened'),
         ('not_screened', 'Not Screened')], 'Stages',default="not_screened",copy=False,tracking=True)
-    screening_date = fields.Date(string="Screening Date",required=True)
+    screening_date = fields.Date(string="Screening Date",required=True,default=datetime.now(),readonly=True)
     sequence = fields.Char(string="Sequence",readonly=True, default=lambda self: _('New'), copy=False)
     category_id = fields.Many2many('hr.applicant.category',string="Category")
     currently_employed = fields.Selection([
@@ -103,9 +103,9 @@ class HrScreening(models.Model):
 
     
     current_or_last_company = fields.Char(string="Current/Last Company")
-    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True,default=lambda self: self.env.user.employee_id.id)
-    lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter")
-    module_lead_id = fields.Many2one('hr.employee',string="Module Lead")
+    recruiter_id = fields.Many2one('hr.employee',string="Recruiter",required=True,default=lambda self: self.env.user.employee_id.id,tracking=True)
+    lead_co_ordinator_id = fields.Many2one('hr.employee',string="Lead Recruiter",tracking=True)
+    module_lead_id = fields.Many2one('hr.employee',string="Module Lead",tracking=True)
     ctc = fields.Float(string="CTC",tracking=True)
     ectc = fields.Float(string="ECTC",readonly=False,tracking=True)
     commission_percent = fields.Float("Commission Percent",tracking=True)
