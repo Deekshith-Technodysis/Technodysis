@@ -39,7 +39,7 @@ class HrScreening(models.Model):
     # ]
 
     _sql_constraints = [
-        ('code_company_uniq', 'unique (email,company_id)', 'The code of the account must be unique per company !')
+        ('code_company_uniq', 'unique (email,company_id)', 'The email is already used. Please check the created records !')
     ]
 
     
