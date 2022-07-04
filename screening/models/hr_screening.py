@@ -348,6 +348,16 @@ class HrScreening(models.Model):
             else:
                 raise UserError(_("Application already created, Please update the reasons and confirm the record"))
 
+    @api.constrains('total_exp_year')
+    def _check_total_exp(self):
+        # We try if the date exists in 2020, which is a leap year.
+        # We do not define the constrain on res.company, since the recomputation of the related
+        # fields is done one field at a time.
+        for line in self:
+            if line.total_exp_year == 0:
+                raise ValidationError(('Please Update Total Years of Experience'))
+
+
 
 
 class HrSourcing(models.Model):
